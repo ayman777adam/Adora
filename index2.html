@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -288,7 +287,6 @@
             <div class="header-title" style="align-items:center; gap:12px;">
                 <h1 id="header-text" style="margin:0;">واجهة العمال<br><span style="font-size:0.7rem; opacity:0.7;">تتبع الغرف</span></h1>
 
-                <!-- زر اللغة (يمين جنب العنوان) -->
                 <div id="lang-container" style="margin-left:6px; display:flex; align-items:center;">
                     <div style="position:relative; display:inline-block;">
                         <button id="langBtn" class="tools-btn" style="padding:6px 10px; font-weight:700;">🌐 اللغة ▾</button>
@@ -319,7 +317,7 @@
                         تفعيل الوضع التيربو لكل الغرف - المواسم أو الطوارئ
                     </button>
                     <button id="report-btn-action" class="full-btn" style="background:var(--gold-btn); color: var(--text-main); font-size:0.9rem; flex: 1;" onclick="generateDailyReport()">
-                         إرسال تقرير النظافة اليومي للاداره
+                        اغلاق اليوم إرسال تقرير النظافة اليومي للاداره
                     </button>
                 </div>
             </div>
@@ -1179,14 +1177,36 @@
                     }
                 }
                 
-                if (workerState.rooms.length === 0 || workerState.rooms[workerState.rooms.length-1].num !== '') {
+                // === BEGIN CRITICAL FIX FOR ROOM INPUT VISIBILITY ===
+                // This block replaces the original logic to ensure a pending room is always present 
+                // for input upon loading from existing storage (d is NOT null).
+                const hasEmptyRow = workerState.rooms.some(r => r.num === '');
+                if (!hasEmptyRow) {
                      workerState.rooms.push({ 
                         id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, limit: 0 
                     });
                 }
-
-                updateLogUI(); 
+                // === END CRITICAL FIX IF (D) IS PRESENT ===
+            } 
+            
+            // CRITICAL FIX: Ensure workerState.rooms is an array and has the input slot on first load 
+            // (d is null or workerState.rooms was empty after filtering).
+            if (!workerState.rooms || workerState.rooms.length === 0) {
+                 workerState.rooms = [{ 
+                    id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, limit: 0 
+                }];
+            } else {
+                 // Double check on subsequent loads if the array was cleared by logic errors or manual reset
+                 const hasEmptyRow = workerState.rooms.some(r => r.num === '');
+                 if (!hasEmptyRow) {
+                     workerState.rooms.push({ 
+                        id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, limit: 0 
+                    });
+                }
             }
+
+
+            updateLogUI(); 
         }
 
         function checkConn() {
