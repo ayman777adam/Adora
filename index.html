@@ -6,23 +6,27 @@
     <title>تقرير إشغال فندق أبيلا</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. Variables --- */
+        /* --- 1. Tanafos Theme Variables --- */
         :root {
-            --bg-body: #f9f4e8;
+            --bg-body: #f4f6f8;
             --bg-card: #ffffff;
-            --text-main: #2d3436;
-            --text-sec: #636e72;
-            --border-color: #dfe6e9;
+            --text-main: #37474f;
+            --text-sec: #78909c;
+            --border-color: #cfd8dc;
             
-            --primary: #0984e3;
+            --primary: #0097a7;       /* Teal Main */
+            --primary-light: #e0f7fa;
+            
             --success: #00b894;
             --danger: #d63031;
             --warning: #f1c40f;
-            --upgrade: #6c5ce7;
-            --gold-line: rgba(184, 134, 11, 0.15);
+            --upgrade: #7e57c2;       /* Purple for Upgrade */
             
-            --color-single: #0984e3; 
-            --color-suite: #b7950b; 
+            /* Room Colors (Theme Adapted) */
+            --color-single: #26c6da;  /* Cyan */
+            --color-suite: #ffca28;   /* Amber */
+            
+            --shadow: 0 4px 20px rgba(0, 151, 167, 0.08);
         }
 
         body.dark-mode {
@@ -36,14 +40,13 @@
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: var(--bg-body);
-            background-image: 
-                linear-gradient(45deg, var(--gold-line) 1px, transparent 1px),
-                linear-gradient(-45deg, var(--gold-line) 1px, transparent 1px);
-            background-size: 40px 40px;
-            background-attachment: fixed;
+            /* Tanafos Dot Pattern */
+            background-image: radial-gradient(#b0bec5 1px, transparent 1px);
+            background-size: 20px 20px;
+            
             color: var(--text-main);
             margin: 0;
-            padding: 15px 15px 220px 15px; /* مساحة كبيرة للفوتر */
+            padding: 15px 15px 220px 15px;
             -webkit-tap-highlight-color: transparent;
             transition: 0.3s;
             overflow-x: hidden;
@@ -51,65 +54,66 @@
 
         body.dark-mode { background-image: none; }
         
-        /* Zen Mode Effect */
+        /* Zen Mode */
         body.zen-active .dashboard, 
         body.zen-active .header-glass, 
         body.zen-active .price-bar,
         body.zen-active .sticky-footer {
-            opacity: 0.1;
-            filter: blur(2px);
-            transition: 0.3s;
+            opacity: 0.1; filter: blur(2px); transition: 0.3s;
         }
 
         .container { max-width: 500px; margin: 0 auto; }
 
-        /* --- 2. Header & Tools --- */
+        /* --- 2. Header Glass (Clean) --- */
         .header-glass {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid #fff;
             border-radius: 20px; padding: 15px; margin-bottom: 20px;
             display: flex; justify-content: space-between; align-items: center;
+            box-shadow: var(--shadow);
         }
         body.dark-mode .header-glass { background: rgba(45,45,45,0.7); border-color:rgba(255,255,255,0.1); }
         .header-title h1 { margin: 0; font-size: 1.1rem; color: var(--primary); font-weight: 800; }
         
         .tools-area { display: flex; align-items: center; gap: 10px; }
-        .tools-btn { background: rgba(255,255,255,0.5); border: 1px solid var(--border-color); padding: 8px; border-radius: 10px; cursor: pointer; font-size: 1.1rem; }
+        .tools-btn { background: var(--bg-body); border: 1px solid var(--border-color); padding: 8px; border-radius: 10px; cursor: pointer; font-size: 1.1rem; color: var(--text-main); }
 
-        /* Season Toggle */
+        /* Season Toggle (Themed) */
         .season-toggle {
             display: flex; align-items: center; gap: 5px;
-            background: var(--bg-card); border: 1px solid var(--border-color);
+            background: var(--bg-body); border: 1px solid var(--border-color);
             padding: 5px 10px; border-radius: 20px; cursor: pointer;
-            font-size: 0.8rem; font-weight: bold; transition: 0.3s;
+            font-size: 0.8rem; font-weight: bold; transition: 0.3s; color: var(--text-sec);
         }
-        .season-toggle.active { background: #dff9fb; border-color: var(--success); color: var(--success); }
-        .season-dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; transition:0.3s;}
-        .season-toggle.active .season-dot { background: var(--success); box-shadow: 0 0 5px var(--success); }
+        .season-toggle.active { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        .season-dot { width: 10px; height: 10px; border-radius: 50%; background: #cfd8dc; transition:0.3s;}
+        .season-toggle.active .season-dot { background: var(--primary); box-shadow: 0 0 5px var(--primary); }
 
         /* --- 3. Dashboard --- */
         .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
         .card { 
             background: var(--bg-card); border-radius: 18px; padding: 15px; 
-            position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative; box-shadow: var(--shadow); border: 1px solid var(--border-color);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-bottom: 4px solid transparent; transition: transform 0.2s;
+            border-bottom: 3px solid transparent; transition: transform 0.2s;
         }
         .chart-container { position: relative; width: 70px; height: 70px; margin-bottom: 5px; }
         .circular-chart { display: block; margin: 0 auto; max-width: 80%; max-height: 250px; }
-        .circle-bg { fill: none; stroke: var(--border-color); stroke-width: 3.8; }
+        .circle-bg { fill: none; stroke: var(--primary-light); stroke-width: 3.8; }
         .circle { fill: none; stroke-width: 2.8; stroke-linecap: round; transition: stroke-dasharray 0.6s ease; }
-        .percentage { fill: var(--text-main); font-family: 'Tajawal', sans-serif; font-weight: bold; font-size: 0.5em; text-anchor: middle; }
+        .percentage { fill: var(--text-main); font-family: 'Tajawal'; font-weight: bold; font-size: 0.5em; text-anchor: middle; }
+        
         .card-label { font-size: 0.85rem; font-weight: 700; }
         .card-sub { font-size: 0.7rem; opacity: 0.7; }
+        
         .c-single .circle { stroke: var(--color-single); } .c-single .card-label { color: var(--color-single); }
         .c-suite .circle { stroke: var(--color-suite); } .c-suite .card-label { color: var(--color-suite); }
 
-        /* --- Price Bar (Dynamic) --- */
+        /* --- Price Bar (Themed) --- */
         .price-bar {
             background: var(--bg-card); border-radius: 15px; padding: 10px 15px;
-            margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            margin-bottom: 25px; box-shadow: var(--shadow); border: 1px solid var(--border-color);
             display: flex; justify-content: space-between; align-items: center;
             border-left: 5px solid #ccc; transition: 0.3s;
         }
@@ -117,46 +121,45 @@
         .price-values { display: flex; gap: 15px; font-weight: 800; font-size: 1rem; }
         .p-val span { font-size: 0.7rem; font-weight: normal; opacity: 0.7; margin-left: 3px; }
         
-        .price-mode-std { border-left-color: var(--success); }
-        .price-mode-med { border-left-color: var(--warning); }
-        .price-mode-high { border-left-color: var(--danger); }
+        .price-mode-std { border-left-color: var(--success); background: #e8f5e9; }
+        .price-mode-med { border-left-color: var(--warning); background: #fffde7; }
+        .price-mode-high { border-left-color: var(--danger); background: #ffebee; }
 
-        /* --- 4. Steppers --- */
-        .section { background: var(--bg-card); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .sec-title { font-weight: 700; font-size: 1rem; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px dashed var(--border-color); }
+        /* --- 4. Steppers (Clean) --- */
+        .section { background: var(--bg-card); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
+        .sec-title { font-weight: 700; font-size: 1rem; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px dashed var(--border-color); color: var(--primary); }
         .control-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .control-label { flex: 1; font-size: 0.9rem; font-weight: 600; color: var(--text-sec); }
-        .control-label span { display: block; font-size: 1.2rem; margin-right: 5px; float: right;}
+        .control-label { flex: 1; font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
         
-        .stepper { display: flex; align-items: center; gap: 10px; background: var(--bg-body); padding: 5px; border-radius: 12px; }
+        .stepper { display: flex; align-items: center; gap: 10px; background: var(--bg-body); padding: 5px; border-radius: 12px; border: 1px solid var(--border-color); }
         .step-btn {
             width: 45px; height: 45px; border: none; border-radius: 12px;
-            font-size: 1.4rem; font-weight: bold; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: 0.1s; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            user-select: none; -webkit-user-select: none;
+            background: #fff; cursor: pointer; font-weight: bold; font-size: 1.4rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); color: var(--text-main);
         }
         .step-btn:active { transform: scale(0.9); }
-        .btn-minus { background: #fff; color: var(--danger); }
-        .btn-plus { background: #fff; color: var(--success); }
+        .btn-minus { color: var(--danger); } .btn-plus { color: var(--success); }
         body.dark-mode .step-btn { background: #444; }
         
-        .val-display { font-size: 1.4rem; font-weight: 800; width: 35px; text-align: center; transition: transform 0.1s; }
-        .pop-anim { animation: pop 0.2s ease; color: var(--primary); }
+        .val-display { font-size: 1.4rem; font-weight: 800; width: 35px; text-align: center; color: var(--primary); }
+        .pop-anim { animation: pop 0.2s ease; color: var(--upgrade); }
         @keyframes pop { 50% { transform: scale(1.4); } }
+
+        .cap-bar-bg { height: 4px; background: var(--border-color); border-radius: 2px; margin-top: 5px; width: 100%; position: relative; overflow: hidden; }
+        .cap-bar-fill { height: 100%; width: 0%; background: var(--success); transition: width 0.3s, background 0.3s; }
+        .lbl-single { color: var(--color-single); } .lbl-suite { color: var(--color-suite); }
 
         /* --- Footer & Sticky --- */
         .sticky-footer {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(0,0,0,0.1);
+            border-top: 1px solid var(--border-color);
             padding: 15px 15px 5px 15px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
             z-index: 999;
             display: flex; flex-direction: column; gap: 8px;
-            box-sizing: border-box;
-            border-radius: 20px 20px 0 0;
+            box-sizing: border-box; border-radius: 20px 20px 0 0;
         }
         body.dark-mode .sticky-footer { background: rgba(35,35,35,0.98); border-color: #555; }
 
@@ -165,37 +168,38 @@
             flex: 1; padding: 10px; border-radius: 12px; text-align: center;
             font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 5px;
         }
-        .pill-green { background: rgba(0, 184, 148, 0.15); color: var(--success); border: 1px solid rgba(0, 184, 148, 0.3); }
-        .pill-red { background: rgba(214, 48, 49, 0.15); color: var(--danger); border: 1px solid rgba(214, 48, 49, 0.3); }
+        /* Pastel Advice Pills */
+        .pill-green { background: #e0f2f1; color: #00695c; border: 1px solid #80cbc4; }
+        .pill-red { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
 
         .actions-row { display: flex; gap: 10px; }
         #submit-btn {
             flex: 1; padding: 14px; border: none; border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), #0984e3);
+            background: var(--primary);
             color: white; font-weight: 800; font-size: 1.1rem;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
+            cursor: pointer; box-shadow: 0 4px 15px rgba(0, 151, 167, 0.3);
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
         #copy-btn { width: 50px; border: none; border-radius: 12px; background: var(--bg-body); color: var(--text-sec); font-size: 1.2rem; cursor: pointer; border: 1px solid var(--border-color); }
 
         .footer-credits {
-            text-align: center; font-size: 0.75rem; color: #b2bec3;
+            text-align: center; font-size: 0.75rem; color: #90a4ae;
             padding-top: 5px; padding-bottom: 5px;
             border-top: 1px dashed rgba(0,0,0,0.05); margin-top: 5px;
         }
         .footer-credits b { color: var(--text-sec); }
 
-        /* Gamification Toast */
+        /* Toast */
         #game-toast {
             position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
-            background: #2d3436; color: #fff; padding: 8px 15px; border-radius: 20px;
+            background: #37474f; color: #fff; padding: 8px 15px; border-radius: 20px;
             font-size: 0.8rem; font-weight: bold; opacity: 0; pointer-events: none;
             transition: 0.3s; z-index: 2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: flex; align-items: center; gap: 5px;
         }
         #game-toast.show { opacity: 1; top: 90px; }
 
-        .alert-upgrade { background: rgba(108, 92, 231, 0.1); color: var(--upgrade); padding: 10px; border-radius: 10px; border: 1px solid var(--upgrade); text-align: center; font-size: 0.9rem; margin-bottom: 15px; display: none; }
+        .alert-upgrade { background: #ede7f6; color: #5e35b1; padding: 10px; border-radius: 10px; border: 1px solid #d1c4e9; text-align: center; font-size: 0.9rem; margin-bottom: 15px; display: none; }
         .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-content { background: var(--bg-card); padding: 25px; border-radius: 20px; width: 85%; max-width: 350px; text-align: center; }
         .math-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
@@ -268,7 +272,10 @@
                     <button class="step-btn btn-plus" onclick="changeVal('stayS', 1, 4)">+</button>
                 </div>
             </div>
+            <div class="cap-bar-bg"><div class="cap-bar-fill" id="bar-stayS"></div></div>
             
+            <hr style="border:0; border-top:1px dashed #eee; margin:15px 0;">
+
             <div class="control-row">
                 <div class="control-label lbl-suite"><span>🛋️</span> مجدد (وصالة)</div>
                 <div class="stepper" onmousedown="zenStart()" onmouseup="zenEnd()" ontouchstart="zenStart()" ontouchend="zenEnd()">
@@ -277,6 +284,7 @@
                     <button class="step-btn btn-plus" onclick="changeVal('stayR', 1, 20)">+</button>
                 </div>
             </div>
+            <div class="cap-bar-bg"><div class="cap-bar-fill" id="bar-stayR"></div></div>
         </div>
 
         <div class="section">
@@ -381,7 +389,6 @@
         function changeVal(key, amount, maxCap, isSale = false) {
             let val = s[key] + amount;
             if (val < 0) val = 0;
-            // Prevent going over logic capacity (soft limit for Stay/Pot)
             if (['stayS','potS'].includes(key) && (s.stayS + s.potS + amount > CAP_S)) { vibrate(50); return; }
             if (['stayR','potR'].includes(key) && (s.stayR + s.potR + amount > CAP_R)) { vibrate(50); return; }
             
@@ -415,6 +422,10 @@
         function updateUI() {
             // Update Displays
             for (let k in s) document.getElementById('disp-'+k).innerText = s[k];
+            
+            // Update Progress Bars
+            updateBar('bar-stayS', s.stayS, CAP_S);
+            updateBar('bar-stayR', s.stayR, CAP_R);
 
             // Calculation
             const gainS = Math.floor(s.potS * RISK); const gainR = Math.floor(s.potR * RISK);
@@ -441,15 +452,8 @@
         }
 
         function updatePricing(netS, netR) {
-            // Determine Level based on Availability %
-            // High Demand (Red): Avail < 25% (S < 1, R < 5)
-            // Med Demand (Yellow): Avail < 50% (S < 2, R < 10)
-            // Std Demand (Green): Else
-            
             let lvlS = 0; if(netS < 1) lvlS = 2; else if(netS < 2) lvlS = 1;
             let lvlR = 0; if(netR < 5) lvlR = 2; else if(netR < 10) lvlR = 1;
-            
-            // Use the higher demand level for the global status
             let globalLvl = Math.max(lvlS, lvlR); 
             
             const pricesS = isSeason ? P_SEA_S : P_REG_S;
@@ -465,6 +469,16 @@
             if(globalLvl === 0) { bar.classList.add('price-mode-std'); statusTxt.innerText = '(قياسي)'; }
             else if(globalLvl === 1) { bar.classList.add('price-mode-med'); statusTxt.innerText = '(متوسط)'; }
             else { bar.classList.add('price-mode-high'); statusTxt.innerText = '(مرتفع)'; }
+        }
+
+        function updateBar(id, val, cap) {
+            const el = document.getElementById(id);
+            if(!el) return;
+            let pct = (val / cap) * 100;
+            el.style.width = pct + '%';
+            if(pct > 90) el.style.background = 'var(--danger)';
+            else if(pct > 50) el.style.background = 'var(--warning)';
+            else el.style.background = 'var(--success)';
         }
 
         function updateChart(cId, tId, val, cap, cardId, cls) {
