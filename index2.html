@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>نظام فندق أبيلا</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <title data-lang-key="abella_system">نظام فندق أبيلا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-body: #f4f6f8;
@@ -285,38 +285,38 @@
 <body class="worker-mode"> <div class="container">
         <div class="header-glass">
             <div class="header-title" style="align-items:center; gap:12px;">
-                <h1 id="header-text" style="margin:0;">واجهة العمال<br><span style="font-size:0.7rem; opacity:0.7;">تتبع الغرف</span></h1>
+                <h1 id="header-text" style="margin:0;" data-lang-key="staff_interface">واجهة العمال<br><span style="font-size:0.7rem; opacity:0.7;" data-lang-key="tracking_table">تتبع الغرف</span></h1>
 
                 <div id="lang-container" style="margin-left:6px; display:flex; align-items:center;">
                     <div style="position:relative; display:inline-block;">
-                        <button id="langBtn" class="tools-btn" style="padding:6px 10px; font-weight:700;">🌐 اللغة ▾</button>
+                        <button id="langBtn" class="tools-btn" style="padding:6px 10px; font-weight:700;" data-lang-key="lang_button">🌐 اللغة ▾</button>
                         <div id="langMenu" style="position:absolute; top:38px; right:0; display:none; background:#fff; border:1px solid var(--border-color); border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.12); z-index:9999; min-width:140px; overflow:hidden;">
-                            <div class="langItem" data-lang="ar" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">عربي</div>
-                            <div class="langItem" data-lang="en" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">English</div>
-                            <div class="langItem" data-lang="ur" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">اردو</div>
-                            <div class="langItem" data-lang="bn" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">বাংলা</div>
+                            <div class="langItem" data-lang="ar" style="padding:10px 12px; cursor:pointer; white-space:nowrap;" data-lang-key="lang_ar">عربي</div>
+                            <div class="langItem" data-lang="en" style="padding:10px 12px; cursor:pointer; white-space:nowrap;" data-lang-key="lang_en">English</div>
+                            <div class="langItem" data-lang="ur" style="padding:10px 12px; cursor:pointer; white-space:nowrap;" data-lang-key="lang_ur">اردو</div>
+                            <div class="langItem" data-lang="bn" style="padding:10px 12px; cursor:pointer; white-space:nowrap;" data-lang-key="lang_bn">বাংলা</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tools-area">
-                <button class="tools-btn" onclick="document.body.classList.toggle('dark-mode')">🌙</button>
+                <button class="tools-btn" onclick="document.body.classList.toggle('dark-mode')" data-lang-key="dark_mode_btn">🌙</button>
             </div>
         </div>
 
         <div class="worker-view">
             <div id="worker-toast" class="worker-toast"></div>
             
-            <div id="offline-indicator" class="quiet-notif" style="background:var(--danger); color:white;">⚠️ وضع عدم الاتصال: يتم حفظ البيانات محلياً</div>
-            <div id="rain-mode-indicator" class="quiet-notif" style="background:var(--upgrade); color:white;">⚡ الوضع التيربو مفعّل</div>
-            <div id="timer-alert-bar" class="quiet-notif">⚠️ انتبه: يوجد غرف تجاوزت الوقت المحدد!</div>
+            <div id="offline-indicator" class="quiet-notif" style="background:var(--danger); color:white;" data-lang-key="offline_mode">⚠️ وضع عدم الاتصال: يتم حفظ البيانات محلياً</div>
+            <div id="rain-mode-indicator" class="quiet-notif" style="background:var(--upgrade); color:white;" data-lang-key="high_pressure">⚡ الوضع التيربو مفعّل</div>
+            <div id="timer-alert-bar" class="quiet-notif" data-lang-key="warn_overtime">⚠️ انتبه: يوجد غرف تجاوزت الوقت المحدد!</div>
 
             <div class="section" style="margin-bottom:15px;">
                 <div class="worker-action-row" style="margin-bottom: 0;">
-                    <button id="turbo-mode-btn" class="full-btn" style="background:var(--success); font-size:0.9rem; flex: 1;" onclick="toggleTurboMode()">
+                    <button id="turbo-mode-btn" class="full-btn" style="background:var(--success); font-size:0.9rem; flex: 1;" onclick="toggleTurboMode" data-lang-key="turbo_btn_on">
                         تفعيل الوضع التيربو لكل الغرف - المواسم أو الطوارئ
                     </button>
-                    <button id="report-btn-action" class="full-btn" style="background:var(--gold-btn); color: var(--text-main); font-size:0.9rem; flex: 1;" onclick="generateDailyReport()">
+                    <button id="report-btn-action" class="full-btn" style="background:var(--gold-btn); color: var(--text-main); font-size:0.9rem; flex: 1;" onclick="generateDailyReport()" data-lang-key="send_daily_report">
                         اغلاق اليوم إرسال تقرير النظافة اليومي للاداره
                     </button>
                 </div>
@@ -325,8 +325,8 @@
 
             <div class="section" style="padding:15px;">
                 <div class="sec-title" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>📈 إحصائيات الأداء الحالية</span>
-                    <button class="tools-btn" style="padding: 5px 8px;" onclick="showResetModal()">🗑️</button>
+                    <span data-lang-key="stats_title">📈 إحصائيات الأداء الحالية</span>
+                    <button class="tools-btn" style="padding: 5px 8px;" onclick="showResetModal()" data-lang-key="reset_btn">🗑️</button>
                 </div>
                 
                 <div class="stats-grid" style="grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
@@ -334,14 +334,14 @@
                     <div class="stat-circle-box">
                         <div class="circle-viz" style="border: 5px solid var(--danger);">
                             <h3 id="fastest-out-num">--</h3>
-                            <span id="fastest-out-time">أسرع خروج</span>
+                            <span id="fastest-out-time" data-lang-key="fastest_out">أسرع خروج</span>
                         </div>
                     </div>
 
                     <div class="stat-circle-box">
                         <div class="circle-viz" style="border: 5px solid var(--primary);">
                             <h3 id="fastest-stay-num">--</h3>
-                            <span id="fastest-stay-time">أسرع ساكن</span>
+                            <span id="fastest-stay-time" data-lang-key="fastest_stay">أسرع ساكن</span>
                         </div>
                     </div>
                     
@@ -350,32 +350,32 @@
                 <div style="border-top: 1px dashed var(--border-color); margin-top: 0; padding-top: 15px;">
                     <div class="stats-grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 10px 5px;">
                         
-                        <div class="stat-box-item"><h4 id="stat-completed">0</h4><span style="color:var(--upgrade)">تم الإنجاز</span></div>
-                        <div class="stat-box-item"><h4 id="stat-avg">0د</h4><span style="color:var(--text-sec)">متوسط الزمن</span></div>
-                        <div class="stat-box-item"><h4 id="stat-over">0</h4><span style="color:var(--danger)">تأخير</span></div>
+                        <div class="stat-box-item"><h4 id="stat-completed">0</h4><span data-lang-key="completed" style="color:var(--upgrade)">تم الإنجاز</span></div>
+                        <div class="stat-box-item"><h4 id="stat-avg">0د</h4><span data-lang-key="avg_time" style="color:var(--text-sec)">متوسط الزمن</span></div>
+                        <div class="stat-box-item"><h4 id="stat-over">0</h4><span data-lang-key="delay" style="color:var(--danger)">تأخير</span></div>
                         
-                        <div class="stat-box-item"><h4 id="stat-out-count">0</h4><span style="color:var(--danger)">غرف خروج</span></div>
-                        <div class="stat-box-item"><h4 id="stat-stay-count">0</h4><span style="color:var(--primary)">غرف ساكن</span></div>
-                        <div class="stat-box-item"><h4 id="stat-max-time">--</h4><span style="color:var(--warning)">أقصى وقت تنظيف</span></div>
+                        <div class="stat-box-item"><h4 id="stat-out-count">0</h4><span data-lang-key="out_rooms" style="color:var(--danger)">غرف خروج</span></div>
+                        <div class="stat-box-item"><h4 id="stat-stay-count">0</h4><span data-lang-key="stay_rooms" style="color:var(--primary)">غرف ساكن</span></div>
+                        <div class="stat-box-item"><h4 id="stat-max-time">--</h4><span data-lang-key="max_time" style="color:var(--warning)">أقصى وقت تنظيف</span></div>
                         
-                        <div class="stat-box-item"><h4 id="stat-min-time">--</h4><span style="color:var(--success)">أدنى وقت تنظيف</span></div>
+                        <div class="stat-box-item"><h4 id="stat-min-time">--</h4><span data-lang-key="min_time" style="color:var(--success)">أدنى وقت تنظيف</span></div>
                         <div class="stat-box-item" style="background:#f4f6f8; box-shadow:none;"></div> <div class="stat-box-item" style="background:#f4f6f8; box-shadow:none;"></div> </div>
                 </div>
             </div>
 
             <div class="section">
-                <div class="sec-title">🚪 تتبع الغرف (جدول ذكي)</div>
+                <div class="sec-title" data-lang-key="tracking_table">🚪 تتبع الغرف (جدول ذكي)</div>
                 <div id="rooms-container">
                     </div>
             </div>
 
             <div class="section">
                 <div class="sec-title" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>📋 آخر العمليات المنجزة</span>
-                    <button class="tools-btn" style="padding: 5px 8px; font-size: 1.1rem;" onclick="showLogClearModal()">🗑️</button>
+                    <span data-lang-key="latest_operations">📋 آخر العمليات المنجزة</span>
+                    <button class="tools-btn" style="padding: 5px 8px; font-size: 1.1rem;" onclick="showLogClearModal()" data-lang-key="reset_btn">🗑️</button>
                 </div>
                 <div id="worker-log-list" style="font-size:0.8rem; max-height:200px; overflow-y:auto;">
-                    <p style="text-align:center; color:#999;">لا توجد عمليات بعد</p>
+                    <p id="log-none-p" style="text-align:center; color:#999;" data-lang-key="log_none">لا توجد عمليات بعد</p>
                 </div>
             </div>
         </div>
@@ -387,91 +387,91 @@
             </div>
         </div>
 
-    <div id="dev-footer-fixed">
+    <div id="dev-footer-fixed" data-lang-key="developed_by">
         تطوير .. ايمن ابو ورده 77aayy@gmail.com
     </div>
 
     <div id="rain-prompt-modal" class="modal-overlay">
         <div class="modal-content" style="text-align:center;">
-            <h3 style="color:var(--primary); margin-top:0;">اختر وضع البدء</h3>
-            <p>ما هو وضع الضغط لهذه الغرفة؟</p>
-            <button class="full-btn" style="background:var(--danger); margin-bottom:10px;" onclick="commitStartRoom(window.tempRoomId, true)">⚡ ضغط عالي (Rain Mode)</button>
-            <button class="full-btn" style="background:var(--success);" onclick="commitStartRoom(window.tempRoomId, false)">وضع عادي (Normal)</button>
+            <h3 style="color:var(--primary); margin-top:0;" data-lang-key="pressure_mode">اختر وضع البدء</h3>
+            <p data-lang-key="pressure_mode_msg">ما هو وضع الضغط لهذه الغرفة؟</p>
+            <button class="full-btn" style="background:var(--danger); margin-bottom:10px;" onclick="commitStartRoom(window.tempRoomId, true)" data-lang-key="high_pressure">⚡ ضغط عالي (Rain Mode)</button>
+            <button class="full-btn" style="background:var(--success);" onclick="commitStartRoom(window.tempRoomId, false)" data-lang-key="normal_mode">وضع عادي (Normal)</button>
         </div>
     </div>
 
     <div id="final-modal" class="modal-overlay">
         <div class="modal-content">
-            <h3 style="margin-top:0; color:var(--primary);" id="modal-title-text">📝 تقرير فحص الغرفة</h3>
+            <h3 style="margin-top:0; color:var(--primary);" id="modal-title-text" data-lang-key="room_inspection">📝 تقرير فحص الغرفة</h3>
             
             <div id="delay-reason-section"> 
-                <label class="modal-label" id="delay-reason-label">سبب التأخير (إن وجد):</label>
+                <label class="modal-label" id="delay-reason-label" data-lang-key="delay_reasons">سبب التأخير (إن وجد):</label>
                 <select id="modal-delay" onchange="updateImageRequirementUI()">
-                    <option value="لا يوجد تأخير">لا يوجد تأخير</option>
-                    <option value="الانشغال بالاستقبال">الانشغال بالاستقبال</option>
-                    <option value="الغرفة بها ملاحظات كثيرة">الغرفة بها ملاحظات كثيرة</option>
-                    <option value="سبب آخر">سبب آخر</option>
+                    <option value="لا يوجد تأخير" data-lang-key="none">لا يوجد تأخير</option>
+                    <option value="الانشغال بالاستقبال" data-lang-key="busy_reception">الانشغال بالاستقبال</option>
+                    <option value="الغرفة بها ملاحظات كثيرة" data-lang-key="room_many_notes">الغرفة بها ملاحظات كثيرة</option>
+                    <option value="سبب آخر" data-lang-key="other_reason">سبب آخر</option>
                 </select>
             </div>
 
 
-            <label class="modal-label">ملاحظات الفحص:</label>
+            <label class="modal-label" data-lang-key="worker_notes">ملاحظات الفحص:</label>
             <select id="modal-notes" onchange="updateMaintenanceUI()">
-                <option value="لا يوجد ملاحظات">لا يوجد ملاحظات</option>
-                <option value="تحتاج صيانة">تحتاج صيانة</option>
-                <option value="نقص مفارش">نقص مفارش</option>
-                <option value="Deep Clean Needed">تحتاج نظافة عميقة</option>
+                <option value="لا يوجد ملاحظات" data-lang-key="none_notes">لا يوجد ملاحظات</option>
+                <option value="تحتاج صيانة" data-lang-key="needs_maintenance">تحتاج صيانة</option>
+                <option value="نقص مفارش" data-lang-key="missing_linens">نقص مفارش</option>
+                <option value="Deep Clean Needed" data-lang-key="deep_clean">تحتاج نظافة عميقة</option>
             </select>
             
             <div id="maintenance-fields" style="border: 1px dashed var(--warning); padding: 10px; border-radius: 8px; margin-bottom: 10px; display: none;">
-                <label class="modal-label" style="color:var(--danger);">تفاصيل الصيانة (إجباري):</label>
-                <textarea id="repair-details-input" placeholder="ما هي الأغراض التي تحتاج صيانة؟"></textarea>
+                <label class="modal-label" style="color:var(--danger);" data-lang-key="maintenance_details_label">تفاصيل الصيانة (إجباري):</label>
+                <textarea id="repair-details-input" data-lang-placeholder="maintenance_details_placeholder" placeholder="ما هي الأغراض التي تحتاج صيانة؟"></textarea>
                 
-                <label class="modal-label">حالة الصيانة:</label>
+                <label class="modal-label" data-lang-key="maintenance_status_label">حالة الصيانة:</label>
                 <select id="repair-status-select" onchange="updateMaintenanceImageStatus()">
-                    <option value="Ongoing">جارية</option>
-                    <option value="Completed">تمت أعمال الصيانة (تغيير الصورة)</option>
+                    <option value="Ongoing" data-lang-key="maintenance_status_ongoing">جارية</option>
+                    <option value="Completed" data-lang-key="maintenance_status_completed">تمت أعمال الصيانة (تغيير الصورة)</option>
                 </select>
             </div>
 
-            <label class="modal-label" id="image-label">إثبات الحالة:</label>
+            <label class="modal-label" id="image-label" data-lang-key="status_proof">إثبات الحالة:</label>
             <div style="display:flex; flex-direction:column; gap:10px;">
-                <label id="camera-label" for="modal-img-camera-input">
+                <label id="camera-label" for="modal-img-camera-input" data-lang-key="image_camera">
                     📸 افتح الكاميرا
                 </label>
                 <input type="file" accept="image/*" capture="environment" id="modal-img-camera-input">
                 
-                <label id="file-label" for="modal-img-pdf-input">
+                <label id="file-label" for="modal-img-pdf-input" data-lang-key="image_file">
                      📄 رفع ملف من الاستديو (صورة/PDF)
                 </label>
                 <input type="file" accept="image/*, application/pdf" multiple id="modal-img-pdf-input">
             </div>
-            <div style="font-size:0.7rem; color:#999; margin-top:5px; margin-bottom:10px;">(يجب اختيار ملف واحد فقط)</div>
+            <div style="font-size:0.7rem; color:#999; margin-top:5px; margin-bottom:10px;" data-lang-key="photo_hint">(يجب اختيار ملف واحد فقط)</div>
 
-            <button class="full-btn" style="background:var(--success); margin-top:10px;" onclick="confirmFinishRoom()">تأكيد وإرسال 🚀</button>
-            <button class="full-btn" style="background:#ddd; color:#333;" onclick="closeModal()">إلغاء</button>
+            <button class="full-btn" id="btn_confirm_finish" style="background:var(--success); margin-top:10px;" onclick="confirmFinishRoom()" data-lang-key="confirm_send">تأكيد وإرسال 🚀</button>
+            <button class="full-btn" id="btn_cancel" style="background:#ddd; color:#333;" onclick="closeModal()" data-lang-key="cancel">إلغاء</button>
         </div>
     </div>
     
     <div id="password-modal" class="modal-overlay">
         <div class="modal-content" style="text-align:center;">
-            <h3 style="color:var(--danger); margin-top:0;" id="password-modal-title">تصفية شاملة للبيانات</h3>
-            <p id="reset-status-msg" style="font-size:0.9rem;">أدخل كلمة مرور المسؤول للمتابعة.</p>
+            <h3 style="color:var(--danger); margin-top:0;" id="password-modal-title" data-lang-key="password_modal_title_reset">تصفية شاملة للبيانات</h3>
+            <p id="reset-status-msg" style="font-size:0.9rem;"></p>
             
-            <input type="password" id="admin-password" placeholder="كلمة المرور" style="width:100%; margin-bottom:15px;" />
+            <input type="password" id="admin-password" data-lang-placeholder="password_placeholder" placeholder="كلمة المرور" style="width:100%; margin-bottom:15px;" />
 
-            <button id="confirm-reset-btn" class="full-btn" style="background:var(--success); margin-bottom:10px;" onclick="checkPasswordAndReset('full_reset')">تأكيد التصفية</button>
-            <button class="full-btn" style="background:#ddd; color:#333;" onclick="document.getElementById('password-modal').style.display='none'">إلغاء</button>
+            <button id="confirm-reset-btn" class="full-btn" style="background:var(--success); margin-bottom:10px;" onclick="checkPasswordAndReset('full_reset')" data-lang-key="btn_confirm_reset">تأكيد التصفية</button>
+            <button class="full-btn" style="background:#ddd; color:#333;" onclick="document.getElementById('password-modal').style.display='none'" data-lang-key="cancel">إلغاء</button>
         </div>
     </div>
     
     <div id="action-confirm-modal" class="modal-overlay">
         <div class="modal-content" style="text-align:center;">
-            <h3 id="confirm-title" style="color:var(--danger); margin-top:0;">تأكيد الإجراء</h3>
-            <p id="confirm-message" style="font-size:0.9rem;">هل أنت متأكد من المتابعة؟</p>
+            <h3 id="confirm-title" style="color:var(--danger); margin-top:0;" data-lang-key="confirm_modal_title">تأكيد الإجراء</h3>
+            <p id="confirm-message" style="font-size:0.9rem;" data-lang-key="confirm_modal_message">هل أنت متأكد من المتابعة؟</p>
             
-            <button id="confirm-yes-btn" class="full-btn" style="background:var(--success); margin-bottom:10px;">نعم، أؤكد</button>
-            <button class="full-btn" style="background:#ddd; color:#333;" onclick="document.getElementById('action-confirm-modal').style.display='none'">إلغاء</button>
+            <button id="confirm-yes-btn" class="full-btn" style="background:var(--success); margin-bottom:10px;" data-lang-key="confirm_modal_yes">نعم، أؤكد</button>
+            <button class="full-btn" style="background:#ddd; color:#333;" onclick="document.getElementById('action-confirm-modal').style.display='none'" data-lang-key="cancel">إلغاء</button>
         </div>
     </div>
 
@@ -483,6 +483,501 @@
         let isTurboMode = false; // NEW: Global Turbo Mode
         let workerState = { rooms: [], log: [] };
         let buffer = [];
+        
+        // --- TRANSLATION DATA ---
+        // المفاتيح تم توليدها بناءً على الكود، والقيم مأخوذة من ملفات JSON المرفقة من المستخدم
+        const TRANSLATIONS = {
+            'ar': {
+                'abella_system': 'نظام فندق أبيلا',
+                'staff_interface': 'واجهة العمال',
+                'tracking_table': 'تتبع الغرف',
+                'lang_button': '🌐 اللغة ▾',
+                'lang_ar': 'عربي',
+                'lang_en': 'English',
+                'lang_ur': 'اردو',
+                'lang_bn': 'বাংলা',
+                'dark_mode_btn': '🌙',
+                'developed_by': 'تطوير: أيمن أبو وردة',
+                'offline_mode': '⚠️ وضع عدم الاتصال: يتم حفظ البيانات محلياً',
+                'high_pressure': '⚡ وضع ضغط عالي مفعّل',
+                'warn_overtime': '⚠️ انتبه: بعض الغرف تجاوزت الوقت المحدد!',
+                'turbo_btn_on': 'تفعيل الوضع التيربو لكل الغرف - المواسم أو الطوارئ',
+                'turbo_btn_off': '⚡ الوضع التيربو مفعّل (إلغاء)',
+                'send_daily_report': 'إرسال تقرير المدير اليومي 📝',
+                'stats_title': '📈 إحصائيات الأداء الحالية',
+                'reset_btn': '🗑️',
+                'fastest_out': 'أسرع خروج',
+                'fastest_stay': 'أسرع ساكن',
+                'completed': 'تم الإنجاز',
+                'avg_time': 'متوسط الزمن',
+                'delay': 'تأخير',
+                'out_rooms': 'غرف خروج',
+                'stay_rooms': 'غرف ساكن',
+                'max_time': 'أقصى وقت تنظيف',
+                'min_time': 'أدنى وقت تنظيف',
+                'rooms_title': '🚪 تتبع الغرف (جدول ذكي)',
+                'latest_operations': '📋 آخر العمليات المنجزة',
+                'log_none': 'لا توجد عمليات بعد',
+                'input_placeholder': 'رقم الغرفة',
+                'type_select_default': 'حالة الغرفة...',
+                'type_option_stay': '👤 ساكن',
+                'type_option_out': '🚪 خروج',
+                'guest_status_default': 'حالة النزيل...',
+                'guest_status_in': 'النزيل داخل الغرفة',
+                'guest_status_out': 'النزيل بالخارج',
+                'btn_start': 'بدء',
+                'btn_acknowledge': 'تم العلم وجاري الانتقال',
+                'btn_check': '✅ تم التنظيف (بدء الفحص)',
+                'btn_finish_inspection': 'انتهاء عملية الفحص',
+                'btn_document_finish': 'توثيق وإنهاء',
+                'btn_undo': 'تراجع',
+                'status_moving': 'انتقال',
+                'status_cleaning': 'تنظيف',
+                'status_checking_live': 'فحص مباشر',
+                'status_checking': 'جاهز للتوثيق',
+                'alert_room_num_type': '🔴 يجب كتابة رقم الغرفة واختيار حالتها',
+                'alert_guest_status': '🔴 يجب تحديد حالة النزيل (داخل/خارج) لغرفة الساكن.',
+                'confirm_start_msg': 'بدء تنظيف الغرفة {num}؟',
+                'confirm_acknowledge_msg': 'تم العلم وجاري الانتقال للغرفة {num}؟',
+                'confirm_check_msg': 'بدء فحص الغرفة {num}؟',
+                'confirm_finish_inspection_msg': 'إنهاء فحص الغرفة {num}؟',
+                'toast_start_ack': 'بدء الانتقال للغرفة {num} ({mode})',
+                'toast_start_clean': 'بدء تنظيف الغرفة {num}',
+                'toast_start_check': 'بدء مرحلة الفحص',
+                'toast_room_documented': 'تم إنجاز وتوثيق الغرفة {num}',
+                'pressure_mode': 'اختر وضع البدء',
+                'pressure_mode_msg': 'ما هو وضع الضغط لهذه الغرفة؟',
+                'normal_mode': 'وضع عادي (Normal)',
+                'room_inspection': '📝 تقرير فحص الغرفة',
+                'delay_reasons': 'سبب التأخير (إن وجد):',
+                'none': 'لا يوجد تأخير',
+                'busy_reception': 'الانشغال بالاستقبال',
+                'room_many_notes': 'الغرفة بها ملاحظات كثيرة',
+                'other_reason': 'سبب آخر',
+                'worker_notes': 'ملاحظات الفحص:',
+                'none_notes': 'لا يوجد ملاحظات',
+                'needs_maintenance': 'تحتاج صيانة',
+                'missing_linens': 'نقص مفارش',
+                'deep_clean': 'تحتاج نظافة عميقة',
+                'maintenance_details_label': 'تفاصيل الصيانة (إجباري):',
+                'maintenance_details_placeholder': 'ما هي الأغراض التي تحتاج صيانة؟',
+                'maintenance_status_label': 'حالة الصيانة:',
+                'maintenance_status_ongoing': 'جارية',
+                'maintenance_status_completed': 'تمت أعمال الصيانة (تغيير الصورة)',
+                'status_proof': 'إثبات الحالة:',
+                'image_camera': '📸 افتح الكاميرا',
+                'image_file': '📄 رفع ملف من الاستديو (صورة/PDF)',
+                'photo_hint': '(يجب اختيار ملف واحد فقط)',
+                'confirm_send': 'تأكيد وإرسال 🚀',
+                'cancel': 'إلغاء',
+                'alert_repair_details': '🔴 مطلوب: يجب وصف الأغراض التي تحتاج صيانة.',
+                'alert_image_mandatory': "🔴 مطلوب: يجب إرفاق صورة عند اختيار 'الغرفة بها ملاحظات كثيرة'.",
+                'log_image_alert': '📸 تم التقاط صورة لملاحظات الغرفة رقم {num}.',
+                'report_title_wa': '*تقرير نظافة غرفة رقم {num}*',
+                'report_start_time_wa': '🕒 وقت البدء: {time}',
+                'report_delay_reason_wa': '🛑 سبب التأخير: {reason}',
+                'report_no_delay_wa': '✅ لا يوجد تأخير',
+                'report_maint_wa': '🛠️ الصيانة: {status}. التفاصيل: {details}',
+                'report_other_notes_wa': '📝 ملاحظات الفحص: {notes}',
+                'report_no_notes_wa': '📝 لا يوجد ملاحظات فحص',
+                'report_clean_time_wa': '🧹 تم الانتهاء من التنظيف في: {time}د',
+                'report_check_time_wa': '🔍 تم الانتهاء من الفحص في: {time}د',
+                'report_image_link_wa': '🔗 *رابط الصورة:* [تم إرفاق صورة]',
+                'password_modal_title_reset': 'تصفية شاملة للبيانات',
+                'password_modal_title_log': 'تصفية سجل العمليات المنجزة (فقط)',
+                'password_msg_allow': '⚠️ تجاوزت الساعة 1:00 ص. أدخل كلمة السر لتصفية اليوم.',
+                'password_msg_deny': '🔒 لم يحن وقت التصفية التلقائية (1:00 ص). أدخل كلمة السر لتجاوز القيد الزمني.',
+                'password_msg_log': 'أدخل كلمة مرور المسؤول لتصفية السجل الحالي.',
+                'password_placeholder': 'كلمة المرور',
+                'btn_confirm_reset': 'تأكيد التصفية',
+                'btn_confirm_log_clear': 'تأكيد التصفية',
+                'toast_data_cleared': '✅ تم تصفية البيانات بنجاح وبدء يوم جديد.',
+                'toast_log_cleared': '✅ تم تصفية سجل العمليات بنجاح.',
+                'alert_wrong_password_allowed': '❌ كلمة السر غير صحيحة. لا يمكن التصفية إلا بكلمة سر صحيحة بعد 1:00 ص.',
+                'alert_wrong_password_denied': '❌ كلمة السر غير صحيحة. التصفية مسموحة فقط بكلمة سر صحيحة أو بعد 1:00 ص.',
+                'confirm_modal_title': 'تأكيد الإجراء',
+                'confirm_modal_message': 'هل أنت متأكد من المتابعة؟',
+                'confirm_modal_yes': 'نعم، أؤكد',
+                'status_time_check_now': 'عملية الفحص تجري الآن',
+                'log_in_alert': '⚠️ نزيل داخل',
+                'status_acknowledging': 'انتقال',
+                'status_cleaning_badge': 'تنظيف',
+                'status_checking_live_badge': 'فحص مباشر',
+                'status_checking_badge': 'جاهز للتوثيق',
+                'image_label_before': 'إثبات الحالة (صورة قبل):',
+                'image_label_after': 'إثبات الحالة (صورة بعد):',
+                'default_staff_interface': 'هذه واجهة الموظفين (الافتراضية).',
+                'workers': 'العمال'
+            },
+            'en': {
+                'abella_system': 'Abella Hotel system',
+                'staff_interface': 'Staff interface',
+                'tracking_table': 'Room tracking (smart table)',
+                'lang_button': '🌐 Language ▾',
+                'lang_ar': 'عربي',
+                'lang_en': 'English',
+                'lang_ur': 'اردو',
+                'lang_bn': 'বাংলা',
+                'dark_mode_btn': '🌙',
+                'developed_by': 'Developed by: Ayman Abu Wardah',
+                'offline_mode': '⚠️ Offline mode: Data saved locally',
+                'high_pressure': '⚡ High pressure mode active',
+                'warn_overtime': '⚠️ Warning: Some rooms have exceeded the time limit!',
+                'turbo_btn_on': 'Activate Turbo Mode for all Rooms - Seasons or Emergency',
+                'turbo_btn_off': '⚡ Turbo Mode Active (Cancel)',
+                'send_daily_report': 'Send daily manager report 📝',
+                'stats_title': '📈 Current Performance Stats',
+                'reset_btn': '🗑️',
+                'fastest_out': 'Fastest Check-Out',
+                'fastest_stay': 'Fastest Stay',
+                'completed': 'Completed',
+                'avg_time': 'Avg. Time',
+                'delay': 'Delay',
+                'out_rooms': 'Check-Outs',
+                'stay_rooms': 'Stays',
+                'max_time': 'Max Clean Time',
+                'min_time': 'Min Clean Time',
+                'rooms_title': '🚪 Room tracking (smart table)',
+                'latest_operations': '📋 Latest completed operations',
+                'log_none': 'No operations yet',
+                'input_placeholder': 'Room Number',
+                'type_select_default': 'Room Status...',
+                'type_option_stay': '👤 Stay',
+                'type_option_out': '🚪 Check-Out',
+                'guest_status_default': 'Guest Status...',
+                'guest_status_in': 'Guest is Inside',
+                'guest_status_out': 'Guest is Outside',
+                'btn_start': 'Start',
+                'btn_acknowledge': 'Acknowledged & Moving',
+                'btn_check': '✅ Cleaned (Start Check)',
+                'btn_finish_inspection': 'Inspection Complete',
+                'btn_document_finish': 'Document & Finish',
+                'btn_undo': 'Undo',
+                'status_moving': 'Moving',
+                'status_cleaning': 'Cleaning',
+                'status_checking_live': 'Live Check',
+                'status_checking': 'Ready to Document',
+                'alert_room_num_type': '🔴 Room number and type must be selected.',
+                'alert_guest_status': '🔴 Guest status (In/Out) must be specified for Stay room.',
+                'confirm_start_msg': 'Start cleaning Room {num}?',
+                'confirm_acknowledge_msg': 'Acknowledge and move to Room {num}?',
+                'confirm_check_msg': 'Start inspection for Room {num}?',
+                'confirm_finish_inspection_msg': 'Finish inspection for Room {num}?',
+                'toast_start_ack': 'Starting movement to Room {num} ({mode})',
+                'toast_start_clean': 'Starting clean for Room {num}',
+                'toast_start_check': 'Starting inspection phase',
+                'toast_room_documented': 'Room {num} documented and completed',
+                'pressure_mode': 'Select Start Mode',
+                'pressure_mode_msg': 'What is the pressure mode for this room?',
+                'normal_mode': 'Normal Mode (Normal)',
+                'room_inspection': '📝 Room inspection report',
+                'delay_reasons': 'Delay Reason (if any):',
+                'none': 'No Delay',
+                'busy_reception': 'Busy with front desk',
+                'room_many_notes': 'Room has many notes',
+                'other_reason': 'Other reason',
+                'worker_notes': 'Inspection Notes:',
+                'none_notes': 'No Notes',
+                'needs_maintenance': 'Needs Maintenance',
+                'missing_linens': 'Missing linens',
+                'deep_clean': 'Requires deep cleaning',
+                'maintenance_details_label': 'Maintenance Details (Required):',
+                'maintenance_details_placeholder': 'What items need maintenance?',
+                'maintenance_status_label': 'Maintenance Status:',
+                'maintenance_status_ongoing': 'Ongoing',
+                'maintenance_status_completed': 'Maintenance Completed (Change Image)',
+                'status_proof': 'Status proof (optional):',
+                'image_camera': '📸 Open Camera',
+                'image_file': '📄 Upload File from Gallery (Image/PDF)',
+                'photo_hint': '(Only one file can be selected)',
+                'confirm_send': 'Confirm & Send 🚀',
+                'cancel': 'Cancel',
+                'alert_repair_details': '🔴 Required: Must describe items needing maintenance.',
+                'alert_image_mandatory': "🔴 Required: Must attach image when selecting 'Room has many notes/issues'.",
+                'log_image_alert': '📸 Image attached for Room {num} notes.',
+                'report_title_wa': '*Room {num} Cleaning Report*',
+                'report_start_time_wa': '🕒 Start Time: {time}',
+                'report_delay_reason_wa': '🛑 Delay Reason: {reason}',
+                'report_no_delay_wa': '✅ No Delay',
+                'report_maint_wa': '🛠️ Maintenance: {status}. Details: {details}',
+                'report_other_notes_wa': '📝 Inspection Notes: {notes}',
+                'report_no_notes_wa': '📝 No Inspection Notes',
+                'report_clean_time_wa': '🧹 Cleaning Finished in: {time}min',
+                'report_check_time_wa': '🔍 Inspection Finished in: {time}min',
+                'report_image_link_wa': '🔗 *Image Link:* [Image Attached]',
+                'password_modal_title_reset': 'Complete Data Wipe',
+                'password_modal_title_log': 'Clear Completed Log (Only)',
+                'password_msg_allow': '⚠️ Past 1:00 AM. Enter admin password to clear the day.',
+                'password_msg_deny': '🔒 Not time for auto-clear (1:00 AM). Enter password to override time restriction.',
+                'password_msg_log': 'Enter admin password to clear the current log.',
+                'password_placeholder': 'Password',
+                'btn_confirm_reset': 'Confirm Wipe',
+                'btn_confirm_log_clear': 'Confirm Clear',
+                'toast_data_cleared': '✅ Data successfully wiped and new day started.',
+                'toast_log_cleared': '✅ Operation log successfully cleared.',
+                'alert_wrong_password_allowed': '❌ Incorrect password. Cannot wipe unless correct password entered after 1:00 AM.',
+                'alert_wrong_password_denied': '❌ Incorrect password. Clearing allowed only with correct password or after 1:00 AM.',
+                'confirm_modal_title': 'Confirm Action',
+                'confirm_modal_message': 'Are you sure you want to proceed?',
+                'confirm_modal_yes': 'Yes, Confirm',
+                'status_time_check_now': 'Inspection in Progress',
+                'log_in_alert': '⚠️ Guest Inside',
+                'status_acknowledging': 'Moving',
+                'status_cleaning_badge': 'Cleaning',
+                'status_checking_live_badge': 'Live Check',
+                'status_checking_badge': 'Ready to Document',
+                'image_label_before': 'Condition Proof (Before Image):',
+                'image_label_after': 'Condition Proof (After Image):',
+                'default_staff_interface': 'This is the staff interface (default).',
+                'workers': 'Workers'
+            },
+            'ur': { // --------------------- Urdu Data (lang-ur.json) ---------------------
+                'abella_system': 'ابیلا ہوٹل سسٹم',
+                'staff_interface': 'اسٹاف انٹرفیس',
+                'tracking_table': 'روم ٹریکنگ (سمارٹ ٹیبل)',
+                'lang_button': '🌐 اللغة ▾',
+                'lang_ar': 'عربي',
+                'lang_en': 'English',
+                'lang_ur': 'اردو',
+                'lang_bn': 'বাংলা',
+                'dark_mode_btn': '🌙',
+                'developed_by': 'ترقی: ایمن ابو وردہ',
+                'offline_mode': '⚠️ آف لائن موڈ: ڈیٹا مقامی طور پر محفوظ ہے',
+                'high_pressure': '⚡ ہائی پریشر موڈ فعال',
+                'warn_overtime': '⚠️ خبردار: کچھ کمرے وقت کی حد سے تجاوز کر گئے ہیں!',
+                'turbo_btn_on': 'تمام کمروں کے لیے ٹربو موڈ فعال کریں - سیزن یا ایمرجنسی',
+                'turbo_btn_off': '⚡ ٹربو موڈ فعال (منسوخ کریں)',
+                'send_daily_report': 'روزانہ مینیجر رپورٹ بھیجیں 📝',
+                'stats_title': '📈 موجودہ کارکردگی کے اعداد و شمار',
+                'reset_btn': '🗑️',
+                'fastest_out': 'تیز ترین چیک آؤٹ',
+                'fastest_stay': 'تیز ترین ٹھہرنا',
+                'completed': 'مکمل',
+                'avg_time': 'اوسط وقت',
+                'delay': 'تاخیر',
+                'out_rooms': 'چیک آؤٹ',
+                'stay_rooms': 'ٹھہرنا',
+                'max_time': 'زیادہ سے زیادہ صفائی کا وقت',
+                'min_time': 'کم سے کم صفائی کا وقت',
+                'rooms_title': '🚪 روم ٹریکنگ (سمارٹ ٹیبل)',
+                'latest_operations': '📋 تازہ ترین مکمل شدہ آپریشنز',
+                'log_none': 'کوئی آپریشنز نہیں',
+                'input_placeholder': 'کمرے کا نمبر',
+                'type_select_default': 'کمرے کی حالت...',
+                'type_option_stay': '👤 ٹھہرنا',
+                'type_option_out': '🚪 چیک آؤٹ',
+                'guest_status_default': 'مہمان کی حالت...',
+                'guest_status_in': 'مہمان اندر ہے',
+                'guest_status_out': 'مہمان باہر ہے',
+                'btn_start': 'شروع کریں',
+                'btn_acknowledge': 'تسلیم شدہ اور منتقل ہو رہے ہیں',
+                'btn_check': '✅ صاف ہو گیا (چیک شروع کریں)',
+                'btn_finish_inspection': 'معائنہ مکمل',
+                'btn_document_finish': 'دستاویز اور مکمل کریں',
+                'btn_undo': 'انڈو کریں',
+                'status_moving': 'منتقل ہو رہا ہے',
+                'status_cleaning': 'صفائی',
+                'status_checking_live': 'لائیو چیک',
+                'status_checking': 'دستاویز کے لیے تیار',
+                'alert_room_num_type': '🔴 کمرے کا نمبر اور قسم منتخب کرنا ضروری ہے۔',
+                'alert_guest_status': '🔴 ٹھہرنے والے کمرے کے لیے مہمان کی حالت (اندر/باہر) کی وضاحت ضروری ہے۔',
+                'confirm_start_msg': 'صفائی شروع کریں کمرہ {num}؟',
+                'confirm_acknowledge_msg': 'تسلیم کریں اور کمرہ {num} کی طرف منتقل ہوں؟',
+                'confirm_check_msg': 'کمرہ {num} کا معائنہ شروع کریں؟',
+                'confirm_finish_inspection_msg': 'کمرہ {num} کا معائنہ مکمل کریں؟',
+                'toast_start_ack': 'کمرہ {num} ({mode}) کی طرف منتقلی شروع کر رہا ہے',
+                'toast_start_clean': 'کمرہ {num} کی صفائی شروع کر رہا ہے',
+                'toast_start_check': 'معائنہ کا مرحلہ شروع کر رہا ہے',
+                'toast_room_documented': 'کمرہ {num} دستاویز ہو گیا اور مکمل ہو گیا',
+                'pressure_mode': 'شروع کرنے کا موڈ منتخب کریں',
+                'pressure_mode_msg': 'اس کمرے کے لیے پریشر موڈ کیا ہے؟',
+                'normal_mode': 'نارمل موڈ (نارمل)',
+                'room_inspection': '📝 کمرے کا معائنہ رپورٹ',
+                'delay_reasons': 'تاخیر کی وجوہات کی فہرست:',
+                'none': 'کوئی تاخیر نہیں',
+                'busy_reception': 'ریسپشن میں مصروف',
+                'room_many_notes': 'کمرے میں متعدد نوٹس موجود ہیں',
+                'other_reason': 'دوسرا سبب',
+                'worker_notes': 'معائنہ کے نوٹس:',
+                'none_notes': 'کوئی نوٹس نہیں',
+                'needs_maintenance': 'مرمت کی ضرورت ہے',
+                'missing_linens': 'چادروں کی کمی',
+                'deep_clean': 'گہری صفائی درکار ہے',
+                'maintenance_details_label': 'مرمت کی تفصیلات (ضروری):',
+                'maintenance_details_placeholder': 'کن چیزوں کو مرمت کی ضرورت ہے؟',
+                'maintenance_status_label': 'مرمت کی حالت:',
+                'maintenance_status_ongoing': 'جاری ہے',
+                'maintenance_status_completed': 'مرمت مکمل (تصویر تبدیل کریں)',
+                'status_proof': 'حالت کا ثبوت (اختیاری):',
+                'image_camera': '📸 کیمرہ کھولیں',
+                'image_file': '📄 گیلری سے فائل اپ لوڈ کریں (تصویر/پی ڈی ایف)',
+                'photo_hint': '(صرف ایک فائل منتخب کی جا سکتی ہے)',
+                'confirm_send': 'تصدیق کریں اور بھیجیں 🚀',
+                'cancel': 'منسوخ کریں',
+                'alert_repair_details': '🔴 ضروری: مرمت کی ضرورت والی چیزوں کی وضاحت ضروری ہے۔',
+                'alert_image_mandatory': "🔴 ضروری: 'کمرے میں متعدد نوٹس موجود ہیں' منتخب کرنے پر تصویر منسلک کرنا ضروری ہے۔",
+                'log_image_alert': '📸 کمرہ {num} کے نوٹس کے لیے تصویر منسلک کی گئی ہے۔',
+                'report_title_wa': '*کمرہ {num} صفائی رپورٹ*',
+                'report_start_time_wa': '🕒 شروع ہونے کا وقت: {time}',
+                'report_delay_reason_wa': '🛑 تاخیر کی وجہ: {reason}',
+                'report_no_delay_wa': '✅ کوئی تاخیر نہیں',
+                'report_maint_wa': '🛠️ مرمت: {status}. تفصیلات: {details}',
+                'report_other_notes_wa': '📝 معائنہ کے نوٹس: {notes}',
+                'report_no_notes_wa': '📝 کوئی معائنہ نوٹس نہیں',
+                'report_clean_time_wa': '🧹 صفائی مکمل ہوئی: {time}منٹ میں',
+                'report_check_time_wa': '🔍 معائنہ مکمل ہوا: {time}منٹ میں',
+                'report_image_link_wa': '🔗 *تصویر کا لنک:* [تصویر منسلک]',
+                'password_modal_title_reset': 'مکمل ڈیٹا ختم کریں',
+                'password_modal_title_log': 'مکمل شدہ لاگ صرف ختم کریں',
+                'password_msg_allow': '⚠️ صبح 1:00 بجے کے بعد. دن ختم کرنے کے لیے ایڈمن پاس ورڈ درج کریں۔',
+                'password_msg_deny': '🔒 خودکار ختم کرنے کا وقت نہیں ہوا (صبح 1:00 بجے). وقت کی پابندی کو نظرانداز کرنے کے لیے پاس ورڈ درج کریں۔',
+                'password_msg_log': 'موجودہ لاگ ختم کرنے کے لیے ایڈمن پاس ورڈ درج کریں۔',
+                'password_placeholder': 'پاس ورڈ',
+                'btn_confirm_reset': 'ختم کرنے کی تصدیق کریں',
+                'btn_confirm_log_clear': 'ختم کرنے کی تصدیق کریں',
+                'toast_data_cleared': '✅ ڈیٹا کامیابی سے ختم ہو گیا اور نیا دن شروع ہو گیا ہے۔',
+                'toast_log_cleared': '✅ آپریشن لاگ کامیابی سے ختم ہو گیا ہے۔',
+                'alert_wrong_password_allowed': '❌ غلط پاس ورڈ. صبح 1:00 بجے کے بعد درست پاس ورڈ درج کیے بغیر ختم نہیں کیا جا سکتا۔',
+                'alert_wrong_password_denied': '❌ غلط پاس ورڈ. ختم کرنے کی اجازت صرف درست پاس ورڈ کے ساتھ یا صبح 1:00 بجے کے بعد ہے۔',
+                'confirm_modal_title': 'کارروائی کی تصدیق کریں',
+                'confirm_modal_message': 'کیا آپ آگے بڑھنے کے لیے یقینی ہیں؟',
+                'confirm_modal_yes': 'ہاں، تصدیق کریں',
+                'status_time_check_now': 'معائنہ جاری ہے',
+                'log_in_alert': '⚠️ مہمان اندر ہے',
+                'status_acknowledging': 'منتقل ہو رہا ہے',
+                'status_cleaning_badge': 'صفائی',
+                'status_checking_live_badge': 'لائیو چیک',
+                'status_checking_badge': 'دستاویز کے لیے تیار',
+                'image_label_before': 'حالت کا ثبوت (پہلے کی تصویر):',
+                'image_label_after': 'حالت کا ثبوت (بعد کی تصویر):',
+                'default_staff_interface': 'یہ اسٹاف انٹرفیس ہے (ڈیفالٹ).',
+                'workers': 'ملازمین'
+            },
+            'bn': { // --------------------- Bengali Data (lang-bn.json) ---------------------
+                'abella_system': 'অ্যাবেলা হোটেল সিস্টেম',
+                'staff_interface': 'স্টাফ ইন্টারফেস',
+                'tracking_table': 'রুম ট্র্যাকিং (স্মার্ট টেবিল)',
+                'lang_button': '🌐 ভাষা ▾',
+                'lang_ar': 'عربي',
+                'lang_en': 'English',
+                'lang_ur': 'اردو',
+                'lang_bn': 'বাংলা',
+                'dark_mode_btn': '🌙',
+                'developed_by': 'উন্নয়ন: আইমন আবু ওয়ারদাহ',
+                'offline_mode': '⚠️ অফলাইন মোড: ডেটা লোকালি সংরক্ষিত',
+                'high_pressure': '⚡ উচ্চ চাপ মোড সক্রিয়',
+                'warn_overtime': '⚠️ সতর্কতা: কিছু রুম সময়সীমা অতিক্রম করেছে!',
+                'turbo_btn_on': 'সমস্ত রুমের জন্য টার্বো মোড সক্রিয় করুন - সিজন বা জরুরি অবস্থা',
+                'turbo_btn_off': '⚡ উচ্চ চাপ মোড সক্রিয় (বাতিল)',
+                'send_daily_report': 'দৈনিক ম্যানেজার রিপোর্ট পাঠান 📝',
+                'stats_title': '📈 বর্তমান কর্মক্ষমতা পরিসংখ্যান',
+                'reset_btn': '🗑️',
+                'fastest_out': 'দ্রুততম চেক-আউট',
+                'fastest_stay': 'দ্রুততম অবস্থান',
+                'completed': 'সম্পন্ন',
+                'avg_time': 'গড় সময়',
+                'delay': 'দেরি',
+                'out_rooms': 'চেক-আউট',
+                'stay_rooms': 'অবস্থান',
+                'max_time': 'সর্বোচ্চ পরিস্কার সময়',
+                'min_time': 'সর্বনিম্ন পরিস্কার সময়',
+                'rooms_title': '🚪 রুম ট্র্যাকিং (স্মার্ট টেবিল)',
+                'latest_operations': '📋 সাম্প্রতিক সম্পন্ন কার্যক্রম',
+                'log_none': 'কোনো কার্যক্রম নেই',
+                'input_placeholder': 'রুম নম্বর',
+                'type_select_default': 'রুমের অবস্থা...',
+                'type_option_stay': '👤 অবস্থান',
+                'type_option_out': '🚪 চেক-আউট',
+                'guest_status_default': 'অতিথির অবস্থা...',
+                'guest_status_in': 'অতিথি ভেতরে আছেন',
+                'guest_status_out': 'অতিথি বাইরে আছেন',
+                'btn_start': 'শুরু করুন',
+                'btn_acknowledge': 'স্বীকৃত এবং স্থানান্তরিত হচ্ছে',
+                'btn_check': '✅ পরিষ্কার করা হয়েছে (চেক শুরু করুন)',
+                'btn_finish_inspection': 'পরিদর্শন সম্পূর্ণ',
+                'btn_document_finish': 'ডকুমেন্ট ও সম্পন্ন করুন',
+                'btn_undo': 'আগের অবস্থায় যান',
+                'status_moving': 'স্থানান্তরিত হচ্ছে',
+                'status_cleaning': 'পরিষ্কার করা হচ্ছে',
+                'status_checking_live': 'লাইভ চেক',
+                'status_checking': 'ডকুমেন্টের জন্য প্রস্তুত',
+                'alert_room_num_type': '🔴 রুম নম্বর এবং প্রকার নির্বাচন করতে হবে।',
+                'alert_guest_status': '🔴 অবস্থানের জন্য অতিথির অবস্থা (ভিতরে/বাইরে) উল্লেখ করতে হবে।',
+                'confirm_start_msg': 'রুম {num} পরিষ্কার করা শুরু করবেন?',
+                'confirm_acknowledge_msg': 'স্বীকার করুন এবং রুম {num} এর দিকে যাবেন?',
+                'confirm_check_msg': 'রুম {num} এর জন্য পরিদর্শন শুরু করবেন?',
+                'confirm_finish_inspection_msg': 'রুম {num} এর জন্য পরিদর্শন সম্পূর্ণ করবেন?',
+                'toast_start_ack': 'রুম {num} ({mode}) এর দিকে যাওয়া শুরু হচ্ছে',
+                'toast_start_clean': 'রুম {num} পরিষ্কার করা শুরু হচ্ছে',
+                'toast_start_check': 'পরিদর্শন পর্ব শুরু হচ্ছে',
+                'toast_room_documented': 'রুম {num} ডকুমেন্ট করা হয়েছে এবং সম্পন্ন হয়েছে',
+                'pressure_mode': 'শুরু করার মোড নির্বাচন করুন',
+                'pressure_mode_msg': 'এই রুমের জন্য চাপের মোড কি?',
+                'normal_mode': 'সাধারণ মোড (Normal)',
+                'room_inspection': '📝 রুম পরিদর্শন রিপোর্ট',
+                'delay_reasons': 'দেরির কারণ (যদি থাকে):',
+                'none': 'কোনো দেরি নেই',
+                'busy_reception': 'রিসেপশনে ব্যস্ত',
+                'room_many_notes': 'ঘরে অনেক মন্তব্য আছে',
+                'other_reason': 'অন্যান্য কারণ',
+                'worker_notes': 'পরিদর্শন নোট:',
+                'none_notes': 'কোনো নোট নেই',
+                'needs_maintenance': 'মেরামত প্রয়োজন',
+                'missing_linens': 'লিনেনের অভাব',
+                'deep_clean': 'গভীর পরিস্কার আবশ্যক',
+                'maintenance_details_label': 'মেরামতের বিবরণ (আবশ্যক):',
+                'maintenance_details_placeholder': 'কোন জিনিসগুলির মেরামত প্রয়োজন?',
+                'maintenance_status_label': 'মেরামত অবস্থা:',
+                'maintenance_status_ongoing': 'চলমান',
+                'maintenance_status_completed': 'মেরামত সম্পন্ন (ছবি পরিবর্তন)',
+                'status_proof': 'অবস্থা প্রমাণ (ঐচ্ছিক):',
+                'image_camera': '📸 ক্যামেরা খুলুন',
+                'image_file': '📄 গ্যালারি থেকে ফাইল আপলোড করুন (ছবি/পিডিএফ)',
+                'photo_hint': '(শুধুমাত্র একটি ফাইল নির্বাচন করা যাবে)',
+                'confirm_send': 'নিশ্চিত করুন ও পাঠান 🚀',
+                'cancel': 'বাতিল',
+                'alert_repair_details': '🔴 আবশ্যক: মেরামতের প্রয়োজন এমন জিনিসগুলির বিবরণ দিতে হবে।',
+                'alert_image_mandatory': "🔴 আবশ্যক: 'ঘরে অনেক মন্তব্য আছে' নির্বাচন করলে ছবি সংযুক্ত করতে হবে।",
+                'log_image_alert': '📸 রুম {num} নোটের জন্য ছবি সংযুক্ত করা হয়েছে।',
+                'report_title_wa': '*রুম {num} পরিষ্কারের রিপোর্ট*',
+                'report_start_time_wa': '🕒 শুরুর সময়: {time}',
+                'report_delay_reason_wa': '🛑 দেরির কারণ: {reason}',
+                'report_no_delay_wa': '✅ কোনো দেরি নেই',
+                'report_maint_wa': '🛠️ মেরামত: {status}. বিবরণ: {details}',
+                'report_other_notes_wa': '📝 পরিদর্শন নোট: {notes}',
+                'report_no_notes_wa': '📝 কোনো পরিদর্শন নোট নেই',
+                'report_clean_time_wa': '🧹 পরিস্কার সম্পন্ন হয়েছে: {time}মিনিটে',
+                'report_check_time_wa': '🔍 পরিদর্শন সম্পন্ন হয়েছে: {time}মিনিটে',
+                'report_image_link_wa': '🔗 *ছবির লিঙ্ক:* [ছবি সংযুক্ত]',
+                'password_modal_title_reset': 'সম্পূর্ণ ডেটা মোছা',
+                'password_modal_title_log': 'সম্পন্ন লগ কেবল মোছা',
+                'password_msg_allow': '⚠️ ভোর ১:০০ টার পর. দিন মোছার জন্য অ্যাডমিন পাসওয়ার্ড দিন।',
+                'password_msg_deny': '🔒 স্বয়ংক্রিয় মোছার সময় হয়নি (ভোর ১:০০ টা). সময় নিষেধাজ্ঞা এড়াতে পাসওয়ার্ড দিন।',
+                'password_msg_log': 'বর্তমান লগ মোছার জন্য অ্যাডমিন পাসওয়ার্ড দিন।',
+                'password_placeholder': 'পাসওয়ার্ড',
+                'btn_confirm_reset': 'মোছা নিশ্চিত করুন',
+                'btn_confirm_log_clear': 'মোছা নিশ্চিত করুন',
+                'toast_data_cleared': '✅ ডেটা সফলভাবে মোছা হয়েছে এবং নতুন দিন শুরু হয়েছে।',
+                'toast_log_cleared': '✅ অপারেশন লগ সফলভাবে মোছা হয়েছে।',
+                'alert_wrong_password_allowed': '❌ ভুল পাসওয়ার্ড. ভোর ১:০০ টার পরে সঠিক পাসওয়ার্ড ছাড়া মোছা যাবে না।',
+                'alert_wrong_password_denied': '❌ ভুল পাসওয়ার্ড. কেবল সঠিক পাসওয়ার্ড সহ বা ভোর ১:০০ টার পরে মোছার অনুমতি আছে।',
+                'confirm_modal_title': 'কার্য নিশ্চিত করুন',
+                'confirm_modal_message': 'আপনি কি এগিয়ে যেতে নিশ্চিত?',
+                'confirm_modal_yes': 'হ্যাঁ, নিশ্চিত করুন',
+                'status_time_check_now': 'পরিদর্শন চলছে',
+                'log_in_alert': '⚠️ অতিথি ভেতরে আছেন',
+                'status_acknowledging': 'স্থানান্তরিত হচ্ছে',
+                'status_cleaning_badge': 'পরিষ্কার করা হচ্ছে',
+                'status_checking_live_badge': 'লাইভ চেক',
+                'status_checking_badge': 'ডকুমেন্টের জন্য প্রস্তুত',
+                'image_label_before': 'অবস্থা প্রমাণ (আগের ছবি):',
+                'image_label_after': 'অবস্থা প্রমাণ (পরের ছবি):',
+                'default_staff_interface': 'এটি স্টাফ ইন্টারফেস (ডিফল্ট)।',
+                'workers': 'কর্মীরা'
+            }
+        };
+        let currentLang = 'ar';
+        // --- END TRANSLATION DATA ---
 
         // --- INIT ---
         window.onload = () => {
@@ -493,6 +988,9 @@
             checkConn();
             window.addEventListener('online', checkConn);
             window.addEventListener('offline', checkConn);
+            
+            // Initial translation call for all dynamic elements
+            applyTranslation(currentLang);
         };
 
         // --- HAPTIC & CONFIRMATION ---
@@ -500,10 +998,10 @@
             if (navigator.vibrate) navigator.vibrate(ms);
         }
 
-        function showConfirmation(msg) {
+        function showConfirmation(key, placeholders = {}) {
             const toast = document.getElementById('worker-toast');
             if (!toast) return;
-            toast.innerText = msg;
+            toast.innerText = getTranslation(key, placeholders);
             toast.classList.add('show');
             vibrate(20); 
             setTimeout(() => toast.classList.remove('show'), 1500);
@@ -531,9 +1029,10 @@
         }
         
         // NEW: Shared Confirmation Logic
-        function showActionConfirm(title, callback) {
+        function showActionConfirm(titleKey, messageKey, callback, placeholders = {}) {
             const modal = document.getElementById('action-confirm-modal');
-            document.getElementById('confirm-title').innerText = title;
+            document.getElementById('confirm-title').innerText = getTranslation(titleKey);
+            document.getElementById('confirm-message').innerText = getTranslation(messageKey, placeholders);
             document.getElementById('confirm-yes-btn').onclick = function() {
                 modal.style.display = 'none';
                 callback();
@@ -552,13 +1051,13 @@
             if (isTurboMode) {
                 btn.style.background = 'var(--danger)';
                 btn.classList.add('btn-turbo-active');
-                btn.innerText = '⚡ الوضع التيربو مفعّل (إلغاء)';
-                showConfirmation('وضع التيربو مفروض على جميع الغرف!');
+                btn.innerText = getTranslation('turbo_btn_off');
+                showConfirmation('toast_turbo_on');
             } else {
                 btn.style.background = 'var(--success)';
                 btn.classList.remove('btn-turbo-active');
-                btn.innerText = 'تفعيل الوضع التيربو لكل الغرف - المواسم أو الطوارئ';
-                showConfirmation('تم إلغاء الوضع التيربو.');
+                btn.innerText = getTranslation('turbo_btn_on');
+                showConfirmation('toast_turbo_off');
             }
             localStorage.setItem('abella_turbo_mode', isTurboMode);
         }
@@ -595,12 +1094,13 @@
                 // Determine style for sub-select based on validation
                 const guestStatusStyle = guestStatusRequired && !r.guestStatus ? 'border: 2px solid var(--danger)' : '';
                 
+                // Use getTranslation for option texts
                 const subSelectHTML = isStay ? `
                     <div class="sub-select-container">
                         <select class="type-select" onchange="updateRoomData(${r.id}, 'guestStatus', this.value)" ${r.status !== 'pending' ? 'disabled' : ''} style="${guestStatusStyle}">
-                            <option value="" disabled ${!r.guestStatus ? 'selected' : ''}>حالة النزيل...</option>
-                            <option value="in" ${r.guestStatus === 'in' ? 'selected' : ''}>النزيل داخل الغرفة</option>
-                            <option value="out" ${r.guestStatus === 'out' ? 'selected' : ''}>النزيل بالخارج</option>
+                            <option value="" disabled ${!r.guestStatus ? 'selected' : ''} data-lang-key="guest_status_default">${getTranslation('guest_status_default')}</option>
+                            <option value="in" ${r.guestStatus === 'in' ? 'selected' : ''} data-lang-key="guest_status_in">${getTranslation('guest_status_in')}</option>
+                            <option value="out" ${r.guestStatus === 'out' ? 'selected' : ''} data-lang-key="guest_status_out">${getTranslation('guest_status_out')}</option>
                         </select>
                     </div>
                 ` : '';
@@ -612,15 +1112,15 @@
                             <span class="badge">${getBadgeText(r)}</span>
                         </div>
                         <div>
-                            <input type="number" class="room-input" placeholder="رقم الغرفة" 
+                            <input type="number" class="room-input" data-lang-placeholder="input_placeholder" placeholder="${getTranslation('input_placeholder')}"
                                 value="${r.num}" onchange="updateRoomData(${r.id}, 'num', this.value)" 
                                 ${r.status !== 'pending' ? 'disabled' : ''}>
                         </div>
                         <div>
                             <select class="type-select" onchange="updateRoomData(${r.id}, 'type', this.value)" ${r.status !== 'pending' ? 'disabled' : ''} style="border-color:${!r.type && r.num ? 'red' : '#cfd8dc'}">
-                                <option value="" disabled ${!r.type ? 'selected' : ''}>حالة الغرفة...</option>
-                                <option value="stay" ${r.type==='stay'?'selected':''}>👤 ساكن</option>
-                                <option value="out" ${r.type==='out'?'selected':''}>🚪 خروج</option>
+                                <option value="" disabled ${!r.type ? 'selected' : ''} data-lang-key="type_select_default">${getTranslation('type_select_default')}</option>
+                                <option value="stay" ${r.type==='stay'?'selected':''} data-lang-key="type_option_stay">${getTranslation('type_option_stay')}</option>
+                                <option value="out" ${r.type==='out'?'selected':''} data-lang-key="type_option_out">${getTranslation('type_option_out')}</option>
                             </select>
                             ${subSelectHTML}
                         </div>
@@ -650,11 +1150,11 @@
             const r = workerState.rooms.find(x => x.id === id);
             
             if (!r.num || !r.type) {
-                alert("🔴 يجب كتابة رقم الغرفة واختيار حالتها");
+                alert(getTranslation("alert_room_num_type"));
                 return;
             }
             if (r.type === 'stay' && !r.guestStatus) {
-                alert("🔴 يجب تحديد حالة النزيل (داخل/خارج) لغرفة الساكن.");
+                alert(getTranslation("alert_guest_status"));
                 return;
             }
 
@@ -691,7 +1191,7 @@
             });
 
             renderRooms();
-            showConfirmation(`بدء الانتقال للغرفة ${r.num} (${isRainActive ? 'تيربو' : 'عادي'})`);
+            showConfirmation('toast_start_ack', { num: r.num, mode: isRainActive ? getTranslation('high_pressure') : getTranslation('normal_mode') });
         }
 
         // Commits the move from Acknowledging to Cleaning
@@ -703,7 +1203,7 @@
             r.undoTimer = 10; // 10s rollback check for cleaning start
             
             saveState(); renderRooms();
-            showConfirmation(`بدء تنظيف الغرفة ${r.num}`);
+            showConfirmation('toast_start_clean', { num: r.num });
         }
         
         function checkRoom(id) {
@@ -712,7 +1212,7 @@
             r.checkStart = Date.now();
             r.undoTimer = 10; // 10s rollback check
             saveState(); renderRooms();
-            showConfirmation('بدء مرحلة الفحص');
+            showConfirmation('toast_start_check');
         }
 
         function finishInspection(id) {
@@ -720,7 +1220,7 @@
             r.status = 'checking'; // FINAL READY STATE FOR MODAL
             r.undoTimer = 10; // 10s rollback check
             saveState(); renderRooms();
-            showConfirmation('الغرفة جاهزة للتوثيق');
+            showConfirmation('toast_room_documented', { num: r.num }); // Reusing this for general success
         }
 
         function undo(id) {
@@ -741,6 +1241,7 @@
                 }
                 r.undoTimer = 0;
                 saveState(); renderRooms();
+                showConfirmation('btn_undo'); // Generic undo confirmation
             }
         }
 
@@ -748,31 +1249,31 @@
             if (!r.num) return '';
             
             if (r.status === 'pending' && r.undoTimer <= 0) {
-                 return `<button class="btn-action btn-start" onclick="showActionConfirm('بدء تنظيف الغرفة ${r.num}؟', () => startRoom(${r.id}))">بدء</button>`;
+                 return `<button class="btn-action btn-start" onclick="showActionConfirm('confirm_modal_title', 'confirm_start_msg', () => startRoom(${r.id}), { num: ${r.num} })">${getTranslation('btn_start')}</button>`;
             }
 
             if (r.status === 'acknowledging') {
-                 return `<button class="btn-action btn-start" onclick="showActionConfirm('تم العلم وجاري الانتقال للغرفة ${r.num}؟', () => acknowledgeTravel(${r.id}))">تم العلم وجاري الانتقال</button>`;
+                 return `<button class="btn-action btn-start" onclick="showActionConfirm('confirm_modal_title', 'confirm_acknowledge_msg', () => acknowledgeTravel(${r.id}), { num: ${r.num} })">${getTranslation('btn_acknowledge')}</button>`;
             }
 
             if (r.status === 'cleaning') {
                 return `
-                    <button class="btn-action btn-check" onclick="showActionConfirm('بدء فحص الغرفة ${r.num}؟', () => checkRoom(${r.id}))">✅ تم التنظيف (بدء الفحص)</button>
-                    <button id="undo-btn-${r.id}" class="btn-action btn-undo" style="display:${r.undoTimer > 0 ? 'block' : 'none'}" onclick="undo(${r.id})">تراجع (${r.undoTimer})</button>
+                    <button class="btn-action btn-check" onclick="showActionConfirm('confirm_modal_title', 'confirm_check_msg', () => checkRoom(${r.id}), { num: ${r.num} })">${getTranslation('btn_check')}</button>
+                    <button id="undo-btn-${r.id}" class="btn-action btn-undo" style="display:${r.undoTimer > 0 ? 'block' : 'none'}" onclick="undo(${r.id})">${getTranslation('btn_undo')} (${r.undoTimer})</button>
                 `;
             }
             
             if (r.status === 'checking_live') {
                 return `
-                    <div style="font-weight:bold; color:var(--warning); font-size:0.8rem; margin-bottom:5px;">عملية الفحص تجري الآن</div>
-                    <button class="btn-action btn-finish" onclick="showActionConfirm('إنهاء فحص الغرفة ${r.num}؟', () => finishInspection(${r.id}))">انتهاء عملية الفحص</button>
-                    <button id="undo-btn-${r.id}" class="btn-action btn-undo" style="display:${r.undoTimer > 0 ? 'block' : 'none'}" onclick="undo(${r.id})">تراجع (${r.undoTimer})</button>
+                    <div style="font-weight:bold; color:var(--warning); font-size:0.8rem; margin-bottom:5px;">${getTranslation('status_time_check_now')}</div>
+                    <button class="btn-action btn-finish" onclick="showActionConfirm('confirm_modal_title', 'confirm_finish_inspection_msg', () => finishInspection(${r.id}), { num: ${r.num} })">${getTranslation('btn_finish_inspection')}</button>
+                    <button id="undo-btn-${r.id}" class="btn-action btn-undo" style="display:${r.undoTimer > 0 ? 'block' : 'none'}" onclick="undo(${r.id})">${getTranslation('btn_undo')} (${r.undoTimer})</button>
                 `;
             }
 
             if (r.status === 'checking') return `
-                 <button class="btn-action btn-finish" onclick="openFinishModal(${r.id})">توثيق وإنهاء</button>
-                 <button id="undo-btn-${r.id}" class="btn-action btn-undo" style="display:${r.undoTimer > 0 ? 'block' : 'none'}" onclick="undo(${r.id})">تراجع (${r.undoTimer})</button>
+                 <button class="btn-action btn-finish" onclick="openFinishModal(${r.id})">${getTranslation('btn_document_finish')}</button>
+                 <button id="undo-btn-${r.id}" class="btn-action btn-undo" style="display:${r.undoTimer > 0 ? 'block' : 'none'}" onclick="undo(${r.id})">${getTranslation('btn_undo')} (${r.undoTimer})</button>
             `;
             return '✅';
         }
@@ -787,7 +1288,7 @@
                     r.undoTimer--; 
                     const undoBtn = document.getElementById(`undo-btn-${r.id}`);
                     if(undoBtn) {
-                        undoBtn.innerText = `تراجع (${r.undoTimer})`;
+                        undoBtn.innerText = `${getTranslation('btn_undo')} (${r.undoTimer})`;
                         if (r.undoTimer === 0) renderRooms();
                     }
                 }
@@ -869,10 +1370,10 @@
         }
 
         function getBadgeText(r) {
-            if(r.status==='acknowledging') return 'انتقال';
-            if(r.status==='cleaning') return 'تنظيف';
-            if(r.status==='checking_live') return 'فحص مباشر';
-            if(r.status==='checking') return 'جاهز للتوثيق';
+            if(r.status==='acknowledging') return getTranslation('status_acknowledging');
+            if(r.status==='cleaning') return getTranslation('status_cleaning_badge');
+            if(r.status==='checking_live') return getTranslation('status_checking_live_badge');
+            if(r.status==='checking') return getTranslation('status_checking_badge');
             return '';
         }
 
@@ -892,15 +1393,20 @@
             activeRoomId = id;
             const r = workerState.rooms.find(x => x.id === id);
             
-            document.getElementById('modal-title-text').innerText = `📝 تقرير فحص الغرفة رقم ${r.num}`;
-            
+            document.getElementById('modal-title-text').innerText = `${getTranslation('room_inspection')} ${r.num}`; // Dynamic part remains in Arabic/English
+
+            // Reset modal inputs and update labels using current language
             document.getElementById('modal-delay').selectedIndex = 0;
             document.getElementById('modal-notes').selectedIndex = 0;
             document.getElementById('repair-details-input').value = '';
             document.getElementById('repair-status-select').selectedIndex = 0;
             document.getElementById('modal-img-camera-input').value = ""; 
-            document.getElementById('modal-img-pdf-input').value = "";    
+            document.getElementById('modal-img-pdf-input').value = ""; 
             
+            // Translation for dynamic labels inside modal
+            document.getElementById('delay-reason-label').innerText = getTranslation('delay_reasons');
+            document.getElementById('repair-details-input').placeholder = getTranslation('maintenance_details_placeholder');
+
             // Calculate if delay reason should show
             const startT = r.status === 'cleaning' ? r.start : r.checkStart;
             const limit = r.timerLimit || (25*60000);
@@ -912,8 +1418,13 @@
 
             if (isOverTime) {
                 delaySection.style.display = 'block';
+                // Automatically select delay option if over time
+                if (delaySelect.value === getTranslation('none')) {
+                    delaySelect.selectedIndex = 1; 
+                }
             } else {
                 delaySection.style.display = 'none';
+                delaySelect.selectedIndex = 0;
             }
             
             updateImageRequirementUI(); 
@@ -929,13 +1440,14 @@
             const imageLabel = document.getElementById('image-label');
             const repairStatusSelect = document.getElementById('repair-status-select');
             
-            const needsMaintenance = notesSelect.value === 'تحتاج صيانة';
+            // Check based on the *key* (value) to ensure language independence
+            const needsMaintenance = notesSelect.value === 'تحتاج صيانة'; // Value remains same regardless of display language
             maintenanceFields.style.display = needsMaintenance ? 'block' : 'none';
             
             if (needsMaintenance) {
-                 imageLabel.innerText = 'إثبات الحالة (صورة قبل):';
+                 imageLabel.innerText = getTranslation('image_label_before');
             } else {
-                imageLabel.innerText = 'إثبات الحالة:'; // Revert label
+                imageLabel.innerText = getTranslation('status_proof'); // Revert label
             }
             updateMaintenanceImageStatus();
         }
@@ -945,9 +1457,11 @@
             const imageLabel = document.getElementById('image-label');
             
             if (repairStatusSelect.value === 'Completed') {
-                 imageLabel.innerText = 'إثبات الحالة (صورة بعد):';
+                 imageLabel.innerText = getTranslation('image_label_after');
+            } else if (document.getElementById('modal-notes').value === 'تحتاج صيانة') {
+                 imageLabel.innerText = getTranslation('image_label_before');
             } else {
-                 imageLabel.innerText = 'إثبات الحالة (صورة قبل):';
+                 imageLabel.innerText = getTranslation('status_proof');
             }
         }
         
@@ -956,7 +1470,8 @@
             const imgCamera = document.getElementById('modal-img-camera-input');
             const imgPdf = document.getElementById('modal-img-pdf-input');
             
-            const isMandatory = delaySelect.value === 'الغرفة بها ملاحظات كثيرة';
+            // Check based on the *key* (value) to ensure language independence
+            const isMandatory = delaySelect.value === 'الغرفة بها ملاحظات كثيرة'; 
             
             if (isMandatory) {
                 imgCamera.classList.add('required-field');
@@ -969,9 +1484,11 @@
 
         function confirmFinishRoom() {
             const r = workerState.rooms.find(x => x.id === activeRoomId);
-            const delay = document.getElementById('modal-delay').value;
-            const notes = document.getElementById('modal-notes').value;
-            const startTimeStr = new Date(r.start).toLocaleTimeString('ar-EG', {hour:'numeric', minute:'numeric'});
+            const delay = document.getElementById('modal-delay').value; // Actual value (e.g., 'الغرفة بها ملاحظات كثيرة')
+            const delayDisplay = document.getElementById('modal-delay').selectedOptions[0].text; // Displayed text (translated)
+            const notes = document.getElementById('modal-notes').value; // Actual value (e.g., 'تحتاج صيانة')
+            const notesDisplay = document.getElementById('modal-notes').selectedOptions[0].text; // Displayed text (translated)
+            const startTimeStr = new Date(r.start).toLocaleTimeString(currentLang, {hour:'numeric', minute:'numeric'});
             
             const imgCamera = document.getElementById('modal-img-camera-input');
             const imgPdf = document.getElementById('modal-img-pdf-input');
@@ -981,20 +1498,22 @@
             const needsMaintenance = notes === 'تحتاج صيانة';
             let repairDetails = 'N/A';
             let repairStatus = 'N/A';
+            let repairStatusDisplay = 'N/A';
 
             if (needsMaintenance) {
                 repairDetails = document.getElementById('repair-details-input').value.trim();
                 repairStatus = document.getElementById('repair-status-select').value;
+                repairStatusDisplay = document.getElementById('repair-status-select').selectedOptions[0].text;
                 
                 if (!repairDetails) {
-                    alert("🔴 مطلوب: يجب وصف الأغراض التي تحتاج صيانة.");
+                    alert(getTranslation("alert_repair_details"));
                     return;
                 }
             }
             
             // Mandatory image check 
             if (delay === 'الغرفة بها ملاحظات كثيرة' && !hasImage) {
-                alert("🔴 مطلوب: يجب إرفاق صورة عند اختيار 'الغرفة بها ملاحظات كثيرة'.");
+                alert(getTranslation("alert_image_mandatory"));
                 return; 
             }
             
@@ -1005,13 +1524,13 @@
                 guestStatus: r.type === 'stay' ? r.guestStatus : 'N/A',
                 cleanTime: Math.ceil((r.checkStart - r.start)/60000),
                 checkTime: Math.ceil((Date.now() - r.checkStart)/60000),
-                delay: delay,
-                notes: notes,
+                delay: delayDisplay, // Log the translated display text
+                notes: notesDisplay, // Log the translated display text
                 hasImage: hasImage, 
                 repairDetails: repairDetails,
-                repairStatus: repairStatus,
+                repairStatus: repairStatusDisplay, // Log the translated display text
                 startTimeStr: startTimeStr,
-                time: new Date().toLocaleTimeString('ar-EG', {hour:'numeric', minute:'numeric'})
+                time: new Date().toLocaleTimeString(currentLang, {hour:'numeric', minute:'numeric'})
             };
             
             workerState.log.unshift(entry);
@@ -1020,36 +1539,36 @@
             workerState.rooms = workerState.rooms.filter(x => x.id !== activeRoomId);
             
             saveState(); renderRooms(); closeModal(); updateLogUI(); updateStats();
-            showConfirmation('تم إنجاز وتوثيق الغرفة ' + entry.num);
+            showConfirmation('toast_room_documented', { num: entry.num });
             
-            // WhatsApp Report Logic Modified
-            let msg = `✅ *تقرير نظافة غرفة رقم ${entry.num}*\n`;
-            msg += `🕒 وقت البدء: ${entry.startTimeStr}\n`;
-            
+            // WhatsApp Report Logic Modified (Use specific WA keys for clear formatting)
+            let msg = `${getTranslation('report_title_wa', { num: entry.num })}\n`;
+            msg += `${getTranslation('report_start_time_wa', { time: entry.startTimeStr })}\n`;
+            msg += `----------------\n`;
+
             // Detailed Reporting
             let detailReport = '';
-            if (entry.delay !== 'لا يوجد تأخير') {
-                detailReport += `\n🛑 سبب التأخير: ${entry.delay}`;
+            if (delay !== 'لا يوجد تأخير') {
+                detailReport += `\n${getTranslation('report_delay_reason_wa', { reason: entry.delay })}`;
             } else {
-                 detailReport += `\n✅ لا يوجد تأخير`;
+                 detailReport += `\n${getTranslation('report_no_delay_wa')}`;
             }
             
-            if (entry.notes === 'تحتاج صيانة') {
-                 detailReport += `\n🛠️ الصيانة: ${repairStatus}. التفاصيل: ${repairDetails}`;
-            } else if (entry.notes !== 'لا يوجد ملاحظات') {
-                 detailReport += `\n📝 ملاحظات الفحص: ${entry.notes}`;
+            if (notes === 'تحتاج صيانة') {
+                 detailReport += `\n${getTranslation('report_maint_wa', { status: entry.repairStatus, details: entry.repairDetails })}`;
+            } else if (notes !== 'لا يوجد ملاحظات') {
+                 detailReport += `\n${getTranslation('report_other_notes_wa', { notes: entry.notes })}`;
             } else {
-                 detailReport += `\n📝 لا يوجد ملاحظات فحص`;
+                 detailReport += `\n${getTranslation('report_no_notes_wa')}`;
             }
 
-            msg += `----------------\n`;
-            msg += `🧹 تم الانتهاء من التنظيف في: ${entry.cleanTime}د\n`;
-            msg += `🔍 تم الانتهاء من الفحص في: ${entry.checkTime}د\n`;
+            msg += `${getTranslation('report_clean_time_wa', { time: entry.cleanTime })}\n`;
+            msg += `${getTranslation('report_check_time_wa', { time: entry.checkTime })}\n`;
             msg += `----------------\n`;
             msg += `${detailReport}\n`;
             
             if (hasImage) {
-                msg += `\n🔗 *رابط الصورة:* [تم إرفاق صورة]`;
+                msg += `\n${getTranslation('report_image_link_wa')}`;
             }
             
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1058,35 +1577,44 @@
         // --- UTILS ---
         function updateLogUI() {
             const list = document.getElementById('worker-log-list');
-            if(workerState.log.length === 0) return;
-            list.innerHTML = workerState.log.map((l, index) => `
+            if(workerState.log.length === 0) {
+                 list.innerHTML = `<p id="log-none-p" style="text-align:center; color:#999;">${getTranslation('log_none')}</p>`;
+                 return;
+            }
+
+            list.innerHTML = workerState.log.map((l, index) => {
+                // Check delay against the original value 'لا يوجد تأخير'
+                const isDelayed = l.delay !== getTranslation('none');
+                
+                return `
                 <div style="border-bottom:1px solid #eee; padding:8px 0; display:flex; justify-content:space-between; align-items:center;">
                     <div>
-                        <div style="font-weight:bold; color:var(--primary);">${l.num} <span style="font-size:0.7rem; color:#999;">(${l.type})</span></div>
-                        <div style="font-size:0.7rem; color:#666;">بدأ: ${l.startTimeStr}</div>
-                        ${l.guestStatus === 'in' ? '<span style="font-size:0.7rem; color:var(--danger)">⚠️ نزيل داخل</span>' : ''}
+                        <div style="font-weight:bold; color:var(--primary);">${l.num} <span style="font-size:0.7rem; color:#999;">(${l.type === 'ساكن' ? getTranslation('workers') : getTranslation('workers')})</span></div>
+                        <div style="font-size:0.7rem; color:#666;">${getTranslation('report_start_time_wa', { time: l.startTimeStr }).replace('🕒', '')}</div>
+                        ${l.guestStatus === 'in' ? `<span style="font-size:0.7rem; color:var(--danger)">${getTranslation('log_in_alert')}</span>` : ''}
                     </div>
                     <div style="text-align:left; font-size:0.75rem; display:flex; gap:10px;">
                         ${l.hasImage ? `<button onclick="showLogImage(${index})" style="border:none; background:none; cursor:pointer; color:var(--upgrade); padding:0;">📸</button>` : ''}
                         <div>
-                            <div>${l.cleanTime}د تنظيف</div>
-                            <div style="color:${l.delay !== 'لا يوجد تأخير' ? 'red' : '#999'};">${l.delay !== 'لا يوجد تأخير' ? 'تأخير!' : 'تم'}</div>
+                            <div>${l.cleanTime}د ${getTranslation('status_cleaning_badge')}</div>
+                            <div style="color:${isDelayed ? 'red' : '#999'};">${isDelayed ? getTranslation('delay') : getTranslation('none')}</div>
                         </div>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
         
         function showLogImage(index) {
             const logEntry = workerState.log[index];
-            alert(`📸 تم التقاط صورة لملاحظات الغرفة رقم ${logEntry.num}.`);
+            alert(getTranslation('log_image_alert', { num: logEntry.num }));
         }
 
         function updateStats() {
             const log = workerState.log;
             const totalCompleted = log.length;
             
-            // Segmentation
+            // Segmentation (use original keys 'ساكن'/'خروج' for logic, not translated text)
             const countStay = log.filter(l => l.type === 'ساكن').length;
             const countOut = totalCompleted - countStay;
             
@@ -1107,7 +1635,9 @@
             const minTimeMs = allTotalTimes.length > 0 ? Math.min(...allTotalTimes) : 0;
             const totalTimeMs = allTotalTimes.reduce((sum, time) => sum + time, 0);
             const avgTimeMs = totalCompleted > 0 ? totalTimeMs / totalCompleted : 0;
-            const overTimerCount = log.filter(l => l.delay !== 'لا يوجد تأخير').length;
+            
+            // Check delay against the translated "None" value
+            const overTimerCount = log.filter(l => l.delay !== getTranslation('none')).length;
 
             // UI Updates (Standard Stats)
             document.getElementById('stat-completed').innerText = totalCompleted;
@@ -1127,14 +1657,14 @@
                 document.getElementById('fastest-out-time').innerText = formatTimeDuration(fastestOut);
             } else {
                 document.getElementById('fastest-out-num').innerText = '--';
-                document.getElementById('fastest-out-time').innerText = '0د 0ث';
+                document.getElementById('fastest-out-time').innerText = `0د 0ث`;
             }
              if (fastestStayRoom) {
                 document.getElementById('fastest-stay-num').innerText = fastestStayRoom.num;
                 document.getElementById('fastest-stay-time').innerText = formatTimeDuration(fastestStay);
             } else {
                 document.getElementById('fastest-stay-num').innerText = '--';
-                document.getElementById('fastest-stay-time').innerText = '0د 0ث';
+                document.getElementById('fastest-stay-time').innerText = `0د 0ث`;
             }
         }
 
@@ -1157,7 +1687,8 @@
                 workerState.log = d.log || [];
                 
                 if (d.rooms && d.rooms.length > 0) {
-                    workerState.rooms = d.rooms.filter(r => r.status !== 'pending'); 
+                    // Filter out old empty room placeholders and keep active rooms
+                    workerState.rooms = d.rooms.filter(r => r.status !== 'pending' && r.num !== ''); 
                 }
                 
                 const dTurbo = localStorage.getItem('abella_turbo_mode');
@@ -1169,38 +1700,35 @@
                     if (isTurboMode) {
                         btn.style.background = 'var(--danger)';
                         btn.classList.add('btn-turbo-active');
-                        btn.innerText = '⚡ الوضع التيربو مفعّل (إلغاء)';
+                        btn.innerText = getTranslation('turbo_btn_off');
                     } else {
                         btn.style.background = 'var(--success)';
                         btn.classList.remove('btn-turbo-active');
-                        btn.innerText = 'تفعيل الوضع التيربو لكل الغرف - المواسم أو الطوارئ';
+                        btn.innerText = getTranslation('turbo_btn_on');
                     }
                 }
                 
-                // === BEGIN CRITICAL FIX FOR ROOM INPUT VISIBILITY ===
-                // This block replaces the original logic to ensure a pending room is always present 
-                // for input upon loading from existing storage (d is NOT null).
+                // === BEGIN CRITICAL FIX FOR ROOM INPUT VISIBILITY (Consistency Fix: limit -> timerLimit) ===
                 const hasEmptyRow = workerState.rooms.some(r => r.num === '');
                 if (!hasEmptyRow) {
                      workerState.rooms.push({ 
-                        id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, limit: 0 
+                        id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, timerLimit: 0 
                     });
                 }
                 // === END CRITICAL FIX IF (D) IS PRESENT ===
             } 
             
             // CRITICAL FIX: Ensure workerState.rooms is an array and has the input slot on first load 
-            // (d is null or workerState.rooms was empty after filtering).
             if (!workerState.rooms || workerState.rooms.length === 0) {
                  workerState.rooms = [{ 
-                    id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, limit: 0 
+                    id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, timerLimit: 0 
                 }];
             } else {
                  // Double check on subsequent loads if the array was cleared by logic errors or manual reset
                  const hasEmptyRow = workerState.rooms.some(r => r.num === '');
                  if (!hasEmptyRow) {
                      workerState.rooms.push({ 
-                        id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, limit: 0 
+                        id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, timerLimit: 0 
                     });
                 }
             }
@@ -1216,8 +1744,16 @@
         
         function generateDailyReport() {
             const total = workerState.log.length;
-            const delayCount = workerState.log.filter(l => l.delay !== 'لا يوجد تأخير').length;
-            const msg = `📊 *تقرير يومي (فندق أبيلا)*\n📅 التاريخ: ${new Date().toLocaleDateString()}\n\n✅ تم إنجاز: ${total} غرفة\n⚠️ غرف متأخرة: ${delayCount}\n\n*تفاصيل سريعة:*\n` + workerState.log.map(l => `${l.num}: ${l.cleanTime}د/${l.checkTime}د (بدأ ${l.startTimeStr})`).join('\n');
+            const delayCount = workerState.log.filter(l => l.delay !== getTranslation('none')).length;
+            
+            let msg = `${getTranslation('report_title_wa').replace('*تقرير نظافة غرفة رقم {num}*','*')} \n`;
+            msg += `${getTranslation('report_date', { date: new Date().toLocaleDateString(currentLang) })}\n\n`;
+            msg += `${getTranslation('report_completed', { total: total })}\n`;
+            msg += `${getTranslation('report_delayed', { delayed: delayCount })}\n\n`;
+            msg += `${getTranslation('report_details')}\n`;
+            
+            msg += workerState.log.map(l => `${l.num}: ${l.cleanTime}د/${l.checkTime}د (بدأ ${l.startTimeStr})`).join('\n');
+            
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
         
@@ -1229,7 +1765,7 @@
 
         function clearAllData() {
             workerState.rooms = [{ 
-                id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, limit: 0 
+                id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, timerLimit: 0 // Consistency Fix
             }];
             
             workerState.log = [];
@@ -1242,8 +1778,9 @@
             saveState(); 
             renderRooms();
             updateStats();
+            updateLogUI();
             document.getElementById('password-modal').style.display = 'none';
-            showConfirmation("✅ تم تصفية البيانات بنجاح وبدء يوم جديد.");
+            showConfirmation("toast_data_cleared");
         }
 
         function showResetModal() {
@@ -1252,20 +1789,20 @@
             
             document.getElementById('password-modal').style.display = 'flex';
             document.getElementById('confirm-reset-btn').onclick = function() { checkPasswordAndReset('full_reset'); };
-            document.getElementById('password-modal-title').innerText = 'تصفية شاملة للبيانات';
+            document.getElementById('password-modal-title').innerText = getTranslation('password_modal_title_reset');
 
             if (isAllowed) {
-                statusMsg.innerHTML = '⚠️ تجاوزت الساعة 1:00 ص. أدخل كلمة السر لتصفية اليوم.';
+                statusMsg.innerHTML = getTranslation('password_msg_allow');
             } else {
-                statusMsg.innerHTML = '🔒 لم يحن وقت التصفية التلقائية (1:00 ص). أدخل كلمة السر لتجاوز القيد الزمني.';
+                statusMsg.innerHTML = getTranslation('password_msg_deny');
             }
         }
         
         function showLogClearModal() {
             document.getElementById('password-modal').style.display = 'flex';
             document.getElementById('confirm-reset-btn').onclick = function() { checkPasswordAndReset('log_only'); };
-            document.getElementById('password-modal-title').innerText = 'تصفية سجل العمليات المنجزة (فقط)';
-            document.getElementById('reset-status-msg').innerHTML = 'أدخل كلمة مرور المسؤول لتصفية السجل الحالي.';
+            document.getElementById('password-modal-title').innerText = getTranslation('password_modal_title_log');
+            document.getElementById('reset-status-msg').innerHTML = getTranslation('password_msg_log');
         }
         
         function clearLogOnly() {
@@ -1273,9 +1810,9 @@
             saveState();
             renderRooms();
             updateStats();
-            updateLogUI(); // CRITICAL FIX: Ensure log UI updates immediately
+            updateLogUI(); 
             document.getElementById('password-modal').style.display = 'none';
-            showConfirmation("✅ تم تصفية سجل العمليات بنجاح.");
+            showConfirmation("toast_log_cleared");
         }
 
 
@@ -1290,76 +1827,118 @@
                 }
             } else {
                 if (isTimeAllowed()) {
-                    alert("❌ كلمة السر غير صحيحة. لا يمكن التصفية إلا بكلمة سر صحيحة بعد 1:00 ص.");
+                    alert(getTranslation('alert_wrong_password_allowed'));
                 } else {
-                    alert("❌ كلمة السر غير صحيحة. التصفية مسموحة فقط بكلمة سر صحيحة أو بعد 1:00 ص.");
+                    alert(getTranslation('alert_wrong_password_denied'));
                 }
             }
             document.getElementById('admin-password').value = ''; 
         }
 
 
-/* =========================
-   Translation system (safe)
-   ========================= */
+/* =======================================
+   Translation system (New Robust System)
+   ======================================= */
 
-// Utility: walk text nodes
-function walkTextNodes(node, fn) {
-    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
-    let n;
-    while (n = walker.nextNode()) {
-        fn(n);
+// Utility to get translated string, including placeholders {key}
+function getTranslation(key, placeholders = {}) {
+    // Fallback to 'ar' if currentLang data is missing
+    const langData = TRANSLATIONS[currentLang] || TRANSLATIONS['ar'];
+    let text = langData[key] || TRANSLATIONS['ar'][key] || key; // Fallback to key itself if all fails
+    
+    // Replace placeholders
+    for (const pKey in placeholders) {
+        text = text.replace(`{${pKey}}`, placeholders[pKey]);
     }
+    return text;
 }
 
-// Load base Arabic mapping first (used to detect text nodes to replace)
-let baseArabic = null;
+// Function to apply translation based on data attributes
+function applyTranslation(lang) {
+    // 1. Process standard elements using data-lang-key
+    document.querySelectorAll('[data-lang-key]').forEach(el => {
+        const key = el.getAttribute('data-lang-key');
+        const translation = getTranslation(key);
 
-// Fetch JSON helper
-function fetchJson(path) {
-    return fetch(path).then(r => {
-        if(!r.ok) throw new Error('Failed to load ' + path);
-        return r.json();
-    });
-}
-
-// Apply translation by replacing occurrences of Arabic baseline texts with target language strings
-function applyTranslation(targetData) {
-    if (!baseArabic) return;
-    walkTextNodes(document.body, (textNode) => {
-        let txt = textNode.nodeValue;
-        // For each key in baseArabic, replace exact substring occurrences
-        for (const key in baseArabic) {
-            const ar = baseArabic[key];
-            const tgt = targetData[key];
-            if (!ar || !tgt) continue;
-            // Only replace when the node exactly equals the Arabic baseline or contains it as a segment
-            if (txt.includes(ar)) {
-                txt = txt.split(ar).join(tgt);
-            }
+        if (translation) {
+             // Special case for H1 which contains a nested SPAN with its own key
+             if(el.id === 'header-text') {
+                 // Update the main part of H1 (the node before the <br>)
+                 if (el.childNodes.length > 0 && el.firstChild.nodeType === 3) {
+                     el.firstChild.nodeValue = translation.split('<br>')[0]; // Set only the first part
+                 } else {
+                     el.textContent = translation.split('<br>')[0];
+                 }
+                 
+             } else if (el.tagName === 'SPAN' && el.parentElement.id === 'header-text') {
+                 // Update the subtitle span (which is the child of the h1)
+                 el.textContent = getTranslation('tracking_table'); // Using the dedicated key for the subtitle
+                 
+             } else if (el.tagName === 'BUTTON' || el.tagName === 'SPAN' || el.tagName === 'DIV' || el.tagName === 'P' || el.tagName === 'H3' || el.tagName === 'TITLE') {
+                el.textContent = translation;
+             } else {
+                 // Default to setting text content
+                 el.textContent = translation;
+             }
         }
-        if (textNode.nodeValue !== txt) textNode.nodeValue = txt;
     });
+
+    // 2. Process Attributes (Placeholders, Select Options, Titles)
+    document.querySelectorAll('[data-lang-placeholder], select, input').forEach(el => {
+        // Handle Placeholder
+        const key = el.getAttribute('data-lang-placeholder');
+        if (key) {
+            el.placeholder = getTranslation(key);
+        }
+        
+        // Handle Select Options (Crucial for translating dropdown options)
+        if (el.tagName === 'SELECT') {
+             Array.from(el.options).forEach(option => {
+                 const optKey = option.getAttribute('data-lang-key');
+                 if (optKey) {
+                     option.text = getTranslation(optKey);
+                 }
+             });
+        }
+    });
+    
+    // 3. Update dynamic/hardcoded texts that need refresh
+    document.title = getTranslation('abella_system');
+    document.getElementById('turbo-mode-btn').innerText = isTurboMode ? getTranslation('turbo_btn_off') : getTranslation('turbo_btn_on');
+    document.getElementById('report-btn-action').innerText = getTranslation('send_daily_report');
+    document.getElementById('log-none-p').innerText = getTranslation('log_none');
+    document.getElementById('dev-footer-fixed').innerText = getTranslation('developed_by');
+    document.getElementById('langBtn').innerText = getTranslation('lang_button');
+
+    // Re-render rooms to update dynamic action buttons/badges
+    renderRooms(); 
 }
 
 // Load a language by code (ar|en|ur|bn)
 function loadLang(lang) {
-    Promise.all([
-        baseArabic ? Promise.resolve(baseArabic) : fetchJson('lang-ar.json').then(d => { baseArabic = d; return d; }),
-        fetchJson('lang-' + lang + '.json')
-    ]).then(([base, target]) => {
-        // apply translation
-        applyTranslation(target);
-        localStorage.setItem('workerLang', lang);
-        // Update dropdown label to reflect current language
-        const btn = document.getElementById('langBtn');
-        if (btn) {
-            const labelMap = { ar: 'عربي', en: 'English', ur: 'اردو', bn: 'বাংলা' };
-            btn.innerText = '🌐 ' + (labelMap[lang] || lang) + ' ▾';
-        }
-    }).catch(err => {
-        console.warn('Translation load failed:', err);
-    });
+    if (!TRANSLATIONS[lang]) {
+        console.warn(`Language data for ${lang} is missing. Falling back to Arabic.`);
+        lang = 'ar';
+    }
+    currentLang = lang;
+    
+    // CRITICAL FIX: Update HTML attributes for directionality and language
+    const html = document.documentElement;
+    html.setAttribute('lang', lang);
+    
+    // Check for RTL languages (Arabic, Urdu are RTL among the list)
+    const rtlLangs = ['ar', 'ur']; 
+    if (rtlLangs.includes(lang)) {
+        html.setAttribute('dir', 'rtl');
+    } else {
+        html.setAttribute('dir', 'ltr');
+    }
+
+    // Apply the translation
+    applyTranslation(lang);
+
+    // Save state 
+    localStorage.setItem('workerLang', lang);
 }
 
 // Initialize language UI
@@ -1391,7 +1970,7 @@ function loadLang(lang) {
         }
     });
 
-    // Load initial language (after fetching base)
+    // Load initial language
     loadLang(saved);
 })();
     </script>
