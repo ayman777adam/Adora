@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -59,22 +60,14 @@
         .header-title { display: flex; align-items: center; gap: 10px; flex: 1; }
         .header-title h1 { font-size: 1rem; margin: 0; color: var(--primary); font-weight: 800; line-height: 1.2; }
         
-        /* Toggle Button */
-        #mode-toggle-btn {
-            border: none; padding: 6px 15px; border-radius: 20px;
-            font-weight: 800; font-size: 0.9rem; cursor: pointer; color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; min-width: 80px;
-        }
-        #mode-toggle-btn.btn-staff { background: var(--danger); }
-        #mode-toggle-btn.btn-worker { background: var(--success); }
+        /* Toggle Button Styles Removed */
 
         .tools-area { display: flex; gap: 8px; }
         .tools-btn { background: var(--bg-body); border: 1px solid var(--border-color); padding: 8px; border-radius: 10px; cursor: pointer; }
 
         /* --- VIEW CONTROLLERS --- */
-        .staff-view, .worker-view { display: none; width: 100%; }
-        body.staff-mode .staff-view { display: block; animation: fadeIn 0.3s; }
-        body.worker-mode .worker-view { display: block; animation: fadeIn 0.3s; }
+        .worker-view { display: block; width: 100%; animation: fadeIn 0.3s; }
+        .staff-view { display: none; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- UI Elements --- */
@@ -290,11 +283,23 @@
         }
     </style>
 </head>
-<body class="staff-mode"> <div class="container">
+<body class="worker-mode"> <div class="container">
         <div class="header-glass">
-            <div class="header-title">
-                <button id="mode-toggle-btn" class="btn-staff" onclick="toggleAppMode()">العمال</button>
-                <h1 id="header-text">واجهة الموظفين<br><span style="font-size:0.7rem; opacity:0.7;">فندق أبيلا</span></h1>
+            <div class="header-title" style="align-items:center; gap:12px;">
+                <h1 id="header-text" style="margin:0;">واجهة العمال<br><span style="font-size:0.7rem; opacity:0.7;">تتبع الغرف</span></h1>
+
+                <!-- زر اللغة (يمين جنب العنوان) -->
+                <div id="lang-container" style="margin-left:6px; display:flex; align-items:center;">
+                    <div style="position:relative; display:inline-block;">
+                        <button id="langBtn" class="tools-btn" style="padding:6px 10px; font-weight:700;">🌐 اللغة ▾</button>
+                        <div id="langMenu" style="position:absolute; top:38px; right:0; display:none; background:#fff; border:1px solid var(--border-color); border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.12); z-index:9999; min-width:140px; overflow:hidden;">
+                            <div class="langItem" data-lang="ar" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">عربي</div>
+                            <div class="langItem" data-lang="en" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">English</div>
+                            <div class="langItem" data-lang="ur" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">اردو</div>
+                            <div class="langItem" data-lang="bn" style="padding:10px 12px; cursor:pointer; white-space:nowrap;">বাংলা</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tools-area">
                 <button class="tools-btn" onclick="document.body.classList.toggle('dark-mode')">🌙</button>
@@ -377,27 +382,12 @@
             </div>
         </div>
 
-        <div class="staff-view">
-             <div class="card" style="text-align:center;">
-                 <h3>مرحباً موظف الاستقبال 👋</h3>
-                 <p style="color:var(--text-sec);">هذه واجهة الموظفين (الافتراضية).</p>
-                 <div style="padding:20px; background:#e0f7fa; border-radius:10px; margin-top:10px;">
-                     <h1>نظام الإشغال</h1>
-                     <p>تم فصل الواجهات بنجاح.</p>
-                 </div>
-             </div>
         </div>
-
-    </div>
 
     <div class="sticky-footer">
         <div class="worker-view">
             </div>
-        <div class="staff-view">
-            <button class="full-btn" style="background:var(--primary);" onclick="alert('خيارات الموظفين')">خيارات الموظفين ⚙️</button>
         </div>
-        
-    </div>
 
     <div id="dev-footer-fixed">
         تطوير .. ايمن ابو ورده 77aayy@gmail.com
@@ -492,7 +482,6 @@
         // --- CONFIG & STATE ---
         const ADMIN_PASSWORD = "fahd5"; // Admin password for reset
         const TRAVEL_TIME_MS = 15 * 60 * 1000; // 15 minutes travel time
-        let isWorkerMode = false;
         let isTurboMode = false; // NEW: Global Turbo Mode
         let workerState = { rooms: [], log: [] };
         let buffer = [];
@@ -555,23 +544,7 @@
         }
 
 
-        // --- TOGGLE MODES ---
-        function toggleAppMode() {
-            isWorkerMode = !isWorkerMode;
-            const body = document.body;
-            const btn = document.getElementById('mode-toggle-btn');
-            const headerTxt = document.getElementById('header-text');
-
-            if (isWorkerMode) {
-                body.classList.remove('staff-mode'); body.classList.add('worker-mode');
-                btn.innerText = "الموظفين"; btn.className = "btn-worker";
-                headerTxt.innerHTML = 'واجهة العمال<br><span style="font-size:0.7rem; opacity:0.7;">تتبع الغرف</span>';
-            } else {
-                body.classList.remove('worker-mode'); body.classList.add('staff-mode');
-                btn.innerText = "العمال"; btn.className = "btn-staff";
-                headerTxt.innerHTML = 'واجهة الموظفين<br><span style="font-size:0.7rem; opacity:0.7;">فندق أبيلا</span>';
-            }
-        }
+        // --- TOGGLE MODES REMOVED ---
         
         // NEW: Global Turbo Mode Toggle
         function toggleTurboMode() {
@@ -1304,6 +1277,103 @@
             }
             document.getElementById('admin-password').value = ''; 
         }
+
+
+/* =========================
+   Translation system (safe)
+   ========================= */
+
+// Utility: walk text nodes
+function walkTextNodes(node, fn) {
+    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
+    let n;
+    while (n = walker.nextNode()) {
+        fn(n);
+    }
+}
+
+// Load base Arabic mapping first (used to detect text nodes to replace)
+let baseArabic = null;
+
+// Fetch JSON helper
+function fetchJson(path) {
+    return fetch(path).then(r => {
+        if(!r.ok) throw new Error('Failed to load ' + path);
+        return r.json();
+    });
+}
+
+// Apply translation by replacing occurrences of Arabic baseline texts with target language strings
+function applyTranslation(targetData) {
+    if (!baseArabic) return;
+    walkTextNodes(document.body, (textNode) => {
+        let txt = textNode.nodeValue;
+        // For each key in baseArabic, replace exact substring occurrences
+        for (const key in baseArabic) {
+            const ar = baseArabic[key];
+            const tgt = targetData[key];
+            if (!ar || !tgt) continue;
+            // Only replace when the node exactly equals the Arabic baseline or contains it as a segment
+            if (txt.includes(ar)) {
+                txt = txt.split(ar).join(tgt);
+            }
+        }
+        if (textNode.nodeValue !== txt) textNode.nodeValue = txt;
+    });
+}
+
+// Load a language by code (ar|en|ur|bn)
+function loadLang(lang) {
+    Promise.all([
+        baseArabic ? Promise.resolve(baseArabic) : fetchJson('lang-ar.json').then(d => { baseArabic = d; return d; }),
+        fetchJson('lang-' + lang + '.json')
+    ]).then(([base, target]) => {
+        // apply translation
+        applyTranslation(target);
+        localStorage.setItem('workerLang', lang);
+        // Update dropdown label to reflect current language
+        const btn = document.getElementById('langBtn');
+        if (btn) {
+            const labelMap = { ar: 'عربي', en: 'English', ur: 'اردو', bn: 'বাংলা' };
+            btn.innerText = '🌐 ' + (labelMap[lang] || lang) + ' ▾';
+        }
+    }).catch(err => {
+        console.warn('Translation load failed:', err);
+    });
+}
+
+// Initialize language UI
+(function initLangUI() {
+    // Load saved lang or default ar
+    const saved = localStorage.getItem('workerLang') || 'ar';
+    // Attach dropdown handlers
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+    if (!langBtn || !langMenu) return;
+
+    langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langMenu.style.display = (langMenu.style.display === 'block') ? 'none' : 'block';
+    });
+
+    document.querySelectorAll('.langItem').forEach(item => {
+        item.addEventListener('click', (ev) => {
+            const newLang = item.getAttribute('data-lang');
+            loadLang(newLang);
+            langMenu.style.display = 'none';
+        });
+    });
+
+    // Close menu on outside click
+    document.addEventListener('click', (e) => {
+        if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
+            langMenu.style.display = 'none';
+        }
+    });
+
+    // Load initial language (after fetching base)
+    loadLang(saved);
+})();
     </script>
 </body>
 </html>
