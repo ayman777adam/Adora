@@ -1918,11 +1918,11 @@
                         workerState.rooms.push({ 
                             id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, timerLimit: 0 
                         });
-                        needsSave = true;
+                        // ❌ تم حذف needsSave = true; والحفظ التلقائي لمنع مسح السجل المحمّل.
                     }
                     
                     if (needsSave) {
-                        saveState();
+                        // ❌ تم إزالة استدعاء saveState() هنا لمنع التعارض والحفظ التلقائي الذي يمسح سجل العمليات.
                     }
 
                     // تحديث الواجهة فوراً بأي تغيير (هذه هي ميزة المزامنة اللحظية)
@@ -2007,15 +2007,27 @@
                 });
         }
 
-        // 🗑️ UPDATE: clearLogOnly now uses saveState to sync with Firebase
+        // 🗑️ UPDATE: clearLogOnly now uses explicit update to Firebase
         function clearLogOnly() {
             workerState.log = [];
-            saveState({ forceLog: true }); // Save the state with empty log to Firebase and force the log field to persist
-            renderRooms();
-            updateStats();
-            updateLogUI(); 
-            document.getElementById('password-modal').style.display = 'none';
-            showConfirmation("toast_log_cleared");
+            
+            // 💡 FIX: Perform an explicit field update to guarantee the log field is set to empty array on Firebase
+            db.collection(collectionName).doc('main').update({
+                log: workerState.log,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                // UI updates are handled automatically by loadState/onSnapshot, but we keep local calls for speed
+                renderRooms();
+                updateStats();
+                updateLogUI(); 
+                document.getElementById('password-modal').style.display = 'none';
+                showConfirmation("toast_log_cleared");
+            })
+            .catch((error) => {
+                console.error("Error clearing log:", error);
+                alert('فشل في تصفية السجل.');
+            });
         }
 
         function showResetModal() {
