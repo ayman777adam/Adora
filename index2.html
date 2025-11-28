@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -906,7 +907,7 @@
                 'password_placeholder': 'پاس ورڈ',
                 'btn_confirm_reset': 'ختم کرنے کی تصدیق کریں',
                 'btn_confirm_log_clear': 'ختم کرنے کی تصديق کریں',
-                'toast_data_cleared': '✅ ڈیٹا کامیابی سے ختم ہو گیا اور نیا دن شروع ہو गया ہے۔',
+                'toast_data_cleared': '✅ ڈیٹا کامیابی سے ختم ہو گیا اور نیا دن شروع ہو گیا ہے۔',
                 'toast_log_cleared': '✅ آپریشن لاگ کامیابی سے ختم ہو گیا ہے۔',
                 'alert_wrong_password_allowed': '❌ غلط پاس ورڈ. صبح 1:00 بجے کے بعد درست پاس ورڈ درج کیے بغیر ختم نہیں کیا جا سکتا۔',
                 'alert_wrong_password_denied': '❌ غلط پاس ورڈ. ختم کرنے کی اجازت صرف درست پاس ورڈ کے ساتھ أو صبح 1:00 بجے کے بعد ہے۔',
@@ -934,7 +935,7 @@
                 'lang_button': '🌐 ভাষা ▾',
                 'lang_ar': 'عربي',
                 'lang_en': 'English',
-                'lang_ur': 'اردو',
+                'lang_ur': 'اردু',
                 'lang_bn': 'বাংলা',
                 'dark_mode_btn': '🌙',
                 'developed_by': 'উন্নয়ন: আইমন আবু ওয়ারদাহ',
@@ -1033,10 +1034,10 @@
                 'toast_data_cleared': '✅ ডেটা সফলভাবে মোছা হয়েছে এবং নতুন দিন শুরু হয়েছে।',
                 'toast_log_cleared': '✅ অপারেশন লগ সফলভাবে মোছা হয়েছে।',
                 'alert_wrong_password_allowed': '❌ ভুল পাসওয়ার্ড. ভোর ১:০০ টার পরে সঠিক পাসওয়ার্ড ছাড়া মোছা যাবে না।',
-                'alert_wrong_password_denied': '❌ ভুল পাসওয়ার্ড. কেবল সঠিক পাসওয়ার্ড সহ বা ভোর ১:০০ টার পরে মোছার অনুমতি আছে।',
+                'alert_wrong_password_denied': '❌ ভুল পাসওয়ার্ড. কেবল সঠিক পاسওয়ার্ড সহ বা ভোর ১:০০ টার পরে মোছার অনুমতি আছে।',
                 'confirm_modal_title': 'কার্য নিশ্চিত করুন',
                 'confirm_modal_message': 'আপনি কি এগিয়ে যেতে নিশ্চিত?',
-                'confirm_modal_yes': 'হ্যাঁ، নিশ্চিত করুন',
+                'confirm_modal_yes': 'হ্যাঁ, নিশ্চিত করুন',
                 'status_time_check_now': 'পরিদর্শন চলছে',
                 'log_in_alert': '⚠️ অতিথি ভেতরে আছেন',
                 'status_acknowledging': 'স্থানান্তরিত হচ্ছে',
@@ -1905,42 +1906,32 @@
                     workerState.rooms = data.rooms || [];
                     workerState.log = data.log || [];
 
-                    // 🔥 FIX: Logic to ensure exactly one empty input row exists IF needed (Conditions 1, 2)
+                    // 🛠️ الإصلاح: إزالة منطق إضافة الصف الفارغ التلقائي تماماً
+                    // يتم الآن الاعتماد كلياً على البيانات من Firebase دون تعديل
                     let needsSave = false;
                     
-                    const activeRooms = workerState.rooms.filter(r => r.num !== '');
-                    const inputRows = workerState.rooms.filter(r => r.num === '');
-                    
-                    // 1. ❌ Removed cleanup logic to allow multiple empty rows for multi-input workflow (Fix 2).
-                    
-                    // 2. Add input row only if the list is COMPLETELY EMPTY (Conditions 1 & 2: Clear/Reset)
-                    if (activeRooms.length === 0 && inputRows.length === 0) {
-                        workerState.rooms.push({ 
-                            id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, timerLimit: 0 
-                        });
-                        // ❌ تم حذف needsSave = true; والحفظ التلقائي لمنع مسح السجل المحمّل.
-                    }
+                    // 🔥 تم إزالة منطق إضافة الصفوف الفارغة التلقائية
+                    // هذا يحل مشكلة فقدان البيانات عند الـ refresh
                     
                     if (needsSave) {
-                        // ❌ تم إزالة استدعاء saveState() هنا لمنع التعارض والحفظ التلقائي الذي يمسح سجل العمليات.
+                        saveState();
                     }
 
                     // تحديث الواجهة فوراً بأي تغيير (هذه هي ميزة المزامنة اللحظية)
                     renderRooms();
                     updateLogUI();
                     updateStats();
-                    // console.log("State loaded/updated successfully from Firebase.");
                 } else {
                     console.log("No state document found in Firebase. Initializing empty state.");
-                    // 🔥 FIX: Manual initialization when no state document is found (Covers Clear/Init)
+                    // 🔥 الإصلاح: التهيئة فقط عند عدم وجود بيانات مع الحفاظ على البنية
                     workerState.rooms = [{ 
                         id: Date.now(), num: '', type: '', guestStatus: '', status: 'pending', start: 0, checkStart: 0, undoTimer: 0, timerLimit: 0 
                     }];
-                    saveState({ forceLog: false }); 
+                    workerState.log = [];
+                    saveState({ forceLog: true }); 
                 }
             }, (error) => {
                 console.error("Error listening to state changes from Firebase:", error);
-                // alert('فشل الاتصال بقاعدة بيانات Firebase. تحقق من اتصالك أو إعدادات المشروع.');
             });
         }
 
@@ -2007,27 +1998,15 @@
                 });
         }
 
-        // 🗑️ UPDATE: clearLogOnly now uses explicit update to Firebase
+        // 🗑️ UPDATE: clearLogOnly now uses saveState to sync with Firebase
         function clearLogOnly() {
             workerState.log = [];
-            
-            // 💡 FIX: Perform an explicit field update to guarantee the log field is set to empty array on Firebase
-            db.collection(collectionName).doc('main').update({
-                log: workerState.log,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                // UI updates are handled automatically by loadState/onSnapshot, but we keep local calls for speed
-                renderRooms();
-                updateStats();
-                updateLogUI(); 
-                document.getElementById('password-modal').style.display = 'none';
-                showConfirmation("toast_log_cleared");
-            })
-            .catch((error) => {
-                console.error("Error clearing log:", error);
-                alert('فشل في تصفية السجل.');
-            });
+            saveState({ forceLog: true }); // Save the state with empty log to Firebase and force the log field to persist
+            renderRooms();
+            updateStats();
+            updateLogUI(); 
+            document.getElementById('password-modal').style.display = 'none';
+            showConfirmation("toast_log_cleared");
         }
 
         function showResetModal() {
