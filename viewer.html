@@ -13,40 +13,37 @@
         overflow: hidden;
     }
 
-    /* 🔥 التعديل: زر صغير، أخضر مشع، في الأعلى */
+    /* زر وضع التبديل */
     #switchBtn {
         position: fixed;
-        top: 20px;       /* في مستوى الهيدر */
-        left: 55px;      /* بجانب أزرار التحكم الأخرى (اترك مسافة للوضع الليلي) */
-        z-index: 99999;
-        
-        padding: 6px 16px;       /* حجم صغير وأنيق */
-        border-radius: 30px;     /* كبسولة */
+        top: 20px;
+        left: 55px;
+        z-index: 99999999;  /* ضمان ظهوره فوق iframe */
+
+        padding: 6px 16px;
+        border-radius: 30px;
         border: none;
-        
-        background: #00e676;     /* لون أخضر أونلاين فاقع */
-        color: #006064;          /* نص غامق للتباين */
-        
+
+        background: #00e676;
+        color: #006064;
+
         font-weight: 800;
-        font-size: 0.75rem;      /* خط صغير */
+        font-size: 0.75rem;
         cursor: pointer;
-        
-        /* تأثير التوهج */
+
         box-shadow: 0 0 10px rgba(0, 230, 118, 0.6);
         transition: all 0.3s;
-        
-        /* نقطة صغيرة للتأثير */
         position: relative;
     }
-    
+
     #switchBtn:hover {
         box-shadow: 0 0 15px rgba(0, 230, 118, 0.8);
     }
-    
+
     #switchBtn:active {
         transform: scale(0.95);
     }
-    
+
     #switchBtn::before {
         content: '';
         position: absolute;
@@ -58,29 +55,33 @@
         background: #00e676;
         box-shadow: 0 0 5px #00e676;
     }
-    
+
+    /* iframes */
     iframe {
         width: 100%;
         height: 100vh;
         height: 100dvh;
         border: none;
         display: none;
+
+        position: relative;
+        z-index: 1;   /* حتى لا يغطي الزر */
     }
-    
-    /* 🔥 Desktop Fix: تصغير الزر وتغيير موضعه على الشاشات الكبيرة */
+
+    /* Desktop Fix */
     @media (min-width: 768px) {
         #switchBtn {
-            top: 25px; 
-            left: 50%; /* توسيط الزر أفقياً */
-            transform: translateX(-50%); 
-            
-            padding: 8px 25px; 
-            font-size: 0.95rem; /* تكبير الخط قليلاً */
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            padding: 8px 25px;
+            font-size: 0.95rem;
             box-shadow: 0 4px 15px rgba(0, 230, 118, 0.4);
         }
-        
+
         #switchBtn::before {
-            display: none; /* إخفاء النقطة الخضراء (التوهج يكفي) */
+            display: none;
         }
     }
 </style>
@@ -105,16 +106,15 @@
         if (mode === "worker") {
             staffFrame.style.display = "none";
             workerFrame.style.display = "block";
-            
-            // النص فقط يتغير، التصميم ثابت (أخضر أونلاين)
-            btn.innerHTML = "📊 لوحة استقبال"; 
-            document.title = "Adora | لوحة استقبال";
+
+            btn.innerHTML = "📊 لوحة موظف";
+            document.title = "Adora | لوحة العمال";
         } else {
             workerFrame.style.display = "none";
             staffFrame.style.display = "block";
-            
+
             btn.innerHTML = "👷 لوحة العمال";
-            document.title = "Adora | لوحة المدير";
+            document.title = "Adora | لوحة موظف";
         }
         localStorage.setItem('adora_view_mode', mode);
         currentMode = mode;
