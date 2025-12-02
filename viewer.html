@@ -7,11 +7,11 @@
 <style>
     body { margin: 0; font-family: "Tajawal", sans-serif; background: #f7f9fa; overflow: hidden; }
 
-    /* زر التحويل المحسن - ثابت في أعلى اليسار (40px) ومصغر */
+    /* زر التحويل المحسن - ثابت في أعلى اليسار (80px) ومصغر */
     #switchBtn {
         position: fixed; 
-        /* تم خفضه من 30px إلى 40px ليصبح أكثر انخفاضاً */
-        top: 40px; 
+        /* تم خفضه من 40px إلى 80px ليصبح أكثر انخفاضاً (إجمالي 4 سم) */
+        top: 80px; 
         left: 20px; 
         z-index: 2000;
         /* حجم مصغر */
@@ -52,9 +52,9 @@
     
     iframe { width: 100%; height: 100vh; height: 100dvh; border: none; display: none; position: relative !important; z-index: 1 !important; }
 
-    /* تعديلات سطح المكتب - إبقائه في أعلى اليسار (40px) */
+    /* تعديلات سطح المكتب - إبقائه في أعلى اليسار (80px) */
     @media (min-width: 768px) {
-        #switchBtn { top: 40px; left: 30px; transform: none; } /* تم التعديل هنا أيضاً */
+        #switchBtn { top: 80px; left: 30px; transform: none; } /* تم التعديل هنا أيضاً */
         #switchBtn:hover { transform: translateY(-3px) scale(1.05); }
     }
 
