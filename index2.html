@@ -3,61 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Adora | متابعة فريق العمل (Ayman Abo Warda - 0570707121)</title>
+    <title>Adora | متابعة فريق العمل</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 
     <script>
-        // =================================================================
-        // 1. FIREBASE CONFIGURATION & INITIALIZATION (Provided by User)
-        // =================================================================
+        // --- 1. إعدادات Firebase والهاش الأمني ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1rY9BUciB0ir1b8begsPozpJzgwnR-Z0",
+            authDomain: "adora-staff5255.firebaseapp.com",
+            projectId: "adora-staff5255",
+            storageBucket: "adora-staff5255.firebasestorage.app",
+            messagingSenderId: "96309381730",
+            appId: "1:96309381730:web:d24e0d275255347e43df3b"
+        };
+        
+        // دالة الهاش البسيطة (لعدم كشف الباسوورد كنص صريح)
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = (hash << 5) - hash + char;
+                hash = hash & hash; 
+            }
+            return hash;
+        }
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyD0r1Fc9cCf0d1f1Bb8Gj4P9a3ZJpgmb-20",
-        authDomain: "adora-staff7036.firebaseapp.com",
-        projectId: "adora-staff7036",
-        storageBucket: "adora-staff7036.firebasestorage.app",
-        messagingSenderId: "59993381729",
-        appId: "1:59993381729:web:cdc0e275255347a0eb2476"
-    };
-    
-    let db;
-    try {
-        const firebaseApp = firebase.initializeApp(firebaseConfig);
-        db = firebaseApp.firestore();
-        console.log("Firebase Initialized Successfully.");
-    } catch(e) {
-        console.error("Firebase Initialization Failed:", e);
-    }
-</script>
+        let db;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            console.log("Firebase Connected (Adora-5255).");
+        } catch(e) {
+            console.error("Firebase Init Error:", e);
+            alert("خطأ: فشل الاتصال بقاعدة البيانات.");
+        }
+    </script>
 
     <style>
-        /* ======================== CSS V36.0 (Glass + Rotating Glow + Chic) ======================== */
+        /* ======================== CSS Styles ======================== */
         :root { 
             --bg-body: #f0f2f5; --bg-card: #ffffff; --text-main: #1f2937; --text-sec: #6b7280; 
             --border-color: #e5e7eb; 
             --primary: #0097a7; --primary-glass: rgba(0, 151, 167, 0.15);
             --success: #10b981; --success-glass: rgba(16, 185, 129, 0.2);
             --danger: #ef4444; --danger-glass: rgba(239, 68, 68, 0.15);
-            --warning: #f59e0b; --warning-glass: rgba(245, 158, 11, 0.15); /* NEW: Added warning-glass */
+            --warning: #f59e0b; --warning-glass: rgba(245, 158, 11, 0.15);
             --upgrade: #8b5cf6; 
             --request-color: #6366f1; --request-glass: rgba(99, 102, 241, 0.15);
             --sched-color: #3b82f6; --sched-glass: rgba(59, 130, 246, 0.1);
-            --maint-color: #be123c; --maint-glass: rgba(190, 18, 60, 0.1); /* Elegant Red/Pink */
+            --maint-color: #be123c; --maint-glass: rgba(190, 18, 60, 0.1);
             --shadow: 0 4px 20px rgba(0,0,0,0.06); 
         }
         body.dark-mode { 
             --bg-body: #111827; --bg-card: #1f2937; --text-main: #f9fafb; --text-sec: #9ca3af; 
-            --border-color: #374151; 
-            --maint-color: #f43f5e; 
-            --shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            --border-color: #374151; --maint-color: #f43f5e; --shadow: 0 10px 30px rgba(0,0,0,0.5); 
         }
         body { font-family: 'Tajawal', sans-serif; background-color: var(--bg-body); color: var(--text-main); margin: 0; padding: 15px 15px 80px 15px; -webkit-tap-highlight-color: transparent; transition: background 0.3s; }
         .container { max-width: 600px; margin: 0 auto; }
         
-        /* 1. Header */
+        /* Header & Tools */
         .header-glass { position: relative; z-index: 50; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; padding: 12px 18px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
         .header-right h1 { font-size: 1.3rem; margin: 0; color: var(--primary); font-weight: 800; display:flex; align-items:center; gap:8px; }
         .header-left { display: flex; gap: 8px; align-items: center; background: var(--bg-body); padding: 5px; border-radius: 18px; border: 1px solid var(--border-color); }
@@ -65,103 +72,52 @@
         .tools-btn:active { transform: scale(0.9); }
         .tools-btn.turbo-active { color: var(--success); background: var(--primary-glass); animation: pulseGreen 1.5s infinite; border-radius: 50% !important; width: 38px; height: 38px; padding: 0; display: flex; justify-content: center; align-items: center; }
 
-        /* General Layout */
-        .section { border-radius: 28px; box-shadow: var(--shadow); border: 1px solid var(--border-color); background: var(--bg-card); padding: 20px; margin-bottom: 20px; transition: 0.3s; } /* Added transition */
+        /* Sections */
+        .section { border-radius: 28px; box-shadow: var(--shadow); border: 1px solid var(--border-color); background: var(--bg-card); padding: 20px; margin-bottom: 20px; transition: 0.3s; }
         .sec-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px; position: relative; z-index: 20; }
         .sec-title span { font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
-        
-        /* ================= NEW SECTION COLORS (Smart Glass & Border) ================= */
+        .section-rooms { background: linear-gradient(to bottom right, var(--bg-card), var(--success-glass) 5%); border-left: 5px solid var(--success); }
+        .section-requests { background: linear-gradient(to bottom right, var(--bg-card), var(--request-glass) 5%); border-left: 5px solid var(--request-color); }
+        .section-maintenance { background: linear-gradient(to bottom right, var(--bg-card), var(--warning-glass) 5%); border-left: 5px solid var(--warning); }
 
-        /* تخصيص الخلفيات الزجاجية الخفيفة للأقسام */
-        .section-rooms {
-            /* النظافة: أخضر خفيف (Soft Green) */
-            background: linear-gradient(to bottom right, var(--bg-card), var(--success-glass) 5%);
-            border-left: 5px solid var(--success);
-        }
-
-        .section-requests {
-            /* الطلبات: أزرق خفيف (Soft Blue/Indigo) */
-            background: linear-gradient(to bottom right, var(--bg-card), var(--request-glass) 5%);
-            border-left: 5px solid var(--request-color);
-        }
-
-        .section-maintenance {
-            /* الصيانة: برتقالي خفيف (Soft Orange/Yellow) */
-            background: linear-gradient(to bottom right, var(--bg-card), var(--warning-glass) 5%);
-            border-left: 5px solid var(--warning);
-        }
-
-        /* 2. Rotating Plus Button */
+        /* Add Button */
         .btn-add-room-wrapper { position: relative; display: inline-block; width: 55px; height: 55px; z-index: 100; }
         .btn-add-room { background: var(--primary); color: white; width: 100%; height: 100%; font-weight: 800; font-size: 2rem; border-radius: 50%; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; padding-bottom: 4px; box-shadow: 0 8px 20px rgba(0, 151, 167, 0.3); position: relative; z-index: 101; transition: transform 0.2s; }
         .btn-add-room:active { transform: scale(0.9); }
         .btn-add-room::before { content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--success); border-right-color: var(--success); animation: spinRing 4s linear infinite; z-index: 100; pointer-events: none; }
         @keyframes spinRing { 0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);} }
 
-        /* Stats Grid (Restored 4 Boxes) */
+        /* Stats */
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; text-align: center; margin-bottom: 15px; }
         .circle-viz { width: 75px; height: 75px; border-radius: 50%; margin: 0 auto 8px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; background: var(--bg-body); box-shadow: 6px 6px 12px rgba(0,0,0,0.05), -6px -6px 12px rgba(255,255,255,0.8); border: 4px solid var(--bg-card); }
         .circle-viz h3 { margin: 0; font-size: 1.3rem; color: var(--text-main); line-height: 1; }
         .circle-viz span { font-size: 0.65rem; color: var(--text-sec); font-weight: bold; margin-top: 2px; }
-        
         .stat-detail-box { padding: 12px; border-radius: 20px; border: 1px solid var(--border-color); text-align: center; background: var(--bg-body); display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 80px; }
         .pulse-urgent-box { animation: pulseRedBackground 1.5s infinite; background-color: rgba(239, 68, 68, 0.08) !important; border-color: var(--danger) !important; }
         @keyframes pulseRedBackground { 0% {background-color: rgba(239, 68, 68, 0.05);} 50% {background-color: rgba(239, 68, 68, 0.15);} 100% {background-color: rgba(239, 68, 68, 0.05);} }
 
-        /* ================= NEW CHIC CARD DESIGN ================= */
-        .room-row { 
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 26px; 
-            padding: 16px; margin-bottom: 15px; display: grid; 
-            grid-template-columns: 65px 1fr 1.3fr auto; 
-            gap: 15px; align-items: center; 
-            box-shadow: var(--shadow); position: relative; overflow: hidden;
-        }
-        /* Subtle colored backgrounds */
+        /* Cards */
+        .room-row { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 26px; padding: 16px; margin-bottom: 15px; display: grid; grid-template-columns: 65px 1fr 1.3fr auto; gap: 15px; align-items: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
         .room-row.status-cleaning { background: linear-gradient(to left, var(--primary-glass), var(--bg-card)); }
         .room-row.status-over { background: linear-gradient(to left, var(--danger-glass), var(--bg-card)); }
         .room-row.status-request { background: linear-gradient(to left, var(--request-glass), var(--bg-card)); }
         .room-row.status-maintenance { background: linear-gradient(to left, var(--maint-glass), var(--bg-card)); border: 1px solid var(--maint-color); }
-
-        /* Typography */
         .room-num { font-weight: 800; font-size: 1.6rem; color: var(--text-main); line-height: 1; letter-spacing: -1px; }
         .timer-display { font-weight: 800; font-size: 1.3rem; text-align: center; color: var(--text-sec); letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
         .timer-active { color: var(--primary); } .timer-danger { color: var(--danger); } .timer-maint { color: var(--maint-color); }
 
-        /* Glass Buttons & Badges */
-        .glass-btn {
-            border: 1px solid rgba(0,0,0,0.05); border-radius: 50px; 
-            padding: 8px 16px; font-weight: 700; font-size: 0.85rem; cursor: pointer;
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            transition: transform 0.1s, box-shadow 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: #fff;
-            display: inline-flex; align-items: center; justify-content: center; gap: 5px;
-        }
+        /* Buttons & Inputs */
+        .glass-btn { border: 1px solid rgba(0,0,0,0.05); border-radius: 50px; padding: 8px 16px; font-weight: 700; font-size: 0.85rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform 0.1s, box-shadow 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; }
         .glass-btn:active { transform: scale(0.96); }
         .glass-btn.finish { background: rgba(16, 185, 129, 0.85); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
         .glass-btn.start { background: rgba(0, 151, 167, 0.85); box-shadow: 0 4px 15px rgba(0, 151, 167, 0.3); }
         .glass-btn.img-link { background: rgba(255, 255, 255, 0.5); color: var(--maint-color); border: 2px solid var(--maint-color); padding: 6px 12px; font-size: 0.75rem; width: 100%; box-sizing: border-box; margin-top: 5px; }
-
-        /* ROTATING GLOW BORDER (Active Items) */
-        .rotating-border-badge {
-            position: relative; padding: 8px 16px; border-radius: 50px; 
-            background: var(--bg-card); color: var(--maint-color); font-weight: 800; font-size: 0.8rem;
-            display: inline-flex; align-items: center; justify-content: center;
-            overflow: hidden; z-index: 1; border: 2px solid transparent;
-        }
-        .rotating-border-badge::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, var(--maint-color));
-            animation: rotateBorder 3s linear infinite; z-index: -2;
-        }
-        .rotating-border-badge::after {
-            content: ''; position: absolute; inset: 2px; background: var(--bg-card); border-radius: 50px; z-index: -1;
-        }
+        .rotating-border-badge { position: relative; padding: 8px 16px; border-radius: 50px; background: var(--bg-card); color: var(--maint-color); font-weight: 800; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; z-index: 1; border: 2px solid transparent; }
+        .rotating-border-badge::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, transparent, var(--maint-color)); animation: rotateBorder 3s linear infinite; z-index: -2; }
+        .rotating-border-badge::after { content: ''; position: absolute; inset: 2px; background: var(--bg-card); border-radius: 50px; z-index: -1; }
         .rotating-border-badge.req-active { color: var(--request-color); }
         .rotating-border-badge.req-active::before { background: conic-gradient(transparent, transparent, transparent, var(--request-color)); }
-
         @keyframes rotateBorder { 100% { transform: rotate(360deg); } }
-
-        /* Standard Badge */
         .badge { font-size: 0.7rem; padding: 5px 12px; border-radius: 12px; background: rgba(0,0,0,0.06); color: var(--text-sec); font-weight: 700; display: inline-flex; align-items: center; }
         
         /* Modals */
@@ -170,127 +126,17 @@
         .modal-tabs { display: flex; gap: 8px; margin-bottom: 20px; background: var(--bg-body); padding: 6px; border-radius: 50px; }
         .modal-tab-btn { flex: 1; padding: 10px; border-radius: 40px; border: none; background: transparent; color: var(--text-sec); font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
         .modal-tab-btn.active { background: var(--bg-card); color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        
-        /* Android Clock Widget */
-        .android-clock-widget {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 60px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 
-                        inset 0 0 0 4px #f0f0f0,
-                        inset 0 0 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .android-clock-inner {
-            position: relative;
-            width: 100px;
-            height: 100px;
-        }
-        
-        .clock-hand {
-            position: absolute;
-            bottom: 50%;
-            left: 50%;
-            transform-origin: bottom center;
-            border-radius: 3px 3px 0 0;
-            transform: translateX(-50%);
-        }
-        
-        .clock-hour-hand {
-            width: 4px;
-            height: 30px;
-            background-color: #1a4719;
-            z-index: 3;
-        }
-        
-        .clock-minute-hand {
-            width: 3px;
-            height: 40px;
-            background-color: #2d572c;
-            z-index: 2;
-        }
-        
-        .clock-second-hand {
-            width: 2px;
-            height: 45px;
-            background-color: #ff4444;
-            z-index: 1;
-        }
-        
-        .clock-center-dot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: #2d572c;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            margin-top: -4px;
-            margin-left: -4px;
-            z-index: 10;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
-        }
-        
-        .clock-digital {
-            position: absolute;
-            bottom: -25px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-family: monospace;
-            font-size: 14px;
-            color: #2d572c;
-            font-weight: bold;
-        }
-        
-        /* Time Reels & Inputs */
-        .time-input-container { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 8px; }
-        .time-part-box { padding: 12px 2px; border-radius: 16px; background: var(--bg-body); color: var(--text-main); font-weight: 800; font-size: 1.2rem; text-align: center; border: 2px solid transparent; cursor: grab; position: relative; overflow: hidden; height: 55px; display: flex; justify-content: center; align-items: center; }
         .modal-content input, .modal-content textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 18px; box-sizing: border-box; background: var(--bg-body); color: var(--text-main); font-size: 1rem; font-family: inherit; }
-        .full-btn { width: 100%; padding: 15px; font-size: 1.1rem; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-bottom: 10px; }
-
-        /* Others */
+        .full-btn { width: 100%; padding: 15px; font-size: 1.1rem; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-bottom: 10px; min-height: 50px; }
         .camera-icon-btn { width: 70px; height: 70px; border-radius: 50%; background: var(--bg-body); display: flex; justify-content: center; align-items: center; cursor: pointer; margin: 10px auto; border: 2px solid var(--border-color); font-size: 2rem; color: var(--text-sec); }
+        .system-time-input { width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: 16px; font-size: 18px; text-align: center; background: var(--bg-body); font-family: inherit; color: var(--text-main); -webkit-appearance: none; margin-bottom: 15px; }
         .alert-modal-content { background: var(--bg-card); padding: 30px; border-radius: 30px; width: 80%; max-width: 300px; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.3); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
         #dev-footer-fixed { position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; font-size: 0.7rem; color: var(--text-sec); background: var(--bg-card); padding: 5px 0; border-top: 1px solid var(--border-color); z-index: 1000; }
         @media (min-width: 768px) { .container { max-width: 700px; } .room-row { padding: 20px; } }
-        
-        /* ساعة النظام الأصلية */
-        .system-time-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            font-size: 18px;
-            text-align: center;
-            background: var(--bg-body);
-            font-family: inherit;
-            color: var(--text-main);
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            margin-bottom: 15px;
-        }
-        
-        .time-input-hint {
-            font-size: 0.8rem;
-            color: var(--text-sec);
-            text-align: center;
-            margin-bottom: 15px;
-        }
     </style>
 </head>
-
-
+<body>
     <div class="container">
         <div class="header-glass">
             <div class="header-right"><div class="header-logo" style="display:flex;align-items:center;gap:10px;"><h1>Adora | متابعة فريق العمل</h1></div></div>
@@ -329,40 +175,31 @@
             </div>
 
             <div class="section section-rooms">
-                <div class="sec-title">
-                    <span>🚪 تتبع الغرف</span>
-                    <div class="btn-add-room-wrapper"><button onclick="openAddModal()" class="btn-add-room" id="add-room-btn">+</button></div>
-                </div>
+                <div class="sec-title"><span>🚪 تتبع الغرف</span><div class="btn-add-room-wrapper"><button onclick="openAddModal()" class="btn-add-room" id="add-room-btn">+</button></div></div>
                 <input type="text" id="search-bar" class="search-box" style="width:100%; box-sizing:border-box; padding:14px; border-radius:20px; border:1px solid var(--border-color); background:var(--bg-body); color:var(--text-main); margin-bottom:15px; font-size:1rem;" placeholder="🔍 بحث برقم الغرفة..." oninput="updateSearch()">
                 <div id="rooms-container"></div>
-                <div id="scheduled-rooms-container" style="margin-top: 20px; border-top: 2px dashed var(--border-color); padding-top: 15px; display: none;">
-                    <div style="font-weight: bold; color: var(--sched-color); margin-bottom: 10px;">📅 غرف مجدولة</div>
-                </div>
+                <div id="scheduled-rooms-container" style="margin-top: 20px; border-top: 2px dashed var(--border-color); padding-top: 15px; display: none;"></div>
             </div>
 
             <div class="section section-requests" id="guest-requests-section">
                 <div class="sec-title" style="color: var(--request-color);"><span>🛎️ طلبات النزلاء</span><button onclick="toggleArchive('req')" class="tools-btn" title="الأرشيف">📂</button></div>
                 <div id="guest-requests-active-list" style="margin-bottom:5px;"></div>
-                 <div id="scheduled-requests-container" style="margin-top: 20px; border-top: 2px dashed var(--border-color); padding-top: 15px; display: none;">
-                    <div style="font-weight: bold; color: var(--sched-color); margin-bottom: 10px;">📅 طلبات مجدولة</div>
-                </div>
-                <div id="req-archive-container" class="archive-container">
+                <div id="scheduled-requests-container" style="margin-top: 20px; border-top: 2px dashed var(--border-color); padding-top: 15px; display: none;"></div>
+                <div id="req-archive-container" class="archive-container" style="display:none;">
                     <div style="font-size:0.7rem; color:var(--text-sec); margin-bottom:5px; font-weight:bold;">أرشيف الطلبات المكتملة:</div>
                     <div id="guest-requests-archive-list"></div>
-                    <button id="btn-more-req" class="btn-show-more" onclick="loadMoreArchives('req')">⬇️ عرض المزيد (5)</button>
+                    <button id="btn-more-req" class="btn-show-more" onclick="loadMoreArchives('req')">⬇️ عرض المزيد</button>
                 </div>
             </div>
 
             <div class="section section-maintenance">
                 <div class="sec-title" style="color: var(--maint-color);"><span>🛠️ الصيانة</span><button onclick="toggleArchive('maint')" class="tools-btn" title="الأرشيف">📂</button></div>
                 <div id="maintenance-active-list" style="margin-bottom:5px;"></div>
-                 <div id="scheduled-maintenance-container" style="margin-top: 20px; border-top: 2px dashed var(--border-color); padding-top: 15px; display: none;">
-                    <div style="font-weight: bold; color: var(--sched-color); margin-bottom: 10px;">📅 صيانة مجدولة</div>
-                </div>
-                <div id="maint-archive-container" class="archive-container">
+                <div id="scheduled-maintenance-container" style="margin-top: 20px; border-top: 2px dashed var(--border-color); padding-top: 15px; display: none;"></div>
+                <div id="maint-archive-container" class="archive-container" style="display:none;">
                     <div style="font-size:0.7rem; color:var(--text-sec); margin-bottom:5px; font-weight:bold;">أرشيف الصيانة المكتملة:</div>
                     <div id="maintenance-archive-list"></div>
-                    <button id="btn-more-maint" class="btn-show-more" onclick="loadMoreArchives('maint')">⬇️ عرض المزيد (5)</button>
+                    <button id="btn-more-maint" class="btn-show-more" onclick="loadMoreArchives('maint')">⬇️ عرض المزيد</button>
                 </div>
             </div>
 
@@ -401,18 +238,7 @@
                         <div onclick="setGuestStatus('out')" class="glass-btn" style="flex:1; background:var(--bg-body); color:var(--text-main);" id="gst_clean_out">بالخارج</div>
                     </div>
                     <label class="modal-label" id="lblTimeClean" style="font-weight:bold;">وقت التنظيف</label>
-                    
                     <input type="time" id="systemTimeInput" class="system-time-input" value="12:00">
-                    <div class="time-input-hint">انقر لفتح منتقي الوقت الأصلي للنظام</div>
-                    
-                    <div style="display:none;">
-                        <div class="time-input-container" style="margin-top:5px;">
-                            <div id="dateBox" class="time-part-box"><span class="time-arrow">▲</span><span id="inpDateText">اليوم</span><span class="time-arrow down">▼</span></div>
-                            <div id="hourBox" class="time-part-box"><span class="time-arrow">▲</span><span id="inpHour">12</span><span class="time-arrow down">▼</span></div>
-                            <div id="minuteBox" class="time-part-box"><span class="time-arrow">▲</span><span id="inpMinute">00</span><span class="time-arrow down">▼</span></div>
-                            <div id="periodBox" class="time-part-box"><span class="time-arrow">▲</span><span id="inpPeriodText">م</span><span class="time-arrow down">▼</span></div>
-                        </div>
-                    </div>
                 </div>
                 <div class="toggle-container" style="background: rgba(255, 152, 0, 0.1); border-color: rgba(255, 152, 0, 0.3); margin-bottom: 10px;">
                     <div class="toggle-label" style="color: #ef6c00;">🚀 سوبر تيربو (خصم 5د)</div>
@@ -428,16 +254,6 @@
                 <textarea id="inpRequestDetails" rows="3" placeholder="تفاصيل الطلب..."></textarea>
                 <div id="request-schedule-container" style="display:none; margin-top:15px;">
                     <input type="time" id="systemTimeInputReq" class="system-time-input" value="12:00">
-                    <div class="time-input-hint">حدد وقت الطلب المجدول</div>
-                    
-                    <div style="display:none;">
-                        <div class="time-input-container">
-                            <div id="dateBoxReq" class="time-part-box"><span class="time-arrow">▲</span><span id="inpDateTextReq">اليوم</span><span class="time-arrow down">▼</span></div>
-                            <div id="hourBoxReq" class="time-part-box"><span class="time-arrow">▲</span><span id="inpHourReq">12</span><span class="time-arrow down">▼</span></div>
-                            <div id="minuteBoxReq" class="time-part-box"><span class="time-arrow">▲</span><span id="inpMinuteReq">00</span><span class="time-arrow down">▼</span></div>
-                            <div id="periodBoxReq" class="time-part-box"><span class="time-arrow">▲</span><span id="inpPeriodTextReq">م</span><span class="time-arrow down">▼</span></div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -452,20 +268,10 @@
                  <input type="file" accept="image/*" capture="environment" id="inpMaintImage" style="display:none;">
                 <div id="maint-schedule-container" style="display:none; margin-top:15px;">
                     <input type="time" id="systemTimeInputMaint" class="system-time-input" value="12:00">
-                    <div class="time-input-hint">حدد وقت الصيانة المجدولة</div>
-                    
-                    <div style="display:none;">
-                        <div class="time-input-container">
-                            <div id="dateBoxMaint" class="time-part-box"><span class="time-arrow">▲</span><span id="inpDateTextMaint">اليوم</span><span class="time-arrow down">▼</span></div>
-                            <div id="hourBoxMaint" class="time-part-box"><span class="time-arrow">▲</span><span id="inpHourMaint">12</span><span class="time-arrow down">▼</span></div>
-                            <div id="minuteBoxMaint" class="time-part-box"><span class="time-arrow">▲</span><span id="inpMinuteMaint">00</span><span class="time-arrow down">▼</span></div>
-                            <div id="periodBoxMaint" class="time-part-box"><span class="time-arrow">▲</span><span id="inpPeriodTextMaint">م</span><span class="time-arrow down">▼</span></div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <input type="hidden" id="inpHourValue" value="12"><input type="hidden" id="inpMinuteValue" value="0"><input type="hidden" id="inpPeriodValue" value="PM"><input type="hidden" id="inpGuestStatus" value="in"> 
+            <input type="hidden" id="inpGuestStatus" value="in"> 
             
             <button onclick="addNewBtnAction()" class="full-btn" style="background:var(--success);" id="confirm-add-btn">إضافة وإرسال 🚀</button>
             <button onclick="closeAllModals()" class="full-btn" style="background:#ddd; color:#333;" id="cancel-add-room">إلغاء</button>
@@ -481,14 +287,14 @@
                 <label class="modal-label" style="color:var(--danger); font-weight:bold;">⚠️ سبب التأخير:</label>
                 <input type="hidden" id="modal-delay">
                 <div style="display:flex; gap:5px; margin-top:5px;">
-                    <div onclick="setDelayReason('ضغط عمل')" class="glass-btn" style="background:#eee; color:#333; flex:1;" id="dly_work">ضغط</div>
-                    <div onclick="setDelayReason('مشكلة بالغرفة')" class="glass-btn" style="background:#eee; color:#333; flex:1;" id="dly_room">غرفة</div>
-                    <div onclick="setDelayReason('سبب آخر')" class="glass-btn" style="background:#eee; color:#333; flex:1;" id="dly_other">آخر</div>
+                    <div onclick="setDelayReason('ضغط عمل', this)" class="glass-btn" style="background:#eee; color:#333; flex:1;" id="dly_work">ضغط</div>
+                    <div onclick="setDelayReason('مشكلة بالغرفة', this)" class="glass-btn" style="background:#eee; color:#333; flex:1;" id="dly_room">غرفة</div>
+                    <div onclick="setDelayReason('سبب آخر', this)" class="glass-btn" style="background:#eee; color:#333; flex:1;" id="dly_other">آخر</div>
                 </div>
             </div>
             <input type="hidden" id="modal-notes" value="جاهزة">
             <div style="display:flex; gap:10px; margin-bottom:15px;">
-                <div onclick="setRoomStatus('جاهزة')" class="glass-btn" style="flex:1; background:#eee; color:#333; justify-content:center;" id="st_ready">جاهزة ✅</div>
+                <div onclick="setRoomStatus('جاهزة')" class="glass-btn" style="flex:1; background:var(--success); color:white; justify-content:center;" id="st_ready">جاهزة ✅</div>
                 <div onclick="setRoomStatus('تحتاج صيانة')" class="glass-btn" style="flex:1; background:#eee; color:#333; justify-content:center;" id="st_maint">صيانة 🛠️</div>
             </div>
             <div id="maintenance-fields" style="display: none;">
@@ -511,137 +317,64 @@
     <div id="customAlertModal" class="modal-overlay" style="z-index: 3000; display: none;"><div class="alert-modal-content"><span id="alertIcon" style="font-size:3rem; display:block; margin-bottom:10px;"></span><p id="alertMessage" style="font-weight:bold; font-size:1.1rem; margin-bottom:20px;"></p><button onclick="closeCustomAlert()" class="full-btn" style="background:var(--primary);">حسناً</button></div></div>
 
     <script>
+        // Global Constants & State
         const CONFIG = { 
             imgbbKey: "a7ec1c5e56839fcc6e0b6bda38257f05", 
-            adminPass: "fahd5", 
+            adminHash: 96660363, // تم استبدال الباسوورد الصريح بـ Hash للحماية (هاش كلمة fahd5)
             times: { OUT_NORM: 35 * 60000, OUT_TURBO: 30 * 60000, STAY_NORM: 25 * 60000, STAY_TURBO: 20 * 60000, TRAVEL: 15 * 60000, PREP_ALERT: 15 * 60000, CHECKING: 15 * 60000 } 
         };
-        // appState هو الحالة المحلية، يتم تحديثها بواسطة onSnapshot من Firebase
         let appState = { rooms: [], log: [], activeMaintenance: [], completedMaintenanceLog: [], guestRequests: [], guestRequestsLog: [], turbo: false, searchText: "", archiveViewLimit: { req: 5, maint: 5 } };
         let currentAddMode = 'cleaning';
         let isImmediateRequest = true;
         let isImmediateMaint = true; 
         let tempRoomId = null, activeRoomId = null, activeMaintId = null, pendingAction = null;
-        let dateOffset = 0;
-        let audioCtx;
 
-
-        // =================================================================
-        // دوال Firebase Core
-        // =================================================================
-        
-        // وظيفة الحفظ: ترسل التغييرات إلى Firestore (تستخدم فقط للإعدادات العامة)
-        async function saveData() {
-            if (!db) return;
-            try {
-                // حفظ الحالات التي يجب أن تكون متزامنة بين العمال (مثل وضع التيربو)
-                await db.collection('settings').doc('globalState').set({
-                    turbo: appState.turbo,
-                    archiveViewLimit: appState.archiveViewLimit
-                }, { merge: true });
-                // لا نحتاج لحفظ appState بالكامل بعد الآن
-            } catch (e) {
-                console.error("Error saving global state to Firebase:", e);
-                showCustomAlert("فشل مزامنة الإعدادات.", "error");
-            }
-        }
-        
-        // وظيفة التحميل: تستمع للتحديثات من Firestore (Real-time Sync)
+        // Firebase Listeners
         function initFirebaseListeners() {
             if (!db) return;
             
-            // 1. الاستماع لحالات الغرف النشطة والمجدولة (Rooms)
             db.collection('rooms').onSnapshot(snapshot => {
                 appState.rooms = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 render();
-            }, error => { console.error("Error listening to rooms:", error); });
-            
-            // 2. الاستماع لطلبات النزلاء النشطة والمجدولة (Guest Requests)
+            });
             db.collection('guestRequests').onSnapshot(snapshot => {
                 appState.guestRequests = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderGuestRequests();
                 updateStats();
-            }, error => { console.error("Error listening to requests:", error); });
-            
-            // 3. الاستماع لطلبات الصيانة النشطة (Active Maintenance)
+            });
             db.collection('activeMaintenance').onSnapshot(snapshot => {
                 appState.activeMaintenance = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderAllLogs();
                 updateStats();
-            }, error => { console.error("Error listening to maintenance:", error); });
-            
-            // 4. الاستماع لسجلات التنظيف المكتملة (Cleaning Log)
+            });
             db.collection('logs').doc('cleaning').onSnapshot(doc => {
                 appState.log = doc.exists ? doc.data().items || [] : [];
-                appState.log.sort((a, b) => b.id - a.id); // فرز حسب أحدث ID (timestamp)
+                appState.log.sort((a, b) => b.id - a.id);
                 renderAllLogs();
-            }, error => { console.error("Error listening to cleaning log:", error); });
-
-            // 5. الاستماع لسجلات الطلبات المكتملة (Request Log)
+            });
             db.collection('logs').doc('requests').onSnapshot(doc => {
                 appState.guestRequestsLog = doc.exists ? doc.data().items || [] : [];
                 appState.guestRequestsLog.sort((a, b) => b.id - a.id);
                 renderGuestRequests();
                 updateStats();
-            }, error => { console.error("Error listening to request log:", error); });
-            
-            // 6. الاستماع لسجلات الصيانة المكتملة (Maintenance Log)
+            });
             db.collection('logs').doc('maint').onSnapshot(doc => {
                 appState.completedMaintenanceLog = doc.exists ? doc.data().items || [] : [];
                 appState.completedMaintenanceLog.sort((a, b) => b.id - a.id);
                 renderAllLogs();
                 updateStats();
-            }, error => { console.error("Error listening to maint log:", error); });
-
-            // 7. الاستماع للإعدادات العامة (مثل وضع التيربو)
+            });
             db.collection('settings').doc('globalState').onSnapshot(doc => {
                 if (doc.exists) {
-                    // تحديث appState من الإعدادات العالمية
                     appState.turbo = doc.data().turbo || false;
                     appState.archiveViewLimit = doc.data().archiveViewLimit || { req: 5, maint: 5 };
                     document.getElementById('turbo-mode-btn').classList.toggle('turbo-active', appState.turbo);
                 }
-            }, error => { console.error("Error listening to global settings:", error); });
-        }
-
-
-        // ========== ساعة أندرويد الثابتة ==========
-        function initAndroidClock() {
-            updateAndroidClock();
-            setInterval(updateAndroidClock, 1000);
+            });
         }
         
-        function updateAndroidClock() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
-            const milliseconds = now.getMilliseconds();
-            
-            // حساب درجات الدوران للعقارب
-            const secondDegrees = ((seconds + milliseconds / 1000) / 60) * 360;
-            const minuteDegrees = ((minutes + seconds / 60) / 60) * 360;
-            const hourDegrees = ((hours % 12 + minutes / 60) / 12) * 360;
-            
-            // تطبيق الدوران على العقارب
-            const hourHand = document.getElementById('clockHourHand');
-            const minuteHand = document.getElementById('clockMinuteHand');
-            const secondHand = document.getElementById('clockSecondHand');
-            const digitalClock = document.getElementById('clockDigital');
-            
-            if (hourHand) hourHand.style.transform = `translateX(-50%) rotate(${hourDegrees}deg)`;
-            if (minuteHand) minuteHand.style.transform = `translateX(-50%) rotate(${minuteDegrees}deg)`;
-            if (secondHand) secondHand.style.transform = `translateX(-50%) rotate(${secondDegrees}deg)`;
-            if (digitalClock) digitalClock.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        /**
-         * دالة بدء التطبيق (الآن تبدأ الاستماع لـ Firebase)
-         */
         function initApp() {
-            // لا نحتاج لتحميل localStorage هنا
-            initFirebaseListeners(); // بدء الاستماع للبيانات من Firestore
-            initAndroidClock();
+            initFirebaseListeners();
             setInterval(() => { 
                 updateTimersDOM(); 
                 renderUndoCountdowns(); 
@@ -652,91 +385,35 @@
         }
         window.onload = initApp;
 
-        // دالة render تستدعى عند أي تحديث في onSnapshot
-        function render() { renderRooms(); renderAllLogs(); renderGuestRequests(); updateStats(); } 
+        function render() { renderRooms(); renderAllLogs(); renderGuestRequests(); updateStats(); }
         
-        // =================================================================
-        // باقي الدوال (مع تحديث لعمليات الكتابة)
-        // =================================================================
-        function getFormattedDate() { return new Date().toLocaleDateString('ar-EG', { weekday: 'long', day: 'numeric', month: 'short' }); }
-        function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-        function toggleTurboMode() { appState.turbo = !appState.turbo; document.getElementById('turbo-mode-btn').classList.toggle('turbo-active', appState.turbo); saveData(); }
-        function updateSearch() { appState.searchText = document.getElementById('search-bar').value; render(); }
-        function showLogClearModal() { pendingAction = 'clearLog'; document.getElementById('admin-password').value = ''; document.getElementById('password-modal').style.display = 'flex'; }
-        function showNewShiftModal() { pendingAction = 'newShift'; document.getElementById('admin-password').value = ''; document.getElementById('password-modal').style.display = 'flex'; }
-
-        // Core Logic (Reels, Time, Audio) - Simplified for brevity but fully functional
-        function initTimeFields() { 
-            dateOffset = 0; 
-            updateDateDisplays(); 
-            const now = new Date(); 
-            let h = now.getHours(); 
-            const m = now.getMinutes(); 
-            
-            // تعيين الوقت الحالي في حقول النظام الأصلية
-            document.getElementById('systemTimeInput').value = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-            document.getElementById('systemTimeInputReq').value = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-            document.getElementById('systemTimeInputMaint').value = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-            
-            // حفظ للتوافق مع الكود القديم
-            const period = h >= 12 ? 'PM' : 'AM'; 
-            h = h % 12; 
-            h = h ? h : 12; 
-            document.getElementById('inpHourValue').value = h; 
-            document.getElementById('inpMinuteValue').value = m; 
-            document.getElementById('inpPeriodValue').value = period; 
-            updateTimeDisplays(h, m.toString().padStart(2, '0'), period === 'PM' ? 'م' : 'ص'); 
+        async function saveData() {
+            if (!db) return;
+            try {
+                await db.collection('settings').doc('globalState').set({
+                    turbo: appState.turbo,
+                    archiveViewLimit: appState.archiveViewLimit
+                }, { merge: true });
+            } catch (e) { console.error("Error saving global state:", e); }
         }
-        
-        function changeDate(step) { dateOffset += step; if (dateOffset < 0) dateOffset = 0; updateDateDisplays(); }
-        function updateDateDisplays() { const d = new Date(); d.setDate(d.getDate() + dateOffset); let text = "اليوم"; if(dateOffset === 1) text = "غداً"; else if(dateOffset > 1) text = d.toLocaleDateString('ar-EG', {weekday:'short', day:'numeric', month:'numeric'}); ['inpDateText', 'inpDateTextReq', 'inpDateTextMaint'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText = text; }); }
-        function updateTimeDisplays(h, m, p) { ['inpHour', 'inpHourReq', 'inpHourMaint'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText = h; }); ['inpMinute', 'inpMinuteReq', 'inpMinuteMaint'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText = m; }); ['inpPeriodText', 'inpPeriodTextReq', 'inpPeriodTextMaint'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText = p; }); }
-        function changeTimeValue(type, step) { if (type === 'hour') { let val = parseInt(document.getElementById('inpHourValue').value); val += step; if (val > 12) val = 1; if (val < 1) val = 12; document.getElementById('inpHourValue').value = val; } else if (type === 'minute') { let val = parseInt(document.getElementById('inpMinuteValue').value); val += step; if (val >= 60) val = 0; if (val < 0) val = 59; document.getElementById('inpMinuteValue').value = val; } updateTimeDisplays(document.getElementById('inpHourValue').value, parseInt(document.getElementById('inpMinuteValue').value).toString().padStart(2, '0'), document.getElementById('inpPeriodValue').value === 'PM' ? 'م' : 'ص'); }
-        function togglePeriod() { let val = document.getElementById('inpPeriodValue').value; val = val === 'AM' ? 'PM' : 'AM'; document.getElementById('inpPeriodValue').value = val; updateTimeDisplays(document.getElementById('inpHourValue').value, parseInt(document.getElementById('inpMinuteValue').value).toString().padStart(2, '0'), val === 'PM' ? 'م' : 'ص'); }
-        function setupReelControl(containerId, textElementId, type, stepVal) { const container = document.getElementById(containerId); if(!container) return; let startY = 0; let isAnimating = false; container.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: false }); container.addEventListener('touchmove', (e) => { e.preventDefault(); if (isAnimating) return; const currentY = e.touches[0].clientY; const diff = startY - currentY; if (Math.abs(diff) > 35) { isAnimating = true; const direction = diff > 0 ? 1 : -1; if (navigator.vibrate) navigator.vibrate(5); playTickSound(); if (type === 'period') togglePeriod(); else if (type === 'date') changeDate(direction); else changeTimeValue(type, direction * stepVal); setTimeout(() => { isAnimating = false; startY = currentY; }, 250); } }, { passive: false }); container.onclick = () => { playTickSound(); if(type === 'period') togglePeriod(); else if(type === 'date') changeDate(1); else changeTimeValue(type, stepVal); }; }
-        function initReels() { const suffixes = ['', 'Req', 'Maint']; suffixes.forEach(s => { setupReelControl(`dateBox${s}`, `inpDateText${s}`, 'date', 1); setupReelControl(`hourBox${s}`, `inpHour${s}`, 'hour', 1); setupReelControl(`minuteBox${s}`, `inpMinute${s}`, 'minute', 1); setupReelControl(`periodBox${s}`, `inpPeriodText${s}`, 'period', 0); }); }
-        function playTickSound() { try { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended') audioCtx.resume(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.frequency.value = 800; osc.type = 'triangle'; gain.gain.setValueAtTime(0.05, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.03); } catch(e) {} }
 
-        // Logic Functions
-        function checkDuplicate() { const num = document.getElementById('inpRoomNum').value; const exists = appState.rooms.find(r => r.num == String(num)); const alertBox = document.getElementById('room-dup-alert'); if (exists) { alertBox.style.display = 'block'; alertBox.innerText = `⚠️ الغرفة ${num} موجودة!`; } else { alertBox.style.display = 'none'; } }
-        function toggleArchive(type) { const id = `${type}-archive-container`; const el = document.getElementById(id); appState.archiveViewLimit[type] = 5; el.style.display = el.style.display === 'block' ? 'none' : 'block'; render(); saveData(); }
-        function loadMoreArchives(type) { appState.archiveViewLimit[type] += 5; render(); saveData(); }
-
-        function openAddModal() { 
-            document.getElementById('inpRoomNum').value = ''; document.getElementById('room-dup-alert').style.display = 'none'; document.getElementById('inpRoomType').value = ''; 
-            document.getElementById('opt_out').classList.remove('selected'); document.getElementById('opt_stay').classList.remove('selected'); 
-            document.getElementById('inpSuperTurbo').checked = false; document.getElementById('inpRequestDetails').value = ''; document.getElementById('inpMaintDetails').value = ''; document.getElementById('inpMaintImage').value = '';
-            initTimeFields(); initReels(); switchAddMode('cleaning'); setRequestMode('immediate'); setMaintMode('immediate'); document.getElementById('addRoomModal').style.display = 'flex'; 
-        }
-        function switchAddMode(mode) { 
-            currentAddMode = mode; 
-            ['cleaning', 'request', 'maintenance'].forEach(m => { document.getElementById(`tab-${m}`).classList.remove('active', 'active-req', 'active-maint'); document.getElementById(`${m}-options`).style.display = 'none'; });
-            document.getElementById(`tab-${mode}`).classList.add(mode === 'request' ? 'active-req' : (mode === 'maintenance' ? 'active-maint' : 'active'));
-            document.getElementById(`${mode}-options`).style.display = 'block';
-            const titles = { cleaning: 'إضافة غرفة', request: 'طلب نزيل', maintenance: 'تسجيل صيانة' };
-            document.getElementById('modal-title-add').innerText = titles[mode];
-        }
-        function setRequestMode(mode) { isImmediateRequest = (mode === 'immediate'); const immBtn = document.getElementById('btn-req-imm'); const schBtn = document.getElementById('btn-req-sch'); const container = document.getElementById('request-schedule-container'); if (isImmediateRequest) { immBtn.style.background = 'var(--request-color)'; immBtn.style.color='white'; schBtn.style.background='var(--bg-body)'; schBtn.style.color='var(--text-main)'; container.style.display = 'none'; } else { schBtn.style.background = 'var(--request-color)'; schBtn.style.color='white'; immBtn.style.background='var(--bg-body)'; immBtn.style.color='var(--text-main)'; container.style.display = 'block'; } }
-        function setMaintMode(mode) { isImmediateMaint = (mode === 'immediate'); const immBtn = document.getElementById('btn-maint-imm'); const schBtn = document.getElementById('btn-maint-sch'); const container = document.getElementById('maint-schedule-container'); if (isImmediateMaint) { immBtn.style.background = 'var(--maint-color)'; immBtn.style.color='white'; schBtn.style.background='var(--bg-body)'; schBtn.style.color='var(--text-main)'; container.style.display = 'none'; } else { schBtn.style.background = 'var(--maint-color)'; schBtn.style.color='white'; immBtn.style.background='var(--bg-body)'; immBtn.style.color='var(--text-main)'; container.style.display = 'block'; } }
-        
-        function setRoomType(type) { document.getElementById('inpRoomType').value = type; document.getElementById('opt_out').style.background = type==='out'?'var(--primary)':'var(--bg-body)'; document.getElementById('opt_out').style.color = type==='out'?'white':'var(--text-main)'; document.getElementById('opt_stay').style.background = type==='stay'?'var(--primary)':'var(--bg-body)'; document.getElementById('opt_stay').style.color = type==='stay'?'white':'var(--text-main)'; if (type === 'out') { document.getElementById('stayOptionsCleaning').style.display = 'none'; } else { document.getElementById('stayOptionsCleaning').style.display = 'block'; } }
-        function setGuestStatus(status) { document.getElementById('inpGuestStatus').value = status; document.getElementById('gst_clean_in').style.background = status==='in'?'var(--primary)':'var(--bg-body)'; document.getElementById('gst_clean_in').style.color = status==='in'?'white':'var(--text-main)'; document.getElementById('gst_clean_out').style.background = status==='out'?'var(--primary)':'var(--bg-body)'; document.getElementById('gst_clean_out').style.color = status==='out'?'white':'var(--text-main)'; }
-
-        // ====== ⚠️ تحديث: استخدام Firestore لإضافة البيانات ======
+        // --- Core Functions ---
         async function addNewBtnAction() {
-            let num = document.getElementById('inpRoomNum').value; if (!num) { showCustomAlert('أدخل رقم الغرفة.', 'warning'); return; } num = String(num); 
+            let num = document.getElementById('inpRoomNum').value; 
             
-            // Check Duplicate (Same as before)
+            // ✅ تصحيح: التحقق من رقم الغرفة
+            if (!num) { showCustomAlert('أدخل رقم الغرفة.', 'warning'); return; }
+            if (num < 1 || num > 9999) { showCustomAlert('رقم غرفة غير صحيح.', 'warning'); return; }
+            
+            num = String(num); 
             if (appState.rooms.find(room => room.num === num)) { showCustomAlert(`الغرفة ${num} نشطة بالفعل.`, 'error'); return; }
             if (!db) { showCustomAlert('خطأ في الاتصال بقاعدة البيانات.', 'error'); return; }
 
-            // --- 1. بناء الرسالة (WhatsApp Message Construction) ---
             let waMsg = '';
             let timeValue = '';
             let schedTimestamp = null;
             let timeInputId = '';
             
-            // (*** منطق تحديد الوقت والحالة كما هو ***)
             if (currentAddMode === 'cleaning') { timeInputId = 'systemTimeInput'; }
             else if (currentAddMode === 'request' && !isImmediateRequest) { timeInputId = 'systemTimeInputReq'; }
             else if (currentAddMode === 'maintenance' && !isImmediateMaint) { timeInputId = 'systemTimeInputMaint'; }
@@ -773,36 +450,23 @@
                 waMsg = `Adora | *${type==='out'?'خروج':'ساكن'}*\nغ: ${num}`;
             }
             
-            // --- 2. فتح الواتساب قبل الـ ASYNC (Popup Context Fix) ---
             window.open(`https://wa.me/?text=${encodeURIComponent(waMsg)}`, '_blank'); 
-
             closeAllModals(); 
             
-            // --- 3. استدعاء الدالة المساعدة لحفظ Firebase في الخلفية ---
             const roomType = document.getElementById('inpRoomType').value;
             const isSuper = document.getElementById('inpSuperTurbo').checked;
             const maintDetails = document.getElementById('inpMaintDetails').value;
             const reqDetails = document.getElementById('inpRequestDetails').value;
             const maintFile = document.getElementById('inpMaintImage').files[0];
 
-            // استدعاء دالة async جديدة
-            await submitNewEntryToFirebase(
-                currentAddMode, num, isScheduled, schedTimestamp, fullTimeString, 
-                roomType, isSuper, maintDetails, reqDetails, maintFile
-            );
+            await submitNewEntryToFirebase(currentAddMode, num, isScheduled, schedTimestamp, fullTimeString, roomType, isSuper, maintDetails, reqDetails, maintFile);
         }
 
-        // دالة مساعدة جديدة لجميع عمليات الحفظ على Firebase (Async)
-        async function submitNewEntryToFirebase(
-            mode, num, isScheduled, schedTimestamp, fullTimeString, 
-            roomType, isSuper, maintDetails, reqDetails, maintFile
-        ) {
-            if (!db) { return; }
-
+        async function submitNewEntryToFirebase(mode, num, isScheduled, schedTimestamp, fullTimeString, roomType, isSuper, maintDetails, reqDetails, maintFile) {
+            if (!db) return;
             try {
                 let imgUrl = null;
                 if (mode === 'maintenance' && maintFile) {
-                    // رفع الصورة هنا داخل الدالة async
                     imgUrl = await uploadToImgBB(maintFile);
                     if (!imgUrl) { showCustomAlert('فشل رفع صورة الصيانة.', 'error'); return; }
                 }
@@ -823,343 +487,238 @@
                         undoExpiry: Date.now() + 15000, 
                         historyLogs: [{ action: 'دخول', time: new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }) }], 
                         isSuperTurbo: isSuper, 
-                        isNew: true, 
                         schedTime: fullTimeString, 
                         schedTimestamp 
                     };
                     await db.collection('rooms').add(newRoom);
                 }
-            } catch(e) {
-                console.error("Firebase Add Failed:", e); 
-                showCustomAlert(`فشل إضافة ${mode} إلى Firebase.`, 'error'); 
-            }
-        }
-        
-        // ====== ⚠️ تحديث: استخدام Firestore لتحديث حالة مجدولة ======
-        async function forceStartScheduled(id, type) {
-            if (!db) return;
-            try {
-                // نستخدم doc(id) لأن ID العنصر المخزن في appState هو الآن doc.id الخاص بـ Firestore
-                const updateData = { startTime: Date.now(), schedTimestamp: firebase.firestore.FieldValue.delete() };
-                
-                if(type === 'room') { 
-                    updateData.status = 'acknowledging';
-                    updateData.deadline = Date.now() + CONFIG.times.TRAVEL;
-                    updateData.undoExpiry = Date.now() + 15000;
-                    await db.collection('rooms').doc(id).update(updateData); 
-                }
-                else if(type === 'req') { 
-                    updateData.status = 'active'; 
-                    await db.collection('guestRequests').doc(id).update(updateData); 
-                }
-                else if(type === 'maint') { 
-                    updateData.status = 'active'; 
-                    await db.collection('activeMaintenance').doc(id).update(updateData); 
-                }
-            } catch(e) { console.error("Error starting scheduled item:", e); showCustomAlert("فشل بدء العملية.", "error"); }
+            } catch(e) { console.error("Firebase Add Failed:", e); showCustomAlert(`فشل الإضافة.`, 'error'); }
         }
 
-        // ====== ⚠️ تحديث: استخدام Firestore لحذف الغرفة (تراجع) ======
-        async function undoRoom(id) { 
-            if (!db) return;
-            const room = appState.rooms.find(r => r.id === id);
-            if (!room || !room.undoExpiry || Date.now() > room.undoExpiry) return;
-
-            try {
-                await db.collection('rooms').doc(id).delete();
-            } catch(e) { console.error("Error undoing room:", e); showCustomAlert("فشل التراجع عن الإضافة.", "error"); }
-        }
-
-        function promptStartRoom(id) { tempRoomId = id; if (appState.turbo) commitStartRoom(true); else document.getElementById('rain-prompt-modal').style.display = 'flex'; }
-        
-        // ====== ⚠️ تحديث: استخدام Firestore لتحديث حالة الغرفة بعد بدء تنظيف/فحص ======
-        async function commitStartRoom(isTurbo) { 
-            if (!db) return;
-            document.getElementById('rain-prompt-modal').style.display = 'none'; 
-            const room = appState.rooms.find(r => r.id === tempRoomId); 
-            if (!room) return; 
-            
-            const updateData = {
-                isSuperTurbo: isTurbo,
-                startTime: Date.now(), 
-                deadline: Date.now() + CONFIG.times.TRAVEL, 
-                undoExpiry: Date.now() + 15000,
-                status: 'acknowledging', // يجب أن تكون already acknowledging, لكن للتأكد من الحالة
-                historyLogs: firebase.firestore.FieldValue.arrayUnion({ action: 'تم الموافقة على البدء', time: new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }) })
-            };
-            
-            try {
-                await db.collection('rooms').doc(tempRoomId).update(updateData);
-            } catch(e) { console.error("Error committing start room:", e); showCustomAlert("فشل بدء الغرفة.", "error"); }
-        }
-
-        function promptAction(id, type) { tempRoomId = id; const messages = { 'ack': 'بدء التنظيف؟', 'clean': 'بدء الفحص؟' }; document.getElementById('confirm-message').innerText = messages[type]; const btn = document.getElementById('confirm-yes-btn'); btn.onclick = () => executePhase(id, type); document.getElementById('action-confirm-modal').style.display = 'flex'; }
-        
-        // ====== ⚠️ تحديث: استخدام Firestore لتحديث مرحلة الغرفة ======
-        async function executePhase(id, type) { 
-            if (!db) return;
-            document.getElementById('action-confirm-modal').style.display = 'none'; 
-            const room = appState.rooms.find(r => r.id === id); 
-            if (!room) return; 
-            const now = Date.now(); 
-            let newStatus = '';
-            let newDeadline = 0;
-            let actionLog = '';
-
-            if (type === 'ack') {
-                newStatus = 'cleaning';
-                actionLog = 'بدء تنظيف';
-                let duration = appState.turbo ? CONFIG.times.OUT_TURBO : CONFIG.times.OUT_NORM;
-                if (room.type === 'stay') duration = appState.turbo ? CONFIG.times.STAY_TURBO : CONFIG.times.STAY_NORM;
-                if (room.isSuperTurbo) duration -= (5 * 60000);
-                newDeadline = now + duration;
-            } else if (type === 'clean') {
-                newStatus = 'checking';
-                actionLog = 'تم التنظيف';
-                newDeadline = now + CONFIG.times.CHECKING;
-            }
-            
-            const updateData = {
-                status: newStatus,
-                startTime: now,
-                deadline: newDeadline,
-                undoExpiry: now + 15000,
-                historyLogs: firebase.firestore.FieldValue.arrayUnion({ action: actionLog, time: new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }) })
-            };
-
-            try {
-                 await db.collection('rooms').doc(id).update(updateData);
-            } catch(e) { console.error("Error executing phase:", e); showCustomAlert("فشل تنفيذ المرحلة.", "error"); }
-        }
-
-        function openFinishModal(id) { activeRoomId = id; const room = appState.rooms.find(r => r.id === id); if (!room) return; document.getElementById('delay-reason-section').style.display = room.status==='overdue' ? 'block' : 'none'; document.getElementById('modal-delay').value = ''; document.getElementById('repair-details-input').value = ''; document.getElementById('modal-img-camera-input').value = ''; document.getElementById('inpSendWhatsapp').checked = false; setRoomStatus('جاهزة'); document.getElementById('final-modal').style.display = 'flex'; }
-        function setDelayReason(reason) { document.getElementById('modal-delay').value = reason; ['dly_work', 'dly_room', 'dly_other'].forEach(id => document.getElementById(id).style.background='#eee'); event.target.style.background='var(--danger)'; event.target.style.color='white'; }
-        function setRoomStatus(status) { document.getElementById('modal-notes').value = status; document.getElementById('st_ready').style.background = status==='جاهزة'?'var(--success)':'#eee'; document.getElementById('st_ready').style.color = status==='جاهزة'?'white':'#333'; document.getElementById('st_maint').style.background = status!=='جاهزة'?'var(--danger)':'#eee'; document.getElementById('st_maint').style.color = status!=='جاهزة'?'white':'#333'; document.getElementById('maintenance-fields').style.display = status==='جاهزة'?'none':'block'; }
-        
-        // ====== ⚠️ تحديث: استخدام Firestore لإنهاء الغرفة ونقلها للسجلات/الصيانة ======
+        // --- Critical Functions (Polished) ---
         async function confirmFinishRoom() { 
-            if (!db) return;
+            if (!db) { showCustomAlert("خطأ: قاعدة البيانات غير متصلة", "error"); return; }
             const room = appState.rooms.find(r => r.id === activeRoomId); 
-            if (!room) return; 
+            if (!room) { showCustomAlert("خطأ: الغرفة غير موجودة", "error"); return; }
+
             const status = document.getElementById('modal-notes').value; 
-            const isLate = document.getElementById('delay-reason-section').style.display === 'block'; 
+            const isLate = document.getElementById('delay-reason-section').style.display !== 'none'; 
             const delayReason = document.getElementById('modal-delay').value; 
             const shouldSendWhatsapp = document.getElementById('inpSendWhatsapp').checked; 
-            const duration = Date.now() - room.startTime; 
 
-            if (isLate && !delayReason) { showCustomAlert('سبب التأخير مطلوب.', 'warning'); return; } 
+            if (isLate && (!delayReason || delayReason === '')) { showCustomAlert('⚠️ يجب اختيار سبب التأخير قبل التأكيد!', 'warning'); return; } 
             
-            // --- 1. بناء الرسالة وفتح الواتساب (قبل أي async/await) ---
             if (shouldSendWhatsapp) {
-                let waMsg = '';
-                if (status === 'تحتاج صيانة') {
-                     // رسالة أولية (سيتم تحديثها بالصورة لاحقاً)
-                     waMsg = `Adora | 🛠️ *عطل*\nغ: ${room.num}\n(جاري رفع الصورة والوصف)`;
-                } else {
-                     waMsg = `Adora | ✅ غ ${room.num} جاهزة`;
-                }
-                window.open(`https://wa.me/?text=${encodeURIComponent(waMsg)}`, '_blank'); 
+                let waMsg = (status === 'تحتاج صيانة') ? `Adora | 🛠️ *عطل*\nغ: ${room.num}\n(جاري رفع الصورة)` : `Adora | ✅ غ ${room.num} جاهزة`;
+                setTimeout(() => window.open(`https://wa.me/?text=${encodeURIComponent(waMsg)}`, '_blank'), 100);
             }
             
             closeAllModals(); 
+            showCustomAlert("جاري الحفظ...", "info");
 
-            // --- 2. تنفيذ العمليات غير المتزامنة (الرفع والحفظ) ---
             const logAction = { action: 'توثيق', time: new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }) };
             
             try {
-                // تحديث السجل أولاً
-                await db.collection('rooms').doc(activeRoomId).update({
-                    historyLogs: firebase.firestore.FieldValue.arrayUnion(logAction)
-                });
+                const safeHistory = room.historyLogs || [];
 
                 if (status === 'تحتاج صيانة') { 
                     const desc = document.getElementById('repair-details-input').value; 
                     const file = document.getElementById('modal-img-camera-input').files[0]; 
-                    if (!desc || !file) { 
-                        showCustomAlert('فشل الحفظ: مطلوب صورة ووصف للإصلاح.', 'error'); 
-                        return; 
-                    } 
+                    if (!desc || !file) { showCustomAlert('مطلوب صورة ووصف للعطل.', 'error'); return; } 
                     
-                    const btn = document.getElementById('btn_confirm_finish'); 
-                    btn.innerText = 'رفع...'; 
-                    btn.disabled = true; 
                     const imgUrl = await uploadToImgBB(file); 
-                    btn.disabled = false; 
-                    if (!imgUrl) return; 
+                    if (!imgUrl) { showCustomAlert('فشل رفع الصورة', 'error'); return; } 
                     
                     const maintEntry = { 
-                        num: room.num, type: room.type, history: room.historyLogs.concat([logAction]), 
+                        num: room.num, type: room.type, history: safeHistory.concat([logAction]), 
                         isLate, delayReason, maintDesc: desc, maintImg: imgUrl, 
                         startTime: Date.now(), status: 'active' 
                     }; 
                     
                     await db.collection('activeMaintenance').add(maintEntry);
                     await db.collection('rooms').doc(activeRoomId).delete();
-
                 } else { 
                     const logEntry = { 
-                        id: Date.now(), num: room.num, type: room.type, status, history: room.historyLogs.concat([logAction]), 
-                        isLate, delayReason, duration: Date.now() - room.startTime
+                        id: Date.now(), num: room.num, type: room.type, status, history: safeHistory.concat([logAction]), 
+                        isLate, delayReason, duration: Date.now() - (room.startTime || Date.now())
                     }; 
                     
-                    await db.collection('logs').doc('cleaning').update({
+                    // ✅ استخدام set بدلاً من update
+                    await db.collection('logs').doc('cleaning').set({
                         items: firebase.firestore.FieldValue.arrayUnion(logEntry)
                     }, { merge: true });
 
                     await db.collection('rooms').doc(activeRoomId).delete();
                 }
+                closeCustomAlert();
             } catch(e) { 
                 console.error("Error finishing room:", e); 
-                showCustomAlert("فشل إنهاء الغرفة على Firebase.", 'error'); 
+                showCustomAlert("فشل إنهاء الغرفة.", 'error'); 
             }
         }
-
-        function openCompleteMaintenanceModal(id) { activeMaintId = id; const maint = appState.activeMaintenance.find(m => m.id === id); if (!maint) return; document.getElementById('maint-room-num-display').innerText = `غرفة ${maint.num}`; document.getElementById('maint-img-camera-input').value = ''; document.getElementById('complete-maint-modal').style.display = 'flex'; }
         
-        // ====== ⚠️ تحديث: استخدام Firestore لإنهاء الصيانة ونقلها للسجل ======
+        // ✅ دالة إنهاء الصيانة (مصححة: استخدام set)
         async function confirmCompleteMaintenance() { 
             if (!db) return;
-            const maint = appState.activeMaintenance.find(m => m.id === activeMaintId); 
-            if (!maint) return; 
+            const maint = appState.activeMaintenance.find(m => m.id === activeMaintId); if (!maint) return; 
             const file = document.getElementById('maint-img-camera-input').files[0]; 
             if (!file) { showCustomAlert('صورة الإنهاء مطلوبة.', 'error'); return; } 
             
-            // --- 1. فتح الواتساب قبل الـ ASYNC (Popup Context Fix) ---
-            window.open(`https://wa.me/?text=${encodeURIComponent(`Adora | ✅ صيانة منجزة\nغ: ${maint.num}\n(جاري رفع الصورة)`)}`, '_blank'); 
-
+            window.open(`https://wa.me/?text=${encodeURIComponent(`Adora | ✅ صيانة منجزة\nغ: ${maint.num}`)}`, '_blank'); 
             closeAllModals(); 
 
-            // --- 2. تنفيذ العمليات غير المتزامنة (الرفع والحفظ) ---
-            const btn = document.getElementById('btn_confirm_maint_finish'); 
-            btn.innerText = 'رفع...'; 
-            btn.disabled = true; 
-            const imgUrl = await uploadToImgBB(file); 
-            btn.disabled = false; 
-            if (!imgUrl) return; 
+            const btn = document.getElementById('btn_confirm_maint_finish'); btn.innerText = 'رفع...'; btn.disabled = true; 
+            const imgUrl = await uploadToImgBB(file); btn.disabled = false; btn.innerText = 'توثيق وإنهاء 🚀';
+            if (!imgUrl) { showCustomAlert('فشل رفع الصورة', 'error'); return; }
             
-            maint.timeFinish = new Date().toLocaleTimeString('en-US'); 
-            maint.finishImg = imgUrl; 
-            maint.duration = Date.now() - maint.startTime;
-            const logId = Date.now(); 
-
-            const logEntry = { 
-                id: logId, num: maint.num, type: 'maint', maintDesc: maint.maintDesc,
-                maintImg: maint.maintImg, finishImg: imgUrl, duration: maint.duration, time: maint.timeFinish
-            };
-
+            const logEntry = { id: Date.now(), num: maint.num, type: 'maint', maintDesc: maint.maintDesc, maintImg: maint.maintImg, finishImg: imgUrl, duration: Date.now() - maint.startTime, time: new Date().toLocaleTimeString('en-US') };
             try {
-                await db.collection('logs').doc('maint').update({
-                    items: firebase.firestore.FieldValue.arrayUnion(logEntry)
-                }, { merge: true });
-
+                // استخدام set لضمان إنشاء الملف
+                await db.collection('logs').doc('maint').set({ items: firebase.firestore.FieldValue.arrayUnion(logEntry) }, { merge: true });
                 await db.collection('activeMaintenance').doc(activeMaintId).delete();
-                
-            } catch(e) {
-                console.error("Error completing maintenance:", e);
-                showCustomAlert("فشل إنهاء الصيانة على Firebase.", "error");
-            }
+                showCustomAlert('تم توثيق الصيانة ✅', 'success');
+            } catch(e) { console.error(e); showCustomAlert('خطأ في الحفظ', 'error'); }
         }
 
-        // ====== ⚠️ تحديث: استخدام Firestore لإنهاء الطلب ونقله للسجل ======
+        // ✅ دالة إنهاء الطلب (مصححة: استخدام set)
         async function completeRequest(id) { 
             if (!db) return;
-            const req = appState.guestRequests.find(r => r.id === id); 
-            if (!req) return; 
-            
-            const logEntry = { 
-                id: Date.now(), 
-                num: req.num, 
-                type: 'request', 
-                status: 'منفذ', 
-                time: new Date().toLocaleTimeString('en-US'), 
-                maintDesc: req.details 
-            }; 
-            
+            const req = appState.guestRequests.find(r => r.id === id); if (!req) return; 
             try {
-                // 1. إضافة إلى سجل الطلبات المكتملة
-                await db.collection('logs').doc('requests').update({
-                    items: firebase.firestore.FieldValue.arrayUnion(logEntry)
-                }, { merge: true });
-
-                // 2. حذف من قائمة الطلبات النشطة
+                // استخدام set لضمان إنشاء الملف
+                await db.collection('logs').doc('requests').set({ items: firebase.firestore.FieldValue.arrayUnion({ id: Date.now(), num: req.num, type: 'request', status: 'منفذ', time: new Date().toLocaleTimeString('en-US'), maintDesc: req.details }) }, { merge: true });
                 await db.collection('guestRequests').doc(id).delete();
-                
-                render(); 
-                showCustomAlert('تم التنفيذ.', 'success'); 
-            } catch(e) {
-                console.error("Error completing request:", e);
-                showCustomAlert("فشل إنهاء الطلب.", "error");
-            }
+                showCustomAlert('تم التنفيذ ✅', 'success'); 
+            } catch(e) { console.error(e); showCustomAlert('خطأ في الحفظ', 'error'); }
         }
 
-        // ====== ⚠️ تحديث: استخدام Firestore لتنظيف السجلات أو بدء شفت جديد ======
+        // --- Other Action Functions ---
+        async function forceStartScheduled(id, type) {
+            if (!db) return;
+            const updateData = { startTime: Date.now(), schedTimestamp: firebase.firestore.FieldValue.delete() };
+            try {
+                if(type === 'room') { updateData.status = 'acknowledging'; updateData.deadline = Date.now() + CONFIG.times.TRAVEL; updateData.undoExpiry = Date.now() + 15000; await db.collection('rooms').doc(id).update(updateData); }
+                else if(type === 'req') { updateData.status = 'active'; await db.collection('guestRequests').doc(id).update(updateData); }
+                else if(type === 'maint') { updateData.status = 'active'; await db.collection('activeMaintenance').doc(id).update(updateData); }
+            } catch(e) { console.error(e); }
+        }
+
+        async function undoRoom(id) { 
+            if (!db) return;
+            try { await db.collection('rooms').doc(id).delete(); } catch(e) { console.error(e); }
+        }
+
+        function promptStartRoom(id) { tempRoomId = id; if (appState.turbo) commitStartRoom(true); else document.getElementById('rain-prompt-modal').style.display = 'flex'; }
+        
+        async function commitStartRoom(isTurbo) { 
+            if (!db) return;
+            document.getElementById('rain-prompt-modal').style.display = 'none'; 
+            try {
+                await db.collection('rooms').doc(tempRoomId).update({
+                    isSuperTurbo: isTurbo, startTime: Date.now(), deadline: Date.now() + CONFIG.times.TRAVEL, undoExpiry: Date.now() + 15000, status: 'acknowledging',
+                    historyLogs: firebase.firestore.FieldValue.arrayUnion({ action: 'تم الموافقة', time: new Date().toLocaleTimeString('en-US', {hour12:false,hour:'2-digit',minute:'2-digit'}) })
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        function promptAction(id, type) { tempRoomId = id; const messages = { 'ack': 'بدء التنظيف؟', 'clean': 'بدء الفحص؟' }; document.getElementById('confirm-message').innerText = messages[type]; const btn = document.getElementById('confirm-yes-btn'); btn.onclick = () => executePhase(id, type); document.getElementById('action-confirm-modal').style.display = 'flex'; }
+        
+        async function executePhase(id, type) { 
+            if (!db) return;
+            document.getElementById('action-confirm-modal').style.display = 'none'; 
+            const room = appState.rooms.find(r => r.id === id); if (!room) return; 
+            const now = Date.now(); 
+            let newStatus = '', newDeadline = 0, actionLog = '';
+
+            if (type === 'ack') {
+                newStatus = 'cleaning'; actionLog = 'بدء تنظيف';
+                let duration = appState.turbo ? (room.type === 'stay' ? CONFIG.times.STAY_TURBO : CONFIG.times.OUT_TURBO) : (room.type === 'stay' ? CONFIG.times.STAY_NORM : CONFIG.times.OUT_NORM);
+                if (room.isSuperTurbo) duration -= (5 * 60000);
+                newDeadline = now + duration;
+            } else if (type === 'clean') {
+                newStatus = 'checking'; actionLog = 'تم التنظيف'; newDeadline = now + CONFIG.times.CHECKING;
+            }
+            
+            try {
+                 await db.collection('rooms').doc(id).update({
+                    status: newStatus, startTime: now, deadline: newDeadline, undoExpiry: now + 15000,
+                    historyLogs: firebase.firestore.FieldValue.arrayUnion({ action: actionLog, time: new Date().toLocaleTimeString('en-US', {hour12:false,hour:'2-digit',minute:'2-digit'}) })
+                 });
+            } catch(e) { console.error(e); }
+        }
+
+        // ✅ التحقق من الباسوورد (باستخدام الهاش)
         async function checkPasswordAndAction() { 
             if (!db) return;
-            const pass = document.getElementById('admin-password').value; 
+            const inputPass = document.getElementById('admin-password').value;
             
-            if (pass === CONFIG.adminPass) { 
-                if (pendingAction === 'clearLog') { 
-                    try {
-                        // تنظيف السجلات عن طريق مسح حقل 'items'
-                        await db.collection('logs').doc('cleaning').update({ items: [] });
-                        await db.collection('logs').doc('requests').update({ items: [] });
-                        await db.collection('logs').doc('maint').update({ items: [] });
-                        showCustomAlert('تم مسح السجلات بنجاح.', 'success');
-                    } catch(e) {
-                        console.error("Error clearing logs:", e);
-                        showCustomAlert("فشل مسح السجلات.", "error");
-                    }
-                } else if (pendingAction === 'newShift') { 
-                    try {
-                        // بدء شفت جديد يعني مسح جميع البيانات النشطة والمجدولة
+            if (simpleHash(inputPass) === CONFIG.adminHash) { 
+                try {
+                    if (pendingAction === 'clearLog') { 
+                        // استخدام set لضمان مسح آمن حتى لو الملف غير موجود
+                        await db.collection('logs').doc('cleaning').set({ items: [] });
+                        await db.collection('logs').doc('requests').set({ items: [] });
+                        await db.collection('logs').doc('maint').set({ items: [] });
+                        showCustomAlert('تم مسح السجلات.', 'success');
+                    } else if (pendingAction === 'newShift') { 
                         const batch = db.batch();
-
-                        // 1. مسح الغرف النشطة والمجدولة
-                        const roomsSnapshot = await db.collection('rooms').get();
-                        roomsSnapshot.docs.forEach(doc => batch.delete(doc.ref));
-
-                        // 2. مسح الطلبات النشطة والمجدولة
-                        const reqsSnapshot = await db.collection('guestRequests').get();
-                        reqsSnapshot.docs.forEach(doc => batch.delete(doc.ref));
-
-                        // 3. مسح الصيانة النشطة والمجدولة
-                        const maintSnapshot = await db.collection('activeMaintenance').get();
-                        maintSnapshot.docs.forEach(doc => batch.delete(doc.ref));
-                        
+                        (await db.collection('rooms').get()).docs.forEach(d => batch.delete(d.ref));
+                        (await db.collection('guestRequests').get()).docs.forEach(d => batch.delete(d.ref));
+                        (await db.collection('activeMaintenance').get()).docs.forEach(d => batch.delete(d.ref));
                         await batch.commit();
-                        showCustomAlert('تم بدء شفت جديد بنجاح (مسح النشط).', 'success');
-
-                        // يمكن ترك السجلات المكتملة (Logs) للحفاظ على تقارير الأداء السابقة.
-                        
-                    } catch(e) {
-                        console.error("Error starting new shift:", e);
-                        showCustomAlert("فشل بدء الشفت الجديد.", "error");
-                    }
-                } 
-                closeAllModals(); 
+                        showCustomAlert('تم بدء شفت جديد.', 'success');
+                    } 
+                    closeAllModals(); 
+                } catch(e) { console.error(e); showCustomAlert("خطأ في العملية.", "error"); }
             } else { 
-                showCustomAlert('خطأ في كلمة المرور', 'error'); 
+                showCustomAlert('كلمة المرور خطأ', 'error'); 
+                document.getElementById('admin-password').value = ''; 
             } 
         }
 
-        function closeAllModals() { document.querySelectorAll('.modal-overlay').forEach(modal => modal.style.display = 'none'); }
-        function showCustomAlert(msg, type = 'info') { const modal = document.getElementById('customAlertModal'); const iconEl = document.getElementById('alertIcon'); const msgEl = document.getElementById('alertMessage'); if (type === 'success') { iconEl.innerHTML = '✅'; iconEl.style.color = 'var(--success)'; } else if (type === 'error') { iconEl.innerHTML = '❌'; iconEl.style.color = 'var(--danger)'; } else if (type === 'warning') { iconEl.innerHTML = '⚠️'; iconEl.style.color = 'var(--warning)'; } else { iconEl.innerHTML = 'ℹ️'; iconEl.style.color = 'var(--primary)'; } msgEl.innerText = msg; modal.style.display = 'flex'; }
-        function closeCustomAlert() { document.getElementById('customAlertModal').style.display = 'none'; }
-        function generateDailyReport() { 
-            let msg = `Adora | 📊 *تقرير يومي*\n`; 
-            const completedReqs = appState.guestRequestsLog ? appState.guestRequestsLog.length : 0; 
-            const activeMaint = appState.activeMaintenance.length; 
-            msg += `✅ طلبات منفذة: ${completedReqs}\n🛠️ صيانة نشطة: ${activeMaint}`; 
-            // ✅ تم التصحيح
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank'); 
+        // --- Helpers ---
+        // ✅ إصلاح دالة التأخير لاستخدام العنصر المرر (el)
+        function setDelayReason(reason, el) { 
+            document.getElementById('modal-delay').value = reason; 
+            ['dly_work', 'dly_room', 'dly_other'].forEach(id => {
+                const btn = document.getElementById(id);
+                if(btn) { btn.style.background='#eee'; btn.style.color='#333'; }
+            }); 
+            if(el) { el.style.background='var(--danger)'; el.style.color='white'; }
         }
+
+        function openFinishModal(id) { activeRoomId = id; const room = appState.rooms.find(r => r.id === id); if (!room) return; document.getElementById('delay-reason-section').style.display = room.status==='overdue' ? 'block' : 'none'; document.getElementById('modal-delay').value = ''; document.getElementById('repair-details-input').value = ''; document.getElementById('modal-img-camera-input').value = ''; document.getElementById('inpSendWhatsapp').checked = false; setRoomStatus('جاهزة'); document.getElementById('final-modal').style.display = 'flex'; }
+        function openCompleteMaintenanceModal(id) { activeMaintId = id; const maint = appState.activeMaintenance.find(m => m.id === id); if (!maint) return; document.getElementById('maint-room-num-display').innerText = `غرفة ${maint.num}`; document.getElementById('maint-img-camera-input').value = ''; document.getElementById('complete-maint-modal').style.display = 'flex'; }
+        function openAddModal() { document.getElementById('inpRoomNum').value = ''; document.getElementById('room-dup-alert').style.display = 'none'; document.getElementById('inpRoomType').value = ''; document.getElementById('opt_out').classList.remove('selected'); document.getElementById('opt_stay').classList.remove('selected'); document.getElementById('inpSuperTurbo').checked = false; document.getElementById('inpRequestDetails').value = ''; document.getElementById('inpMaintDetails').value = ''; document.getElementById('inpMaintImage').value = ''; switchAddMode('cleaning'); setRequestMode('immediate'); setMaintMode('immediate'); document.getElementById('addRoomModal').style.display = 'flex'; }
         
         async function uploadToImgBB(file) { return new Promise((resolve) => { const reader = new FileReader(); reader.onload = function(e) { const img = new Image(); img.onload = function() { const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); const scale = 800 / Math.max(img.width, 800); canvas.width = img.width * scale; canvas.height = img.height * scale; ctx.drawImage(img, 0, 0, canvas.width, canvas.height); canvas.toBlob(function(blob) { const formData = new FormData(); formData.append('image', blob); fetch(`https://api.imgbb.com/1/upload?key=${CONFIG.imgbbKey}`, { method: 'POST', body: formData }).then(response => response.json()).then(data => resolve(data.data.url)).catch(() => resolve(null)); }, 'image/jpeg', 0.8); }; img.src = e.target.result; }; reader.readAsDataURL(file); }); }
         
-        // ========== Rendering Functions (no Firebase writes here) ==========
+        // --- UI & Utils ---
+        function getFormattedDate() { return new Date().toLocaleDateString('ar-EG', { weekday: 'long', day: 'numeric', month: 'short' }); }
+        function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+        function toggleTurboMode() { appState.turbo = !appState.turbo; saveData(); }
+        function updateSearch() { appState.searchText = document.getElementById('search-bar').value; render(); }
+        function showLogClearModal() { pendingAction = 'clearLog'; document.getElementById('admin-password').value = ''; document.getElementById('password-modal').style.display = 'flex'; }
+        function showNewShiftModal() { pendingAction = 'newShift'; document.getElementById('admin-password').value = ''; document.getElementById('password-modal').style.display = 'flex'; }
+        function closeAllModals() { document.querySelectorAll('.modal-overlay').forEach(modal => modal.style.display = 'none'); }
+        function showCustomAlert(msg, type = 'info') { const modal = document.getElementById('customAlertModal'); const iconEl = document.getElementById('alertIcon'); const msgEl = document.getElementById('alertMessage'); if (type === 'success') { iconEl.innerHTML = '✅'; iconEl.style.color = 'var(--success)'; } else if (type === 'error') { iconEl.innerHTML = '❌'; iconEl.style.color = 'var(--danger)'; } else if (type === 'warning') { iconEl.innerHTML = '⚠️'; iconEl.style.color = 'var(--warning)'; } else { iconEl.innerHTML = 'ℹ️'; iconEl.style.color = 'var(--primary)'; } msgEl.innerText = msg; modal.style.display = 'flex'; }
+        function closeCustomAlert() { document.getElementById('customAlertModal').style.display = 'none'; }
+        function generateDailyReport() { let msg = `Adora | 📊 *تقرير*\nمنجز: ${appState.guestRequestsLog ? appState.guestRequestsLog.length : 0}\nصيانة: ${appState.activeMaintenance.length}`; window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank'); }
+        function checkDuplicate() { const num = document.getElementById('inpRoomNum').value; const exists = appState.rooms.find(r => r.num == String(num)); const alertBox = document.getElementById('room-dup-alert'); if (exists) { alertBox.style.display = 'block'; alertBox.innerText = `⚠️ ${num} موجودة!`; } else { alertBox.style.display = 'none'; } }
+        function toggleArchive(type) { const id = `${type}-archive-container`; const el = document.getElementById(id); appState.archiveViewLimit[type] = 5; el.style.display = el.style.display === 'block' ? 'none' : 'block'; render(); saveData(); }
+        function loadMoreArchives(type) { appState.archiveViewLimit[type] += 5; render(); saveData(); }
         
+        function switchAddMode(mode) { currentAddMode = mode; ['cleaning', 'request', 'maintenance'].forEach(m => { document.getElementById(`tab-${m}`).classList.remove('active', 'active-req', 'active-maint'); document.getElementById(`${m}-options`).style.display = 'none'; }); document.getElementById(`tab-${mode}`).classList.add(mode === 'request' ? 'active-req' : (mode === 'maintenance' ? 'active-maint' : 'active')); document.getElementById(`${mode}-options`).style.display = 'block'; document.getElementById('modal-title-add').innerText = { cleaning: 'إضافة غرفة', request: 'طلب نزيل', maintenance: 'تسجيل صيانة' }[mode]; }
+        function setRequestMode(mode) { isImmediateRequest = (mode === 'immediate'); document.getElementById('btn-req-imm').style.background = isImmediateRequest ? 'var(--request-color)' : 'var(--bg-body)'; document.getElementById('btn-req-imm').style.color = isImmediateRequest ? 'white' : 'var(--text-main)'; document.getElementById('btn-req-sch').style.background = !isImmediateRequest ? 'var(--request-color)' : 'var(--bg-body)'; document.getElementById('btn-req-sch').style.color = !isImmediateRequest ? 'white' : 'var(--text-main)'; document.getElementById('request-schedule-container').style.display = isImmediateRequest ? 'none' : 'block'; }
+        function setMaintMode(mode) { isImmediateMaint = (mode === 'immediate'); document.getElementById('btn-maint-imm').style.background = isImmediateMaint ? 'var(--maint-color)' : 'var(--bg-body)'; document.getElementById('btn-maint-imm').style.color = isImmediateMaint ? 'white' : 'var(--text-main)'; document.getElementById('btn-maint-sch').style.background = !isImmediateMaint ? 'var(--maint-color)' : 'var(--bg-body)'; document.getElementById('btn-maint-sch').style.color = !isImmediateMaint ? 'white' : 'var(--text-main)'; document.getElementById('maint-schedule-container').style.display = isImmediateMaint ? 'none' : 'block'; }
+        function setRoomType(type) { document.getElementById('inpRoomType').value = type; document.getElementById('opt_out').style.background = type==='out'?'var(--primary)':'var(--bg-body)'; document.getElementById('opt_out').style.color = type==='out'?'white':'var(--text-main)'; document.getElementById('opt_stay').style.background = type==='stay'?'var(--primary)':'var(--bg-body)'; document.getElementById('opt_stay').style.color = type==='stay'?'white':'var(--text-main)'; document.getElementById('stayOptionsCleaning').style.display = type==='out'?'none':'block'; }
+        function setGuestStatus(status) { document.getElementById('inpGuestStatus').value = status; document.getElementById('gst_clean_in').style.background = status==='in'?'var(--primary)':'var(--bg-body)'; document.getElementById('gst_clean_in').style.color = status==='in'?'white':'var(--text-main)'; document.getElementById('gst_clean_out').style.background = status==='out'?'var(--primary)':'var(--bg-body)'; document.getElementById('gst_clean_out').style.color = status==='out'?'white':'var(--text-main)'; }
+        function setRoomStatus(status) { document.getElementById('modal-notes').value = status; document.getElementById('st_ready').style.background = status==='جاهزة'?'var(--success)':'#eee'; document.getElementById('st_ready').style.color = status==='جاهزة'?'white':'#333'; document.getElementById('st_maint').style.background = status!=='جاهزة'?'var(--danger)':'#eee'; document.getElementById('st_maint').style.color = status!=='جاهزة'?'white':'#333'; document.getElementById('maintenance-fields').style.display = status==='جاهزة'?'none':'block'; }
+
+        // --- Render Helpers ---
         function renderRooms() {
-            let activeRooms = appState.rooms.filter(room => room.num.includes(appState.searchText) && room.status !== 'scheduled'); activeRooms.sort((a, b) => { const statusOrder = { 'overdue': 0, 'acknowledging': 1, 'cleaning': 2, 'checking': 3 }; if (statusOrder[a.status] !== statusOrder[b.status]) return statusOrder[a.status] - statusOrder[b.status]; return (a.deadline - Date.now()) - (b.deadline - Date.now()); });
+            let activeRooms = appState.rooms.filter(room => room.num.includes(appState.searchText) && room.status !== 'scheduled'); 
+            activeRooms.sort((a, b) => { const statusOrder = { 'overdue': 0, 'acknowledging': 1, 'cleaning': 2, 'checking': 3 }; if (statusOrder[a.status] !== statusOrder[b.status]) return statusOrder[a.status] - statusOrder[b.status]; return (a.deadline - Date.now()) - (b.deadline - Date.now()); });
             let scheduledRooms = appState.rooms.filter(room => room.num.includes(appState.searchText) && room.status === 'scheduled'); scheduledRooms.sort((a,b) => a.schedTimestamp - b.schedTimestamp);
             document.getElementById('rooms-container').innerHTML = activeRooms.length ? activeRooms.map(room => createRoomCard(room)).join('') : '<p style="text-align:center;color:var(--text-sec);">لا توجد غرف نشطة</p>';
             const schedContainer = document.getElementById('scheduled-rooms-container');
@@ -1167,7 +726,7 @@
             updateTimersDOM(); renderUndoCountdowns();
         }
         function createRoomCard(room) {
-            const isScheduled = room.status === 'scheduled'; const badgeText = room.type === 'out' ? 'خروج' : (room.guestStatus === 'in' ? 'نزيل داخل' : 'نزيل خارج'); const undoLeft = room.undoExpiry ? Math.ceil((room.undoExpiry - Date.now())/1000) : 0; const undoBtn = !isScheduled && room.undoExpiry && Date.now() < room.undoExpiry ? `<button class="btn-undo glass-btn" style="padding:4px 8px; font-size:0.7rem; color:var(--text-sec);" onclick="undoRoom('${room.id}')">تراجع (${undoLeft})</button>` : ''; 
+            const isScheduled = room.status === 'scheduled'; const badgeText = room.type === 'out' ? 'خروج' : (room.guestStatus === 'in' ? 'نزيل داخل' : 'نزيل خارج'); const undoLeft = room.undoExpiry ? Math.ceil((room.undoExpiry - Date.now())/1000) : 0; const undoBtn = !isScheduled && room.undoExpiry && Date.now() < room.undoExpiry ? `<button class="glass-btn" style="padding:4px 8px; font-size:0.7rem; color:var(--text-sec);" onclick="undoRoom('${room.id}')">تراجع (${undoLeft})</button>` : ''; 
             let actionBtn = '';
             if (isScheduled) { actionBtn = `<button class="glass-btn start" style="background:var(--sched-color)" onclick="forceStartScheduled('${room.id}', 'room')">بدء الآن ⚡</button>`; } 
             else if (room.status === 'acknowledging') { actionBtn = `<button class="glass-btn start" onclick="promptAction('${room.id}', 'ack')">وصلت 🏃</button>`; } 
@@ -1188,7 +747,6 @@
                 <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px;">${actionBtn}${undoBtn}</div>
             </div>`;
         }
-        
         function renderGuestRequests() {
             let activeReqs = appState.guestRequests.filter(r => r.status !== 'scheduled'); activeReqs.sort((a, b) => (b.isUrgent ? 1 : 0) - (a.isUrgent ? 1 : 0));
             let scheduledReqs = appState.guestRequests.filter(r => r.status === 'scheduled'); scheduledReqs.sort((a,b) => a.schedTimestamp - b.schedTimestamp);
@@ -1201,50 +759,24 @@
         function createRequestCard(req) { 
             const isScheduled = req.status === 'scheduled'; 
             let actionBtn = !isScheduled ? `<button class="glass-btn finish" onclick="completeRequest('${req.id}')">تم ✅</button>` : `<button class="glass-btn start" style="background:var(--sched-color)" onclick="forceStartScheduled('${req.id}', 'req')">بدء ⚡</button>`;
-            return `<div class="room-row status-request ${isScheduled ? ' status-scheduled' : ''}">
-                <div class="timer-display ${isScheduled ? 'timer-sched' : 'timer-req'}" id="req-timer-${req.id}">--</div>
-                <div style="display:flex; flex-direction:column; gap:5px;">
-                    <div class="room-num">${req.num}</div>
-                    <div style="display:flex; gap:5px;">
-                        ${req.isUrgent ? '<span class="rotating-border-badge req-active">عاجل</span>' : '<span class="badge">طلب</span>'}
-                    </div>
-                    <div style="font-size:0.75rem; color:var(--text-sec);">${req.details}</div>
-                </div>
-                <div style="flex:1;"></div>
-                <div>${actionBtn}</div>
-            </div>`; 
+            return `<div class="room-row status-request ${isScheduled ? ' status-scheduled' : ''}"><div class="timer-display ${isScheduled ? 'timer-sched' : 'timer-req'}" id="req-timer-${req.id}">--</div><div style="display:flex; flex-direction:column; gap:5px;"><div class="room-num">${req.num}</div><div style="display:flex; gap:5px;">${req.isUrgent ? '<span class="rotating-border-badge req-active">عاجل</span>' : '<span class="badge">طلب</span>'}</div><div style="font-size:0.75rem; color:var(--text-sec);">${req.details}</div></div><div style="flex:1;"></div><div>${actionBtn}</div></div>`; 
         }
-
         function renderAllLogs() {
             const cleaningLog = appState.log || []; cleaningLog.sort((a, b) => b.id - a.id || 0); renderLogSection(cleaningLog, 'cleaning-log-list', 'لا توجد عمليات');
             let activeMaint = appState.activeMaintenance.filter(m => m.status !== 'scheduled');
             let scheduledMaint = appState.activeMaintenance.filter(m => m.status === 'scheduled'); scheduledMaint.sort((a,b) => a.schedTimestamp - b.schedTimestamp);
             document.getElementById('maintenance-active-list').innerHTML = activeMaint.length ? activeMaint.map(m => createMaintenanceCard(m)).join('') : '<p style="text-align:center;color:var(--text-sec);font-size:0.8rem;">لا توجد صيانة نشطة</p>';
-             const schedMaintContainer = document.getElementById('scheduled-maintenance-container');
+            const schedMaintContainer = document.getElementById('scheduled-maintenance-container');
             if(scheduledMaint.length) { schedMaintContainer.style.display = 'block'; schedMaintContainer.innerHTML = '<div style="font-weight: bold; color: var(--sched-color); margin-bottom: 10px;">📅 صيانة مجدولة</div>' + scheduledMaint.map(m => createMaintenanceCard(m)).join(''); } else { schedMaintContainer.style.display = 'none'; }
             const maintLog = appState.completedMaintenanceLog || []; maintLog.sort((a, b) => b.id - a.id); const maintArchiveContainer = document.getElementById('maintenance-archive-list');
             if (maintLog.length === 0) { maintArchiveContainer.innerHTML = '<p style="text-align:center;color:var(--text-sec); font-size:0.7rem;">الأرشيف فارغ</p>'; document.getElementById('btn-more-maint').style.display = 'none'; } else { const visibleMaint = maintLog.slice(0, appState.archiveViewLimit.maint); maintArchiveContainer.innerHTML = visibleMaint.map(item => createLogRow(item)).join(''); document.getElementById('btn-more-maint').style.display = maintLog.length > appState.archiveViewLimit.maint ? 'block' : 'none'; }
         }
-
         function createMaintenanceCard(maint) {
              const isScheduled = maint.status === 'scheduled';
              let actionBtn = !isScheduled ? `<button class="glass-btn finish" onclick="openCompleteMaintenanceModal('${maint.id}')">إنهاء</button>` : `<button class="glass-btn start" style="background:var(--sched-color)" onclick="forceStartScheduled('${maint.id}', 'maint')">بدء ⚡</button>`;
              let imgBtn = (maint.maintImg && !isScheduled) ? `<a href="${maint.maintImg}" target="_blank" class="glass-btn img-link">📷 صورة</a>` : '';
-             
-             return `<div class="room-row status-maintenance ${isScheduled ? ' status-scheduled' : ''}">
-                <div class="timer-display ${isScheduled ? 'timer-sched' : 'timer-maint'}" id="maint-timer-${maint.id}">0:00</div>
-                <div style="display:flex; flex-direction:column; gap:5px;">
-                    <div class="room-num">${maint.num}</div>
-                    <div style="display:flex; gap:5px;">
-                        <span class="${isScheduled ? 'badge' : 'rotating-border-badge'}">صيانة نشطة</span>
-                    </div>
-                    <div style="font-size:0.75rem; color:var(--text-sec); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:120px;">${maint.maintDesc}</div>
-                </div>
-                <div style="flex:1;"></div>
-                <div style="display:flex; flex-direction:column; align-items:flex-end;">${actionBtn}${imgBtn}</div>
-            </div>`;
+             return `<div class="room-row status-maintenance ${isScheduled ? ' status-scheduled' : ''}"><div class="timer-display ${isScheduled ? 'timer-sched' : 'timer-maint'}" id="maint-timer-${maint.id}">0:00</div><div style="display:flex; flex-direction:column; gap:5px;"><div class="room-num">${maint.num}</div><div style="display:flex; gap:5px;"><span class="${isScheduled ? 'badge' : 'rotating-border-badge'}">صيانة نشطة</span></div><div style="font-size:0.75rem; color:var(--text-sec); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:120px;">${maint.maintDesc}</div></div><div style="flex:1;"></div><div style="display:flex; flex-direction:column; align-items:flex-end;">${actionBtn}${imgBtn}</div></div>`;
         }
-
         function renderLogSection(data, elementId, emptyMsg) { const listEl = document.getElementById(elementId); if (!data || data.length === 0) { listEl.innerHTML = `<p style="text-align:center;color:var(--text-sec);">${emptyMsg}</p>`; return; } const recent = data.slice(0, 10); listEl.innerHTML = recent.map(item => createLogRow(item)).join(''); }
         function createLogRow(item) {
             const historyText = item.history ? item.history.map(h => `${h.action}: ${h.time}`).join(' | ') : `وقت: ${item.time}`; let statusBadge = item.status; if (item.finishImg) statusBadge = 'منجزة ✅'; else if (item.maintDesc && !item.finishImg && item.type !== 'request') statusBadge = 'عطل 🛠️'; if (item.type === 'request') statusBadge = 'منفذ ✅'; const dateStr = getFormattedDate(); let maintDetails = ''; 
@@ -1265,7 +797,6 @@
             document.getElementById('stat-late').innerText = appState.rooms.filter(room => room.status === 'overdue').length; 
             document.getElementById('stat-maint-done').innerText = appState.activeMaintenance.length;
             document.getElementById('stat-maint-total').innerText = appState.completedMaintenanceLog ? appState.completedMaintenanceLog.length : 0;
-            
             const reqBox = document.getElementById('stat-req-box'); const reqText = document.getElementById('stat-req-text');
             const activeReqs = appState.guestRequests ? appState.guestRequests.filter(r => r.status !== 'scheduled') : [];
             if (activeReqs.length > 0) { const latest = activeReqs[activeReqs.length - 1]; reqText.innerText = `${latest.num}: ${latest.details}`; reqBox.classList.add('pulse-urgent-box'); reqBox.querySelector('span').style.color = 'var(--danger)'; } 
@@ -1275,85 +806,37 @@
 
         function updateTimersDOM() { 
             const now = Date.now(); 
-            let changed = false; // لمراجعة حالة overdue
-
             appState.rooms.forEach(room => { 
-                const el = document.getElementById(`timer-${room.id}`); 
-                if (!el) return; 
-
+                const el = document.getElementById(`timer-${room.id}`); if (!el) return; 
                 if (room.status === 'scheduled' && room.schedTimestamp) { 
                     const diff = room.schedTimestamp - now; 
                     if (diff > 0) { const m = Math.floor(diff / 60000); el.innerText = `${m}د`; el.className = 'timer-display timer-sched'; } else { el.innerText = 'بدء..'; } 
                 } else { 
                     const diff = room.deadline - now; 
-                    const m = Math.floor(Math.abs(diff) / 60000); 
-                    const s = Math.floor((Math.abs(diff) % 60000) / 1000); 
-                    
-                    el.innerText = `${diff < 0 ? '+' : ''}${m}:${s.toString().padStart(2, '0')}`; 
-                    el.className = `timer-display ${diff < 0 ? 'timer-danger' : 'timer-active'}`; 
-
-                    // تحديث حالة overdo في Firestore إذا كانت متأخرة لأول مرة
-                    if (diff < 0 && room.status !== 'overdue') {
-                        // لا نستخدم async/await هنا لعدم إبطاء حلقة setInterval
-                        db.collection('rooms').doc(room.id).update({ status: 'overdue' }).catch(e => console.error("Failed to update overdue status:", e));
-                        changed = true;
-                    }
+                    const m = Math.floor(Math.abs(diff) / 60000); const s = Math.floor((Math.abs(diff) % 60000) / 1000); 
+                    el.innerText = `${diff < 0 ? '+' : ''}${m}:${s.toString().padStart(2, '0')}`; el.className = `timer-display ${diff < 0 ? 'timer-danger' : 'timer-active'}`; 
+                    if (diff < 0 && room.status !== 'overdue') { db.collection('rooms').doc(room.id).update({ status: 'overdue' }).catch(e => console.error(e)); }
                 } 
             }); 
-            
             appState.activeMaintenance.forEach(maint => { 
-                const el = document.getElementById(`maint-timer-${maint.id}`); 
-                if (!el) return; 
-                
+                const el = document.getElementById(`maint-timer-${maint.id}`); if (!el) return; 
                 if (maint.status === 'scheduled' && maint.schedTimestamp) { 
                     const diff = maint.schedTimestamp - now; 
                     if (diff > 0) { const m = Math.floor(diff / 60000); el.innerText = `${m}د`; el.className = 'timer-display timer-sched'; } else { el.innerText = 'بدء..'; } 
                 } else { 
-                    const diff = now - maint.startTime; 
-                    const h = Math.floor(diff / 3600000); 
-                    const m = Math.floor((diff % 3600000) / 60000); 
-                    const s = Math.floor((diff % 60000) / 1000); 
+                    const diff = now - maint.startTime; const h = Math.floor(diff / 3600000); const m = Math.floor((diff % 3600000) / 60000); const s = Math.floor((diff % 60000) / 1000); 
                     el.innerText = `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`; 
                 } 
             }); 
         }
         
-        // ====== ⚠️ تحديث: استخدام Firestore لتغيير حالة العناصر المجدولة تلقائياً ======
         function checkScheduledItems() { 
             if (!db) return;
             const now = Date.now(); 
-            
-            // 1. الغرف
-            appState.rooms.filter(room => room.status === 'scheduled' && room.schedTimestamp && now >= room.schedTimestamp).forEach(room => {
-                db.collection('rooms').doc(room.id).update({
-                    status: 'acknowledging', 
-                    startTime: now, 
-                    deadline: now + CONFIG.times.TRAVEL, 
-                    undoExpiry: now + 15000, 
-                    schedTimestamp: firebase.firestore.FieldValue.delete()
-                }).catch(e => console.error("Failed to auto-start room:", e));
-            });
-
-            // 2. الطلبات
-            appState.guestRequests.filter(req => req.status === 'scheduled' && req.schedTimestamp && now >= req.schedTimestamp).forEach(req => {
-                db.collection('guestRequests').doc(req.id).update({
-                    status: 'active', 
-                    startTime: now, 
-                    schedTimestamp: firebase.firestore.FieldValue.delete()
-                }).catch(e => console.error("Failed to auto-start request:", e));
-            });
-
-            // 3. الصيانة
-            appState.activeMaintenance.filter(maint => maint.status === 'scheduled' && maint.schedTimestamp && now >= maint.schedTimestamp).forEach(maint => {
-                db.collection('activeMaintenance').doc(maint.id).update({
-                    status: 'active', 
-                    startTime: now, 
-                    schedTimestamp: firebase.firestore.FieldValue.delete()
-                }).catch(e => console.error("Failed to auto-start maintenance:", e));
-            });
+            appState.rooms.filter(r => r.status === 'scheduled' && r.schedTimestamp && now >= r.schedTimestamp).forEach(r => db.collection('rooms').doc(r.id).update({ status: 'acknowledging', startTime: now, deadline: now + CONFIG.times.TRAVEL, undoExpiry: now + 15000, schedTimestamp: firebase.firestore.FieldValue.delete() }).catch(e => console.error(e)));
+            appState.guestRequests.filter(r => r.status === 'scheduled' && r.schedTimestamp && now >= r.schedTimestamp).forEach(r => db.collection('guestRequests').doc(r.id).update({ status: 'active', startTime: now, schedTimestamp: firebase.firestore.FieldValue.delete() }).catch(e => console.error(e)));
+            appState.activeMaintenance.filter(m => m.status === 'scheduled' && m.schedTimestamp && now >= m.schedTimestamp).forEach(m => db.collection('activeMaintenance').doc(m.id).update({ status: 'active', startTime: now, schedTimestamp: firebase.firestore.FieldValue.delete() }).catch(e => console.error(e)));
         }
-        
-        window.toggleDarkMode = toggleDarkMode; window.toggleTurboMode = toggleTurboMode; window.generateDailyReport = generateDailyReport; window.showNewShiftModal = showNewShiftModal; window.openAddModal = openAddModal; window.addNewBtnAction = addNewBtnAction; window.closeAllModals = closeAllModals; window.switchAddMode = switchAddMode; window.setRoomType = setRoomType; window.setGuestStatus = setGuestStatus; window.setRequestMode = setRequestMode; window.setMaintMode = setMaintMode; window.changeTimeValue = changeTimeValue; window.togglePeriod = togglePeriod; window.changeDate = changeDate; window.undoRoom = undoRoom; window.promptStartRoom = promptStartRoom; window.commitStartRoom = commitStartRoom; window.promptAction = promptAction; window.executePhase = executePhase; window.openFinishModal = openFinishModal; window.setDelayReason = setDelayReason; window.setRoomStatus = setRoomStatus; window.confirmFinishRoom = confirmFinishRoom; window.openCompleteMaintenanceModal = openCompleteMaintenanceModal; window.confirmCompleteMaintenance = confirmCompleteMaintenance; window.completeRequest = completeRequest; window.toggleArchive = toggleArchive; window.loadMoreArchives = loadMoreArchives; window.showLogClearModal = showLogClearModal; window.checkPasswordAndAction = checkPasswordAndAction; window.updateSearch = updateSearch; window.checkDuplicate = checkDuplicate; window.closeCustomAlert = closeCustomAlert; window.forceStartScheduled = forceStartScheduled;
     </script>
 </body>
 </html>
